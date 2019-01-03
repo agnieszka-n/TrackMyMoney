@@ -1,0 +1,48 @@
+﻿<Window x:Class="Main.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Main"
+        xmlns:conv="clr-namespace:Main.Converters"
+        xmlns:vm="clr-namespace:Main.ViewModels"
+        mc:Ignorable="d"
+        Title="Track My Money" Height="450" Width="800"
+        d:DataContext="{d:DesignInstance vm:CostsListViewModel, IsDesignTimeCreatable=True}"
+        >
+    <Window.Resources>
+        <conv:DateConverter x:Key="DateConverter" />
+    </Window.Resources>
+
+    <DataGrid ItemsSource="{Binding Costs}" AutoGenerateColumns="False" RowHeaderWidth="0">
+        <DataGrid.Resources>
+            <Style TargetType="DataGridColumnHeader">
+                <Setter Property="Padding" Value="5"/>
+                <Setter Property="HorizontalAlignment" Value="Stretch"/>
+                <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            </Style>
+            <Style x:Key="CellTextStyle" TargetType="TextBlock">
+                <Setter Property="Margin" Value="5" />
+                <Setter Property="HorizontalAlignment" Value="Center" />
+            </Style>
+            <DataTemplate x:Key="DateTemplate">
+                <TextBlock Style="{StaticResource CellTextStyle}" Text="{Binding Date, Converter={StaticResource DateConverter}}"/>
+            </DataTemplate>
+            <DataTemplate x:Key="CategoryTemplate">
+                <TextBlock Style="{StaticResource CellTextStyle}" Text="{Binding Category}"/>
+            </DataTemplate>
+            <DataTemplate x:Key="SubjectTemplate">
+                <TextBlock Style="{StaticResource CellTextStyle}" Text="{Binding Subject}"/>
+            </DataTemplate>
+            <DataTemplate x:Key="AmountTemplate">
+                <TextBlock Style="{StaticResource CellTextStyle}"  Text="{Binding Amount}"/>
+            </DataTemplate>
+        </DataGrid.Resources>
+        <DataGrid.Columns>
+            <DataGridTemplateColumn Width="*" Header="Date" CellTemplate="{StaticResource DateTemplate}" />
+            <DataGridTemplateColumn Width="*" Header="Category" CellTemplate="{StaticResource CategoryTemplate}" />
+            <DataGridTemplateColumn Width="3*" Header="Subject" CellTemplate="{StaticResource SubjectTemplate}" />
+            <DataGridTemplateColumn Width="*" Header="Amount" CellTemplate="{StaticResource AmountTemplate}" />
+        </DataGrid.Columns>
+    </DataGrid>
+</Window>
