@@ -18,27 +18,57 @@
                 <Setter Property="HorizontalContentAlignment" Value="Center"/>
             </Style>
             <Style x:Key="CellTextStyle" TargetType="TextBlock">
-                <Setter Property="Margin" Value="5" />
-                <Setter Property="HorizontalAlignment" Value="Center" />
+                <Setter Property="Margin" Value="5"/>
+                <Setter Property="HorizontalAlignment" Value="Center"/>
             </Style>
-            <DataTemplate x:Key="DateTemplate">
-                <xctk:DateTimePicker TimePickerVisibility="Collapsed" Value="{Binding Date}" Format="Custom" FormatString="d.MM.yyyy" ShowButtonSpinner="False" TextAlignment="Center" />
-            </DataTemplate>
-            <DataTemplate x:Key="CategoryTemplate">
-                <TextBlock Style="{StaticResource CellTextStyle}" Text="{Binding Category}"/>
-            </DataTemplate>
-            <DataTemplate x:Key="SubjectTemplate">
-                <TextBlock Style="{StaticResource CellTextStyle}" Text="{Binding Subject}"/>
-            </DataTemplate>
-            <DataTemplate x:Key="AmountTemplate">
-                <TextBlock Style="{StaticResource CellTextStyle}"  Text="{Binding Amount}"/>
-            </DataTemplate>
+            <Style TargetType="TextBox">
+                <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            </Style>
         </DataGrid.Resources>
         <DataGrid.Columns>
-            <DataGridTemplateColumn Width="*" Header="Date" CellTemplate="{StaticResource DateTemplate}" />
-            <DataGridTemplateColumn Width="*" Header="Category" CellTemplate="{StaticResource CategoryTemplate}" />
-            <DataGridTemplateColumn Width="3*" Header="Subject" CellTemplate="{StaticResource SubjectTemplate}" />
-            <DataGridTemplateColumn Width="*" Header="Amount" CellTemplate="{StaticResource AmountTemplate}" />
+            <DataGridTemplateColumn Width="*" Header="Date">
+                <DataGridTemplateColumn.CellTemplate>
+                    <DataTemplate DataType="{x:Type vm:CostViewModel}">
+                        <xctk:DateTimePicker TimePickerVisibility="Collapsed" Value="{Binding Date}" Format="Custom" FormatString="d.MM.yyyy" ShowButtonSpinner="False" TextAlignment="Center"/>
+                    </DataTemplate>
+                </DataGridTemplateColumn.CellTemplate>
+            </DataGridTemplateColumn>
+            <DataGridTemplateColumn Width="*" Header="Category">
+                <DataGridTemplateColumn.CellTemplate>
+                    <DataTemplate DataType="{x:Type vm:CostViewModel}">
+                        <TextBlock Style="{StaticResource CellTextStyle}" Text="{Binding Category}"/>
+                    </DataTemplate>
+                </DataGridTemplateColumn.CellTemplate>
+                <DataGridTemplateColumn.CellEditingTemplate>
+                    <DataTemplate DataType="{x:Type vm:CostViewModel}">
+                        <TextBox Text="{Binding Category}"/>
+                    </DataTemplate>
+                </DataGridTemplateColumn.CellEditingTemplate>
+            </DataGridTemplateColumn>
+            <DataGridTemplateColumn Width="3*" Header="Subject">
+                <DataGridTemplateColumn.CellTemplate>
+                    <DataTemplate DataType="{x:Type vm:CostViewModel}">
+                        <TextBlock Style="{StaticResource CellTextStyle}" Text="{Binding Subject}"/>
+                    </DataTemplate>
+                </DataGridTemplateColumn.CellTemplate>
+                <DataGridTemplateColumn.CellEditingTemplate>
+                    <DataTemplate DataType="{x:Type vm:CostViewModel}">
+                        <TextBox Text="{Binding Subject}"/>
+                    </DataTemplate>
+                </DataGridTemplateColumn.CellEditingTemplate>
+            </DataGridTemplateColumn>
+            <DataGridTemplateColumn Width="*" Header="Amount">
+                <DataGridTemplateColumn.CellTemplate>
+                    <DataTemplate DataType="{x:Type vm:CostViewModel}">
+                        <TextBlock Style="{StaticResource CellTextStyle}" Text="{Binding Amount}"/>
+                    </DataTemplate>
+                </DataGridTemplateColumn.CellTemplate>
+                <DataGridTemplateColumn.CellEditingTemplate>
+                    <DataTemplate DataType="{x:Type vm:CostViewModel}">
+                        <TextBox Text="{Binding Amount}"/>
+                    </DataTemplate>
+                </DataGridTemplateColumn.CellEditingTemplate>
+            </DataGridTemplateColumn>
         </DataGrid.Columns>
     </DataGrid>
 </Window>
