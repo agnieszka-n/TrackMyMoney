@@ -18,7 +18,7 @@ namespace Main.ViewModels
             Costs.Add(new CostViewModel(new DateTime(2000, 1, 1), "Food", "Pasta", 10));
             Costs.Add(new CostViewModel(new DateTime(2000, 1, 1), "Food", "Pizza", 15));
             Costs.Add(new CostViewModel(new DateTime(2000, 1, 2), "Food", "Burger", 20));
-            Costs.Add(new CostViewModel(new DateTime(2000, 1, 3), "Transport", "Bus", 2));
+            Costs.Add(new CostViewModel(new DateTime(2000, 1, 31), "Transport", "Bus", 2));
         }
     }
 }

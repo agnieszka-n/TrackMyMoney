@@ -4,16 +4,12 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Main"
-        xmlns:conv="clr-namespace:Main.Converters"
         xmlns:vm="clr-namespace:Main.ViewModels"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         mc:Ignorable="d"
         Title="Track My Money" Height="450" Width="800"
         d:DataContext="{d:DesignInstance vm:CostsListViewModel, IsDesignTimeCreatable=True}"
         >
-    <Window.Resources>
-        <conv:DateConverter x:Key="DateConverter" />
-    </Window.Resources>
-
     <DataGrid ItemsSource="{Binding Costs}" AutoGenerateColumns="False" RowHeaderWidth="0">
         <DataGrid.Resources>
             <Style TargetType="DataGridColumnHeader">
@@ -26,7 +22,7 @@
                 <Setter Property="HorizontalAlignment" Value="Center" />
             </Style>
             <DataTemplate x:Key="DateTemplate">
-                <TextBlock Style="{StaticResource CellTextStyle}" Text="{Binding Date, Converter={StaticResource DateConverter}}"/>
+                <xctk:DateTimePicker TimePickerVisibility="Collapsed" Value="{Binding Date}" Format="Custom" FormatString="d.MM.yyyy" ShowButtonSpinner="False" TextAlignment="Center" />
             </DataTemplate>
             <DataTemplate x:Key="CategoryTemplate">
                 <TextBlock Style="{StaticResource CellTextStyle}" Text="{Binding Category}"/>
