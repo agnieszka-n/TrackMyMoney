@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using ViewModelsContracts;
 
-namespace Main.ViewModels
+namespace Views.ViewModels
 {
     internal class CostViewModel : ICostViewModel
     {
