@@ -16,6 +16,32 @@ namespace ViewModels
         {
             get { return costs; }
             set { Set(() => Costs, ref costs, value); }
-        }        
+        }
+
+        public CostsListViewModel()
+        {
+            Costs = new ObservableCollection<ICostViewModel>();
+            Costs.Add(new CostViewModel()
+            {
+                Date = new DateTime(2000, 2, 2),
+                Category = "Entertainment",
+                Subject = "Cinema",
+                Amount = 15
+            });
+            Costs.Add(new CostViewModel()
+            {
+                Date = new DateTime(2000, 2, 3),
+                Category = "Entertainment",
+                Subject = "Theater",
+                Amount = 30
+            });
+            Costs.Add(new CostViewModel()
+            {
+                Date = new DateTime(2000, 2, 4),
+                Category = "Entertainment",
+                Subject = "Opera",
+                Amount = 45
+            });
+        }
     }
 }

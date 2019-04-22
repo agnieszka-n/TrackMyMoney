@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using ViewModelsContracts;
 
 namespace Views
 {
@@ -21,9 +22,9 @@ namespace Views
     /// </summary>
     public partial class MainWindow : Window
     {
-        public MainWindow()
+        public MainWindow(ICostsListViewModel vm)
         {
-            DataContext = new CostsListViewModel();
+            DataContext = vm;
             InitializeComponent();
         }
     }
