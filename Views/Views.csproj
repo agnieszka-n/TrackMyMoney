@@ -89,8 +89,10 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="ViewModels\CostsListViewModel.cs" />
-    <Compile Include="ViewModels\CostViewModel.cs" />
+    <Compile Include="Converters\BoolToVisibilityNegatedConverter.cs" />
+    <Compile Include="Converters\BoolToVisibilityConverter.cs" />
+    <Compile Include="ViewModels\CostsListViewModelMock.cs" />
+    <Compile Include="ViewModels\CostViewModelMock.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MainWindow.xaml.cs">

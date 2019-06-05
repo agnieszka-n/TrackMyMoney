@@ -5,10 +5,10 @@ namespace ViewModelsContracts
 {
     public interface ICostViewModel
     {
-        DateTime Date { get; set; }
+        DateTime? Date { get; set; }
         string Category { get; set; }
         string Subject { get; set; }
-        decimal Amount { get; set; }
+        decimal? Amount { get; set; }
         bool IsDirty { get; set; }
         bool IsDeleted { get; set; }
 

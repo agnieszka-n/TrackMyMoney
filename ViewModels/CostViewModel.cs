@@ -11,8 +11,8 @@ namespace ViewModels
 {
     public class CostViewModel : ViewModelBase, ICostViewModel
     {
-        private DateTime date;
-        public DateTime Date
+        private DateTime? date;
+        public DateTime? Date
         {
             get { return date; }
             set { Set(() => Date, ref date, value); }
@@ -32,8 +32,8 @@ namespace ViewModels
             set { Set(() => Subject, ref subject, value); }
         }
 
-        private decimal amount;
-        public decimal Amount
+        private decimal? amount;
+        public decimal? Amount
         {
             get { return amount; }
             set { Set(() => Amount, ref amount, value); }
