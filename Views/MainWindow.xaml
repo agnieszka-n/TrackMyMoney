@@ -8,7 +8,7 @@
         xmlns:conv="clr-namespace:Views.Converters"
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         mc:Ignorable="d"
-        Title="Track My Money" Height="450" Width="850"
+        Title="Track My Money" Height="450" Width="850" MinHeight="450" MinWidth="850"
         d:DataContext="{d:DesignInstance vm:CostsListViewModelMock, IsDesignTimeCreatable=True}"
         >
     <DockPanel>
