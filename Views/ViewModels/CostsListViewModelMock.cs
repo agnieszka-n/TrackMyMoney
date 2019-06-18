@@ -23,11 +23,13 @@ namespace Views.ViewModels
             IsAddingCost = true;
             NewCost = new CostViewModelMock(DateTime.Now, "Category", "Subject", 123);
 
-            Costs = new ObservableCollection<ICostViewModel>();
-            Costs.Add(new CostViewModelMock(new DateTime(2000, 1, 1), "Food", "Pasta", 10));
-            Costs.Add(new CostViewModelMock(new DateTime(2000, 1, 1), "Food", "Pizza", 15));
-            Costs.Add(new CostViewModelMock(new DateTime(2000, 1, 2), "Food", "Burger", 20));
-            Costs.Add(new CostViewModelMock(new DateTime(2000, 1, 31), "Transport", "Bus", 2));
+            Costs = new ObservableCollection<ICostViewModel>
+            {
+                new CostViewModelMock(new DateTime(2000, 1, 1), "Food", "Pasta", 10),
+                new CostViewModelMock(new DateTime(2000, 1, 1), "Food", "Pizza", 15),
+                new CostViewModelMock(new DateTime(2000, 1, 2), "Food", "Burger", 20),
+                new CostViewModelMock(new DateTime(2000, 1, 31), "Transport", "Bus", 2)
+            };
         }
     }
 }

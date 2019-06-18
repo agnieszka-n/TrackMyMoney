@@ -15,7 +15,7 @@ namespace ViewModels
         private ObservableCollection<ICostViewModel> costs;
         public ObservableCollection<ICostViewModel> Costs
         {
-            get { return costs; }
+            get => costs;
             set { Set(() => Costs, ref costs, value); }
         }
 
