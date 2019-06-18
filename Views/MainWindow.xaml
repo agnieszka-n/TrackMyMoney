@@ -17,12 +17,17 @@
                 <xctk:DateTimePicker TimePickerVisibility="Collapsed" Value="{Binding Date}" Format="Custom" FormatString="d.MM.yyyy" ShowButtonSpinner="False" TextAlignment="Center"/>
             </DataTemplate>
 
+            <Style TargetType="Button">
+                <Setter Property="Height" Value="25"></Setter>
+                <Setter Property="Padding" Value="5,0"></Setter>
+            </Style>
+
             <conv:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"></conv:BoolToVisibilityConverter>
             <conv:BoolToVisibilityNegatedConverter x:Key="BoolToVisibilityNegatedConverter"></conv:BoolToVisibilityNegatedConverter>
         </DockPanel.Resources>
 
-        <StackPanel DockPanel.Dock="Top" Margin="5">
-            <Button Content="Add a cost" Visibility="{Binding IsAddingCost, Converter={StaticResource BoolToVisibilityNegatedConverter}}" HorizontalAlignment="Left" Padding="5,0" Height="25" Width="80" Command="{Binding AddCostCommand}"></Button>
+        <StackPanel DockPanel.Dock="Top" Margin="5,15">
+            <Button Content="Add a cost" Visibility="{Binding IsAddingCost, Converter={StaticResource BoolToVisibilityNegatedConverter}}" HorizontalAlignment="Left" Width="80" Command="{Binding AddCostCommand}"></Button>
 
             <StackPanel Height="25" Orientation="Horizontal" Visibility="{Binding IsAddingCost, Converter={StaticResource BoolToVisibilityConverter}}">
                 <StackPanel DataContext="{Binding NewCost}" Orientation="Horizontal">
