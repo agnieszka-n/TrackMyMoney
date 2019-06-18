@@ -69,9 +69,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ViewModels.Contracts\ViewModelsContracts.csproj">
+    <ProjectReference Include="..\ViewModels.Contracts\ViewModels.Contracts.csproj">
       <Project>{4FA1C5B3-73A6-4518-8E47-FCF43EEB395E}</Project>
-      <Name>ViewModelsContracts</Name>
+      <Name>ViewModels.Contracts</Name>
     </ProjectReference>
     <ProjectReference Include="..\ViewModels\ViewModels.csproj">
       <Project>{e2b9d0dd-9df7-463f-8f24-3249368d09f0}</Project>

@@ -64,9 +64,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ViewModels.Contracts\ViewModelsContracts.csproj">
+    <ProjectReference Include="..\ViewModels.Contracts\ViewModels.Contracts.csproj">
       <Project>{4fa1c5b3-73a6-4518-8e47-fcf43eeb395e}</Project>
-      <Name>ViewModelsContracts</Name>
+      <Name>ViewModels.Contracts</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -7,7 +7,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using ViewModels;
-using ViewModelsContracts;
+using ViewModels.Contracts;
 using Views;
 
 namespace Main

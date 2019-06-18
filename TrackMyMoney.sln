@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Main", "Main\Main.csproj", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ViewModels", "ViewModels\ViewModels.csproj", "{E2B9D0DD-9DF7-463F-8F24-3249368D09F0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ViewModelsContracts", "ViewModels.Contracts\ViewModelsContracts.csproj", "{4FA1C5B3-73A6-4518-8E47-FCF43EEB395E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ViewModels.Contracts", "ViewModels.Contracts\ViewModels.Contracts.csproj", "{4FA1C5B3-73A6-4518-8E47-FCF43EEB395E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Views", "Views\Views.csproj", "{68CF4E80-B544-4639-A3F3-E3D92F971A69}"
 EndProject

@@ -1,7 +1,7 @@
 ﻿using System.Collections.ObjectModel;
 using GalaSoft.MvvmLight.Command;
 
-namespace ViewModelsContracts
+namespace ViewModels.Contracts
 {
     public interface ICostsListViewModel
     {
