@@ -21,37 +21,37 @@
             <conv:BoolToVisibilityNegatedConverter x:Key="BoolToVisibilityNegatedConverter"></conv:BoolToVisibilityNegatedConverter>
         </DockPanel.Resources>
 
-        <StackPanel DockPanel.Dock="Top" Margin="5" Visibility="{Binding IsAddingCost, Converter={StaticResource BoolToVisibilityNegatedConverter}}">
-            <Button Content="Add a cost" HorizontalAlignment="Left" Padding="5" Height="30" Command="{Binding AddCostCommand}"></Button>
-        </StackPanel>
+        <StackPanel DockPanel.Dock="Top" Margin="5">
+            <Button Content="Add a cost" Visibility="{Binding IsAddingCost, Converter={StaticResource BoolToVisibilityNegatedConverter}}" HorizontalAlignment="Left" Padding="5,0" Height="25" Width="80" Command="{Binding AddCostCommand}"></Button>
 
-        <StackPanel DockPanel.Dock="Top" Margin="5" Height="30" Orientation="Horizontal" Visibility="{Binding IsAddingCost, Converter={StaticResource BoolToVisibilityConverter}}">
-            <StackPanel DataContext="{Binding NewCost}" Orientation="Horizontal">
-                <StackPanel.Resources>
-                    <Style TargetType="TextBlock">
-                        <Setter Property="HorizontalAlignment" Value="Left"></Setter>
-                        <Setter Property="VerticalAlignment" Value="Center"></Setter>
-                    </Style>
-                    <Style x:Key="EditableControl" TargetType="Control">
-                        <Setter Property="Margin" Value="0,0,10,0"></Setter>
-                    </Style>
-                    <Style TargetType="TextBox" BasedOn="{StaticResource EditableControl}">
-                        <Setter Property="Padding" Value="5,0"></Setter>
-                        <Setter Property="HorizontalContentAlignment" Value="Center"></Setter>
-                        <Setter Property="VerticalContentAlignment" Value="Center"></Setter>
-                    </Style>
-                </StackPanel.Resources>
-                <TextBlock Text="Date: " HorizontalAlignment="Left" VerticalAlignment="Center"></TextBlock>
-                <ContentControl Style="{StaticResource EditableControl}" Content="{Binding}" ContentTemplate="{StaticResource CostDate}" Width="90" Height="25"></ContentControl>
-                <TextBlock Text="Category: "></TextBlock>
-                <TextBox Text="{Binding Category}" Width="100"/>
-                <TextBlock Text="Subject: "></TextBlock>
-                <TextBox Text="{Binding Subject}" Width="190"/>
-                <TextBlock Text="Amount: "></TextBlock>
-                <TextBox Text="{Binding Amount}" Width="50"/>
+            <StackPanel Height="25" Orientation="Horizontal" Visibility="{Binding IsAddingCost, Converter={StaticResource BoolToVisibilityConverter}}">
+                <StackPanel DataContext="{Binding NewCost}" Orientation="Horizontal">
+                    <StackPanel.Resources>
+                        <Style TargetType="TextBlock">
+                            <Setter Property="HorizontalAlignment" Value="Left"></Setter>
+                            <Setter Property="VerticalAlignment" Value="Center"></Setter>
+                        </Style>
+                        <Style x:Key="EditableControl" TargetType="Control">
+                            <Setter Property="Margin" Value="0,0,10,0"></Setter>
+                        </Style>
+                        <Style TargetType="TextBox" BasedOn="{StaticResource EditableControl}">
+                            <Setter Property="Padding" Value="5,0"></Setter>
+                            <Setter Property="HorizontalContentAlignment" Value="Center"></Setter>
+                            <Setter Property="VerticalContentAlignment" Value="Center"></Setter>
+                        </Style>
+                    </StackPanel.Resources>
+                    <TextBlock Text="Date: " HorizontalAlignment="Left" VerticalAlignment="Center"></TextBlock>
+                    <ContentControl Style="{StaticResource EditableControl}" Content="{Binding}" ContentTemplate="{StaticResource CostDate}" Width="90" Height="25"></ContentControl>
+                    <TextBlock Text="Category: "></TextBlock>
+                    <TextBox Text="{Binding Category}" Width="100"/>
+                    <TextBlock Text="Subject: "></TextBlock>
+                    <TextBox Text="{Binding Subject}" Width="190"/>
+                    <TextBlock Text="Amount: "></TextBlock>
+                    <TextBox Text="{Binding Amount}" Width="50"/>
+                </StackPanel>
+                <Button Content="Save" Command="{Binding SaveCostCommand}" Width="80" Margin="0,0,10,0"></Button>
+                <Button Content="Cancel" Command="{Binding CancelAddingCommand}" Width="80"></Button>
             </StackPanel>
-            <Button Content="Save" Command="{Binding SaveCostCommand}" Width="80" Margin="0,0,10,0"></Button>
-            <Button Content="Cancel" Command="{Binding CancelAddingCommand}" Width="80"></Button>
         </StackPanel>
 
         <DataGrid ItemsSource="{Binding Costs}" AutoGenerateColumns="False" RowHeaderWidth="0">
