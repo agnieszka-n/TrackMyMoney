@@ -38,22 +38,5 @@ namespace ViewModels
             get => amount;
             set { Set(() => Amount, ref amount, value); }
         }
-
-        private bool isDirty;
-        public bool IsDirty
-        {
-            get => isDirty;
-            set { Set(() => IsDirty, ref isDirty, value); }
-        }
-
-        private bool isDeleted;
-        public bool IsDeleted
-        {
-            get => isDeleted;
-            set { Set(() => IsDeleted, ref isDeleted, value); }
-        }
-
-        public RelayCommand EditCommand => throw new NotImplementedException();
-        public RelayCommand DeleteCommand => throw new NotImplementedException();
     }
 }
