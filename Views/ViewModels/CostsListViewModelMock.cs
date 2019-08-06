@@ -5,6 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using GalaSoft.MvvmLight.Command;
+using Models;
+using ViewModels;
 using ViewModels.Contracts;
 
 namespace Views.ViewModels
@@ -14,6 +16,7 @@ namespace Views.ViewModels
         public ObservableCollection<ICostViewModel> Costs { get; set; }
         public ICostViewModel NewCost { get; }
         public bool IsAddingCost { get; }
+        public ObservableCollection<ICostCategoryViewModel> Categories { get; }
         public RelayCommand AddCostCommand => null;
         public RelayCommand CancelAddingCommand => null;
         public RelayCommand SaveCostCommand => null;
@@ -22,6 +25,11 @@ namespace Views.ViewModels
         {
             IsAddingCost = true;
             NewCost = new CostViewModelMock(DateTime.Now, "Category", "Subject", 123);
+
+            Categories = new ObservableCollection<ICostCategoryViewModel>
+            {
+                new CostCategoryViewModel(new CostCategory() { Id = 1, Name = "Category"})
+            };
 
             Costs = new ObservableCollection<ICostViewModel>
             {

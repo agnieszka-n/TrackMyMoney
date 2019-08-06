@@ -5,13 +5,25 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Common;
 using GalaSoft.MvvmLight.Command;
+using Models;
+using Services.Contracts;
 using ViewModels.Contracts;
 
 namespace ViewModels
 {
     public class CostsListViewModel : ViewModelBase, ICostsListViewModel
     {
+        private readonly ICategoriesManager categoriesManager;
+
+        private ObservableCollection<ICostCategoryViewModel> categories;
+        public ObservableCollection<ICostCategoryViewModel> Categories
+        {
+            get => categories;
+            set { Set(() => Categories, ref categories, value); }
+        }
+
         private ObservableCollection<ICostViewModel> costs;
         public ObservableCollection<ICostViewModel> Costs
         {
@@ -37,9 +49,12 @@ namespace ViewModels
         public RelayCommand CancelAddingCommand { get; }
         public RelayCommand SaveCostCommand { get; }
 
-        public CostsListViewModel()
+        public CostsListViewModel(ICategoriesManager categoriesManager)
         {
+            this.categoriesManager = categoriesManager;
+
             ClearNewCost();
+
             AddCostCommand = new RelayCommand(AddCost);
             CancelAddingCommand = new RelayCommand(CancelAdding);
             SaveCostCommand = new RelayCommand(SaveCost);
@@ -86,6 +101,19 @@ namespace ViewModels
         private void AddCost()
         {
             IsAddingCost = true;
+
+            if (Categories != null)
+            {
+                return;
+            }
+
+            OperationResult<List<CostCategory>> categoriesResult = categoriesManager.GetCategories();
+            if (categoriesResult.IsSuccess)
+            {
+                var categoryViewModels = categoriesResult.Data.Select(x => new CostCategoryViewModel(x));
+                Categories = new ObservableCollection<ICostCategoryViewModel>(categoryViewModels);
+            }
+            // TODO Agnieszka implement an error message 
         }
 
         private void ClearNewCost()

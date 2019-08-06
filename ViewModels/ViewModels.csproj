@@ -56,6 +56,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CostCategoryViewModel.cs" />
     <Compile Include="CostsListViewModel.cs" />
     <Compile Include="CostViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -64,6 +65,18 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Common\Common.csproj">
+      <Project>{0121D3FB-50E0-4AC2-BCE1-3E76FA43FC87}</Project>
+      <Name>Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Models\Models.csproj">
+      <Project>{DF5CFF3A-B31B-428B-B201-F1EA8E0BA3C4}</Project>
+      <Name>Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Services.Contracts\Services.Contracts.csproj">
+      <Project>{fbb6629a-0ea9-458b-8cdf-698829629e0c}</Project>
+      <Name>Services.Contracts</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ViewModels.Contracts\ViewModels.Contracts.csproj">
       <Project>{4fa1c5b3-73a6-4518-8e47-fcf43eeb395e}</Project>
       <Name>ViewModels.Contracts</Name>

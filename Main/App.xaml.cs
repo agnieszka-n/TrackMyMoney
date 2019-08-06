@@ -9,6 +9,8 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using Services;
+using Services.Contracts;
 using ViewModels;
 using ViewModels.Contracts;
 using Views;
@@ -51,6 +53,7 @@ namespace Main
         private void ConfigureKernel(IKernel kernel)
         {
             kernel.Bind<ICostsListViewModel>().To<CostsListViewModel>();
+            kernel.Bind<ICategoriesManager>().To<CategoriesManager>();
             kernel.Bind<SQLiteConnection>().ToMethod(context => new SQLiteConnection(CONNECTION_STRING));
         }
     }

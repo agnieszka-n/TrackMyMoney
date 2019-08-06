@@ -14,13 +14,6 @@ namespace Views.ViewModels
         public string Category { get; set; }
         public string Subject { get; set; }
         public decimal? Amount { get; set; }
-        public bool IsDirty { get; set; }
-        public bool IsDeleted { get; set; }
-
-        public RelayCommand EditCommand => throw new NotImplementedException();
-        public RelayCommand DeleteCommand => throw new NotImplementedException();
-
-        public CostViewModelMock() { }
 
         public CostViewModelMock(DateTime date, string category, string subject, decimal amount)
         {

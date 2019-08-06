@@ -131,6 +131,14 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Services.Contracts\Services.Contracts.csproj">
+      <Project>{fbb6629a-0ea9-458b-8cdf-698829629e0c}</Project>
+      <Name>Services.Contracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Services\Services.csproj">
+      <Project>{4624c635-65bb-47c6-b3c5-637f413b012f}</Project>
+      <Name>Services</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ViewModels.Contracts\ViewModels.Contracts.csproj">
       <Project>{4FA1C5B3-73A6-4518-8E47-FCF43EEB395E}</Project>
       <Name>ViewModels.Contracts</Name>

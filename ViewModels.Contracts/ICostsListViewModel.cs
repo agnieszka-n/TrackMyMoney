@@ -8,6 +8,7 @@ namespace ViewModels.Contracts
         ObservableCollection<ICostViewModel> Costs { get; }
         ICostViewModel NewCost { get; }
         bool IsAddingCost { get; }
+        ObservableCollection<ICostCategoryViewModel> Categories { get;}
         RelayCommand AddCostCommand { get; }
         RelayCommand CancelAddingCommand { get; }
         RelayCommand SaveCostCommand { get; }

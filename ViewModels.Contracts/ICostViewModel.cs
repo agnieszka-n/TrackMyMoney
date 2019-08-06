@@ -9,10 +9,5 @@ namespace ViewModels.Contracts
         string Category { get; set; }
         string Subject { get; set; }
         decimal? Amount { get; set; }
-        bool IsDirty { get; set; }
-        bool IsDeleted { get; set; }
-
-        RelayCommand EditCommand { get; }
-        RelayCommand DeleteCommand { get; }
     }
 }

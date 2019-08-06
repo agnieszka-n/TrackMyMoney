@@ -10,6 +10,7 @@
         mc:Ignorable="d"
         Title="Track My Money" Height="450" Width="850" MinHeight="450" MinWidth="850"
         d:DataContext="{d:DesignInstance vm:CostsListViewModelMock, IsDesignTimeCreatable=True}"
+        Name="Window"
         >
     <DockPanel>
         <DockPanel.Resources>
@@ -48,7 +49,7 @@
                     <TextBlock Text="Date: " HorizontalAlignment="Left" VerticalAlignment="Center"></TextBlock>
                     <ContentControl Style="{StaticResource EditableControl}" Content="{Binding}" ContentTemplate="{StaticResource CostDate}" Width="90" Height="25"></ContentControl>
                     <TextBlock Text="Category: "></TextBlock>
-                    <TextBox Text="{Binding Category}" Width="100"/>
+                    <ComboBox ItemsSource="{Binding DataContext.Categories, ElementName=Window}" DisplayMemberPath="Name" SelectedValuePath="Name" SelectedValue="{Binding Category}" Style="{StaticResource EditableControl}" Width="100"></ComboBox>
                     <TextBlock Text="Subject: "></TextBlock>
                     <TextBox Text="{Binding Subject}" Width="190"/>
                     <TextBlock Text="Amount: "></TextBlock>
