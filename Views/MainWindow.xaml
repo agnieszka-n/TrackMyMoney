@@ -28,7 +28,7 @@
         </DockPanel.Resources>
 
         <StackPanel DockPanel.Dock="Top" Margin="5,15">
-            <Button Content="Add a cost" Visibility="{Binding IsAddingCost, Converter={StaticResource BoolToVisibilityNegatedConverter}}" HorizontalAlignment="Left" Width="80" Command="{Binding AddCostCommand}"></Button>
+            <Button Content="Add a cost" Visibility="{Binding IsAddingCost, Converter={StaticResource BoolToVisibilityNegatedConverter}}" HorizontalAlignment="Left" Width="80" Command="{Binding ShowAddCostCommand}"></Button>
 
             <StackPanel Height="25" Orientation="Horizontal" Visibility="{Binding IsAddingCost, Converter={StaticResource BoolToVisibilityConverter}}">
                 <StackPanel DataContext="{Binding NewCost}" Orientation="Horizontal">

@@ -21,7 +21,7 @@ namespace ViewModels.Tests
             CostsListViewModel vm = GetSimpleObjectUnderTest();
 
             // Act
-            vm.AddCostCommand.Execute(null);
+            vm.ShowAddCostCommand.Execute(null);
 
             // Assert
             Assert.AreEqual(true, vm.IsAddingCost);
@@ -32,7 +32,7 @@ namespace ViewModels.Tests
         {
             // Arrange
             CostsListViewModel vm = GetSimpleObjectUnderTest();
-            vm.AddCostCommand.Execute(null);
+            vm.ShowAddCostCommand.Execute(null);
 
             // Act
             vm.CancelAddingCommand.Execute(null);
@@ -46,12 +46,12 @@ namespace ViewModels.Tests
         {
             // Arrange
             CostsListViewModel vm = GetSimpleObjectUnderTest();
-            vm.AddCostCommand.Execute(null);
+            vm.ShowAddCostCommand.Execute(null);
             vm.NewCost.Amount = 123;
 
             // Act
             vm.CancelAddingCommand.Execute(null);
-            vm.AddCostCommand.Execute(null);
+            vm.ShowAddCostCommand.Execute(null);
 
             // Assert
             Assert.IsNull(vm.NewCost.Amount);
@@ -64,7 +64,7 @@ namespace ViewModels.Tests
             CostsListViewModel vm = GetSimpleObjectUnderTest();
             var costsCountBefore = vm.Costs.Count;
 
-            vm.AddCostCommand.Execute(null);
+            vm.ShowAddCostCommand.Execute(null);
 
             vm.NewCost.Date = new DateTime(2000, 1, 1);
             vm.NewCost.Category = "category";
@@ -100,7 +100,7 @@ namespace ViewModels.Tests
             var vm = new CostsListViewModel(mockManager.Object);
 
             // Act
-            vm.AddCostCommand.Execute(null);
+            vm.ShowAddCostCommand.Execute(null);
 
             // Assert
             Assert.IsNotNull(vm.Categories);
@@ -118,8 +118,8 @@ namespace ViewModels.Tests
             var vm = new CostsListViewModel(mockManager.Object);
 
             // Act
-            vm.AddCostCommand.Execute(null);
-            vm.AddCostCommand.Execute(null);
+            vm.ShowAddCostCommand.Execute(null);
+            vm.ShowAddCostCommand.Execute(null);
 
             // Assert
             Assert.DoesNotThrow(() => mockManager.Verify(x => x.GetCategories(), Times.Once));

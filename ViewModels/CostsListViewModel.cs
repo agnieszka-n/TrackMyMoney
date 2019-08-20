@@ -45,7 +45,7 @@ namespace ViewModels
             set { Set(() => IsAddingCost, ref isAddingCost, value); }
         }
 
-        public RelayCommand AddCostCommand { get; }
+        public RelayCommand ShowAddCostCommand { get; }
         public RelayCommand CancelAddingCommand { get; }
         public RelayCommand SaveCostCommand { get; }
 
@@ -55,7 +55,7 @@ namespace ViewModels
 
             ClearNewCost();
 
-            AddCostCommand = new RelayCommand(AddCost);
+            ShowAddCostCommand = new RelayCommand(ShowAddCost);
             CancelAddingCommand = new RelayCommand(CancelAdding);
             SaveCostCommand = new RelayCommand(SaveCost);
 
@@ -98,7 +98,7 @@ namespace ViewModels
             IsAddingCost = false;
         }
 
-        private void AddCost()
+        private void ShowAddCost()
         {
             IsAddingCost = true;
 

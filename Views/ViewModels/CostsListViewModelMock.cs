@@ -17,7 +17,7 @@ namespace Views.ViewModels
         public ICostViewModel NewCost { get; }
         public bool IsAddingCost { get; }
         public ObservableCollection<ICostCategoryViewModel> Categories { get; }
-        public RelayCommand AddCostCommand => null;
+        public RelayCommand ShowAddCostCommand => null;
         public RelayCommand CancelAddingCommand => null;
         public RelayCommand SaveCostCommand => null;
 
