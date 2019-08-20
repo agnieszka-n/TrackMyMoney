@@ -30,7 +30,9 @@ namespace Main
             base.OnStartup(e);
 
             IKernel kernel = new StandardKernel();
-            ConfigureKernel(kernel);
+            var diConfiguration = new NinjectConfiguration();
+
+            diConfiguration.ConfigureKernel(kernel, CONNECTION_STRING);
 
             if (!File.Exists(FILE_NAME))
             {
@@ -48,13 +50,6 @@ namespace Main
 
             MainWindow = new MainWindow(kernel.Get<ICostsListViewModel>());
             MainWindow.Show();
-        }
-
-        private void ConfigureKernel(IKernel kernel)
-        {
-            kernel.Bind<ICostsListViewModel>().To<CostsListViewModel>();
-            kernel.Bind<ICategoriesManager>().To<CategoriesManager>();
-            kernel.Bind<SQLiteConnection>().ToMethod(context => new SQLiteConnection(CONNECTION_STRING));
         }
     }
 }
