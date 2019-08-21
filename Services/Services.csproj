@@ -61,6 +61,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CategoriesManager.cs" />
+    <Compile Include="Database\DatabaseProxy.cs" />
+    <Compile Include="Database\QueryResultReader.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

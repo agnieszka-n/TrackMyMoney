@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.Common;
 using System.Data.SQLite;
 using System.Diagnostics;
 using System.Linq;
@@ -9,51 +10,52 @@ using System.Threading.Tasks;
 using Common;
 using Models;
 using Services.Contracts;
+using Services.Contracts.Database;
 
 namespace Services
 {
     public class CategoriesManager : ICategoriesManager
     {
-        private readonly SQLiteConnection connection;
+        private readonly IDatabaseProxy dbProxy;
 
-        public CategoriesManager(SQLiteConnection connection)
+        public CategoriesManager(IDatabaseProxy dbProxy)
         {
-            this.connection = connection;
+            this.dbProxy = dbProxy;
         }
 
         public OperationResult<List<CostCategory>> GetCategories()
         {
-            try
+            using (DbConnection connection = dbProxy.GetConnection())
             {
-                connection.Open();
-
-                string query = "select id, name from categories";
-                SQLiteCommand command = new SQLiteCommand(query, connection);
-                var reader = command.ExecuteReader();
-                var result = new List<CostCategory>();
-
-                while (reader.Read())
+                try
                 {
-                    var category = new CostCategory
+                    dbProxy.OpenConnection(connection);
+
+                    string query = "select id, name from categories";
+                    IQueryResultReader reader = dbProxy.ExecuteReader(query, connection);
+                    var result = new List<CostCategory>();
+
+                    while (reader.Read())
                     {
-                        Id = reader.GetInt32(0),
-                        Name = reader.GetString(1)
-                    };
-                    result.Add(category);
-                }
+                        var category = new CostCategory
+                        {
+                            Id = Convert.ToInt32(reader[0]),
+                            Name = (string)reader[1]
+                        };
+                        result.Add(category);
+                    }
 
-                connection.Close();
-                return new OperationResult<List<CostCategory>>(result);
-            }
-            catch (Exception e)
-            {
-                if (connection.State != ConnectionState.Closed)
+                    return new OperationResult<List<CostCategory>>(result);
+                }
+                catch (Exception e)
                 {
-                    connection.Close();
+                    Trace.WriteLine(e);
+                    return new OperationResult<List<CostCategory>>("An error occurred while getting categories.");
                 }
-
-                Trace.WriteLine(e);
-                return new OperationResult<List<CostCategory>>("An error occurred while getting categories.");
+                finally
+                {
+                    dbProxy.CloseConnection(connection);
+                }
             }
         }
     }

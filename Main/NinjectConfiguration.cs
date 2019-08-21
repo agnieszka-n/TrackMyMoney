@@ -8,6 +8,8 @@ using Ninject;
 using Ninject.Parameters;
 using Services;
 using Services.Contracts;
+using Services.Contracts.Database;
+using Services.Database;
 using ViewModels;
 using ViewModels.Contracts;
 
@@ -19,7 +21,7 @@ namespace Main
         {
             kernel.Bind<ICostsListViewModel>().To<CostsListViewModel>();
             kernel.Bind<ICategoriesManager>().To<CategoriesManager>();
-            kernel.Bind<SQLiteConnection>().ToMethod(context => new SQLiteConnection(connectionString));
+            kernel.Bind<IDatabaseProxy>().ToMethod(context => new DatabaseProxy(connectionString));
         }
     }
 }

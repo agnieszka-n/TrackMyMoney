@@ -43,6 +43,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ICategoriesManager.cs" />
+    <Compile Include="Database\IDatabaseProxy.cs" />
+    <Compile Include="Database\IQueryResultReader.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
