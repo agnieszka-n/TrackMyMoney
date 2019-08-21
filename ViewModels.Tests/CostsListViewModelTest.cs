@@ -92,7 +92,7 @@ namespace ViewModels.Tests
             var sampleCategories = new List<CostCategory>()
             {
                 new CostCategory() { Id = 1, Name = "111" },
-                new CostCategory() { Id = 1, Name = "222" }
+                new CostCategory() { Id = 2, Name = "222" }
             };
 
             var mockManager = new Mock<ICategoriesManager>();
@@ -119,6 +119,7 @@ namespace ViewModels.Tests
 
             // Act
             vm.ShowAddCostCommand.Execute(null);
+            vm.CancelAddingCommand.Execute(null);
             vm.ShowAddCostCommand.Execute(null);
 
             // Assert
