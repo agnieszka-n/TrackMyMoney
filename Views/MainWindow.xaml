@@ -49,7 +49,7 @@
                     <TextBlock Text="Date: " HorizontalAlignment="Left" VerticalAlignment="Center"></TextBlock>
                     <ContentControl Style="{StaticResource EditableControl}" Content="{Binding}" ContentTemplate="{StaticResource CostDate}" Width="90" Height="25"></ContentControl>
                     <TextBlock Text="Category: "></TextBlock>
-                    <ComboBox ItemsSource="{Binding DataContext.Categories, ElementName=Window}" DisplayMemberPath="Name" SelectedValuePath="Name" SelectedValue="{Binding Category}" Style="{StaticResource EditableControl}" Width="100"></ComboBox>
+                    <ComboBox ItemsSource="{Binding DataContext.Categories, ElementName=Window}" DisplayMemberPath="Name" SelectedValue="{Binding Category}" Style="{StaticResource EditableControl}" Width="100"></ComboBox>
                     <TextBlock Text="Subject: "></TextBlock>
                     <TextBox Text="{Binding Subject}" Width="190"/>
                     <TextBlock Text="Amount: "></TextBlock>
@@ -80,12 +80,12 @@
                 <DataGridTemplateColumn Width="*" Header="Category">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate DataType="{x:Type vm:CostViewModelMock}">
-                            <TextBlock Style="{StaticResource CellTextStyle}" Text="{Binding Category}"/>
+                            <TextBlock Style="{StaticResource CellTextStyle}" Text="{Binding Category.Name}"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                     <DataGridTemplateColumn.CellEditingTemplate>
                         <DataTemplate DataType="{x:Type vm:CostViewModelMock}">
-                            <TextBox Text="{Binding Category}"/>
+                            <TextBox Text="{Binding Category.Id}"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellEditingTemplate>
                 </DataGridTemplateColumn>

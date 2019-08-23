@@ -4,18 +4,21 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Models;
+using ViewModels;
 using ViewModels.Contracts;
 
 namespace Views.ViewModels
 {
     internal class CostViewModelMock : ICostViewModel
     {
+        public int Id { get; set; }
         public DateTime? Date { get; set; }
-        public string Category { get; set; }
+        public ICostCategoryViewModel Category { get; set; }
         public string Subject { get; set; }
         public decimal? Amount { get; set; }
 
-        public CostViewModelMock(DateTime date, string category, string subject, decimal amount)
+        public CostViewModelMock(DateTime date, ICostCategoryViewModel category, string subject, decimal amount)
         {
             Date = date;
             Category = category;

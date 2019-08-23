@@ -16,6 +16,7 @@ namespace ViewModels
     public class CostsListViewModel : ViewModelBase, ICostsListViewModel
     {
         private readonly ICategoriesManager categoriesManager;
+        private readonly ICostsManager costsManager;
 
         private ObservableCollection<ICostCategoryViewModel> categories;
         public ObservableCollection<ICostCategoryViewModel> Categories
@@ -49,9 +50,10 @@ namespace ViewModels
         public RelayCommand CancelAddingCommand { get; }
         public RelayCommand SaveCostCommand { get; }
 
-        public CostsListViewModel(ICategoriesManager categoriesManager)
+        public CostsListViewModel(ICategoriesManager categoriesManager, ICostsManager costsManager)
         {
             this.categoriesManager = categoriesManager;
+            this.costsManager = costsManager;
 
             ClearNewCost();
 
@@ -59,29 +61,8 @@ namespace ViewModels
             CancelAddingCommand = new RelayCommand(CancelAdding);
             SaveCostCommand = new RelayCommand(SaveCost);
 
-            Costs = new ObservableCollection<ICostViewModel>();
-            // TODO use a database 
-            Costs.Add(new CostViewModel()
-            {
-                Date = new DateTime(2000, 2, 2),
-                Category = "Entertainment",
-                Subject = "Cinema",
-                Amount = 15
-            });
-            Costs.Add(new CostViewModel()
-            {
-                Date = new DateTime(2000, 2, 3),
-                Category = "Entertainment",
-                Subject = "Theater",
-                Amount = 30
-            });
-            Costs.Add(new CostViewModel()
-            {
-                Date = new DateTime(2000, 2, 4),
-                Category = "Entertainment",
-                Subject = "Opera",
-                Amount = 45
-            });
+            LoadCategories();
+            LoadCosts();
         }
 
         private void SaveCost()
@@ -101,12 +82,10 @@ namespace ViewModels
         private void ShowAddCost()
         {
             IsAddingCost = true;
+        }
 
-            if (Categories != null)
-            {
-                return;
-            }
-
+        private void LoadCategories()
+        {
             OperationResult<List<CostCategory>> categoriesResult = categoriesManager.GetCategories();
             if (categoriesResult.IsSuccess)
             {
@@ -114,6 +93,22 @@ namespace ViewModels
                 Categories = new ObservableCollection<ICostCategoryViewModel>(categoryViewModels);
             }
             // TODO Agnieszka implement an error message 
+        }
+
+        private void LoadCosts()
+        {
+            if (Categories == null)
+            {
+                return;
+            }
+
+            OperationResult<List<Cost>> costsResult = costsManager.GetCosts();
+            if (costsResult.IsSuccess)
+            {
+                var costsViewModels = costsResult.Data.Select(x => new CostViewModel(x, Categories.Single(category => category.Id == x.CategoryId)));
+                Costs = new ObservableCollection<ICostViewModel>(costsViewModels);
+            }
+            // TODO implement an error message 
         }
 
         private void ClearNewCost()

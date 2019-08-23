@@ -7,6 +7,9 @@ using Microsoft.SqlServer.Server;
 
 namespace Common
 {
+    /// <summary>
+    /// Represents a result of an operation related to a database.
+    /// </summary>
     public class OperationResult
     {
         public bool IsSuccess { get; }
@@ -31,6 +34,9 @@ namespace Common
         }
     }
 
+    /// <summary>
+    /// Represents a result of an operation related to a database. Contains data returned from it.
+    /// </summary>
     public class OperationResult<TData> : OperationResult
     {
         public TData Data { get; }

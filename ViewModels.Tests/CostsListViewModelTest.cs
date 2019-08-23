@@ -67,7 +67,7 @@ namespace ViewModels.Tests
             vm.ShowAddCostCommand.Execute(null);
 
             vm.NewCost.Date = new DateTime(2000, 1, 1);
-            vm.NewCost.Category = "category";
+            vm.NewCost.Category = new CostCategoryViewModel(new CostCategory() { Id = 1 });
             vm.NewCost.Subject = "subject";
             vm.NewCost.Amount = 123;
 
@@ -79,7 +79,7 @@ namespace ViewModels.Tests
 
             var lastCost = vm.Costs.Last();
 
-            Assert.AreEqual("category", lastCost.Category);
+            Assert.AreEqual(1, lastCost.Category.Id);
             Assert.AreEqual("subject", lastCost.Subject);
             Assert.AreEqual(new DateTime(2000, 1, 1), lastCost.Date);
             Assert.AreEqual(123, lastCost.Amount);
@@ -95,12 +95,13 @@ namespace ViewModels.Tests
                 new CostCategory() { Id = 2, Name = "222" }
             };
 
-            var mockManager = new Mock<ICategoriesManager>();
-            mockManager.Setup(x => x.GetCategories()).Returns(new OperationResult<List<CostCategory>>(sampleCategories));
-            var vm = new CostsListViewModel(mockManager.Object);
+            var mockCategoriesManager = new Mock<ICategoriesManager>();
+            mockCategoriesManager.Setup(x => x.GetCategories()).Returns(new OperationResult<List<CostCategory>>(sampleCategories));
+            var mockCostsManager = new Mock<ICostsManager>();
+            mockCostsManager.Setup(x => x.GetCosts()).Returns(new OperationResult<List<Cost>>(new List<Cost>()));
 
             // Act
-            vm.ShowAddCostCommand.Execute(null);
+            var vm = new CostsListViewModel(mockCategoriesManager.Object, mockCostsManager.Object);
 
             // Assert
             Assert.IsNotNull(vm.Categories);
@@ -110,27 +111,66 @@ namespace ViewModels.Tests
         }
 
         [Test]
-        public void Can_Load_Categories_Only_Once()
+        public void Can_Load_Costs()
         {
             // Arrange
-            var mockManager = new Mock<ICategoriesManager>();
-            mockManager.Setup(x => x.GetCategories()).Returns(new OperationResult<List<CostCategory>>(new List<CostCategory>()));
-            var vm = new CostsListViewModel(mockManager.Object);
+            var sampleCategories = new List<CostCategory>()
+            {
+                new CostCategory() { Id = 1, Name = "Food" },
+                new CostCategory() { Id = 2, Name = "Transport" }
+            };
+
+            var sampleCosts = new List<Cost>
+            {
+                new Cost() { Id = 1, Date = new DateTime(2000, 1, 1), CategoryId = 1, Subject = "Pasta", Amount = 10 },
+                new Cost() { Id = 2, Date = new DateTime(2000, 1, 22), CategoryId = 2, Subject = "Bus", Amount = 10 }
+            };
+
+            var mockCategoriesManager = new Mock<ICategoriesManager>();
+            mockCategoriesManager.Setup(x => x.GetCategories()).Returns(new OperationResult<List<CostCategory>>(sampleCategories));
+            var mockCostsManager = new Mock<ICostsManager>();
+            mockCostsManager.Setup(x => x.GetCosts()).Returns(new OperationResult<List<Cost>>(sampleCosts));
 
             // Act
-            vm.ShowAddCostCommand.Execute(null);
-            vm.CancelAddingCommand.Execute(null);
-            vm.ShowAddCostCommand.Execute(null);
+            var vm = new CostsListViewModel(mockCategoriesManager.Object, mockCostsManager.Object);
 
             // Assert
-            Assert.DoesNotThrow(() => mockManager.Verify(x => x.GetCategories(), Times.Once));
+            Assert.IsNotNull(vm.Costs);
+            Assert.AreEqual(2, vm.Costs.Count);
+            Assert.AreEqual(1, vm.Costs[0].Id);
+            Assert.AreEqual("Food", vm.Costs[0].Category.Name);
+        }
+
+        [Test]
+        public void Can_Load_Costs_Only_When_Categories_Available()
+        {
+            // Arrange
+            var sampleCosts = new List<Cost>
+            {
+                new Cost() { Id = 1, Date = new DateTime(2000, 1, 1), CategoryId = 1, Subject = "Pasta", Amount = 10 },
+                new Cost() { Id = 2, Date = new DateTime(2000, 1, 22), CategoryId = 2, Subject = "Bus", Amount = 10 }
+            };
+
+            var mockCategoriesManager = new Mock<ICategoriesManager>();
+            mockCategoriesManager.Setup(x => x.GetCategories()).Returns(new OperationResult<List<CostCategory>>("Something went wrong!"));
+            var mockCostsManager = new Mock<ICostsManager>();
+            mockCostsManager.Setup(x => x.GetCosts()).Returns(new OperationResult<List<Cost>>(sampleCosts));
+
+            // Act
+            var vm = new CostsListViewModel(mockCategoriesManager.Object, mockCostsManager.Object);
+
+            // Assert
+            Assert.DoesNotThrow(() => mockCostsManager.Verify(x => x.GetCosts(), Times.Never));
+            Assert.IsNull(vm.Costs);
         }
 
         private CostsListViewModel GetSimpleObjectUnderTest()
         {
-            var mockManager = new Mock<ICategoriesManager>();
-            mockManager.Setup(x => x.GetCategories()).Returns(new OperationResult<List<CostCategory>>(new List<CostCategory>()));
-            return new CostsListViewModel(mockManager.Object);
+            var mockCategoriesManager = new Mock<ICategoriesManager>();
+            mockCategoriesManager.Setup(x => x.GetCategories()).Returns(new OperationResult<List<CostCategory>>(new List<CostCategory>()));
+            var mockCostsManager = new Mock<ICostsManager>();
+            mockCostsManager.Setup(x => x.GetCosts()).Returns(new OperationResult<List<Cost>>(new List<Cost>()));
+            return new CostsListViewModel(mockCategoriesManager.Object, mockCostsManager.Object);
         }
     }
 }

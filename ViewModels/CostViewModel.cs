@@ -5,12 +5,20 @@ using System.Text;
 using System.Threading.Tasks;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
+using Models;
 using ViewModels.Contracts;
 
 namespace ViewModels
 {
     public class CostViewModel : ViewModelBase, ICostViewModel
     {
+        private int id;
+        public int Id
+        {
+            get => id;
+            set { Set(() => Id, ref id, value); }
+        }
+
         private DateTime? date;
         public DateTime? Date
         {
@@ -18,8 +26,8 @@ namespace ViewModels
             set { Set(() => Date, ref date, value); }
         }
 
-        private string category;
-        public string Category
+        private ICostCategoryViewModel category;
+        public ICostCategoryViewModel Category
         {
             get => category;
             set { Set(() => Category, ref category, value); }
@@ -37,6 +45,19 @@ namespace ViewModels
         {
             get => amount;
             set { Set(() => Amount, ref amount, value); }
+        }
+
+        public CostViewModel()
+        {
+        }
+
+        public CostViewModel(Cost cost, ICostCategoryViewModel category)
+        {
+            Id = cost.Id;
+            Date = cost.Date;
+            Subject = cost.Subject;
+            Amount = cost.Amount;
+            Category = category;
         }
     }
 }

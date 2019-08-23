@@ -24,19 +24,19 @@ namespace Views.ViewModels
         public CostsListViewModelMock()
         {
             IsAddingCost = true;
-            NewCost = new CostViewModelMock(DateTime.Now, "Category", "Subject", 123);
-
             Categories = new ObservableCollection<ICostCategoryViewModel>
             {
-                new CostCategoryViewModel(new CostCategory() { Id = 1, Name = "Category"})
+                new CostCategoryViewModel(new CostCategory() { Id = 1, Name = "Selected category"}),
+                new CostCategoryViewModel(new CostCategory() { Id = 2, Name = "Another category"})
             };
+
+            NewCost = new CostViewModelMock(DateTime.Now, Categories[0], "Subject", 123);
 
             Costs = new ObservableCollection<ICostViewModel>
             {
-                new CostViewModelMock(new DateTime(2000, 1, 1), "Food", "Pasta", 10),
-                new CostViewModelMock(new DateTime(2000, 1, 1), "Food", "Pizza", 15),
-                new CostViewModelMock(new DateTime(2000, 1, 2), "Food", "Burger", 20),
-                new CostViewModelMock(new DateTime(2000, 1, 31), "Transport", "Bus", 2)
+                new CostViewModelMock(new DateTime(2000, 1, 1), Categories[1], "Pasta", 10),
+                new CostViewModelMock(new DateTime(2000, 1, 1), Categories[1], "Pizza", 15),
+                new CostViewModelMock(new DateTime(2000, 1, 2), Categories[1], "Burger", 20),
             };
         }
     }
