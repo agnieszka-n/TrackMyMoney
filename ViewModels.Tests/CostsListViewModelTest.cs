@@ -8,6 +8,7 @@ using Common;
 using Models;
 using Moq;
 using Services.Contracts;
+using ViewModels.Contracts;
 
 namespace ViewModels.Tests
 {
@@ -18,7 +19,7 @@ namespace ViewModels.Tests
         public void Can_Add_Cost_Show_New_Cost_Panel()
         {
             // Arrange
-            CostsListViewModel vm = GetSimpleObjectUnderTest();
+            CostsListViewModel vm = GetCostsListViewModelWithoutDatabaseReadings();
 
             // Act
             vm.ShowAddCostCommand.Execute(null);
@@ -31,7 +32,7 @@ namespace ViewModels.Tests
         public void Can_Cancel_Hide_New_Cost_Panel()
         {
             // Arrange
-            CostsListViewModel vm = GetSimpleObjectUnderTest();
+            CostsListViewModel vm = GetCostsListViewModelWithoutDatabaseReadings();
             vm.ShowAddCostCommand.Execute(null);
 
             // Act
@@ -45,7 +46,7 @@ namespace ViewModels.Tests
         public void Can_Cancelling_Clear_New_Cost()
         {
             // Arrange
-            CostsListViewModel vm = GetSimpleObjectUnderTest();
+            CostsListViewModel vm = GetCostsListViewModelWithoutDatabaseReadings();
             vm.ShowAddCostCommand.Execute(null);
             vm.NewCost.Amount = 123;
 
@@ -61,13 +62,16 @@ namespace ViewModels.Tests
         public void Can_Save_Cost()
         {
             // Arrange
-            CostsListViewModel vm = GetSimpleObjectUnderTest();
+            CostsListViewModel vm = GetCostsListViewModelWithoutDatabaseReadings();
             var costsCountBefore = vm.Costs.Count;
 
             vm.ShowAddCostCommand.Execute(null);
 
+            var costCategoryMock = new Mock<ICostCategoryViewModel>();
+            costCategoryMock.Setup(x => x.Id).Returns(1);
+
             vm.NewCost.Date = new DateTime(2000, 1, 1);
-            vm.NewCost.Category = new CostCategoryViewModel(new CostCategory() { Id = 1 });
+            vm.NewCost.Category = costCategoryMock.Object;
             vm.NewCost.Subject = "subject";
             vm.NewCost.Amount = 123;
 
@@ -164,7 +168,7 @@ namespace ViewModels.Tests
             Assert.IsNull(vm.Costs);
         }
 
-        private CostsListViewModel GetSimpleObjectUnderTest()
+        private CostsListViewModel GetCostsListViewModelWithoutDatabaseReadings()
         {
             var mockCategoriesManager = new Mock<ICategoriesManager>();
             mockCategoriesManager.Setup(x => x.GetCategories()).Returns(new OperationResult<List<CostCategory>>(new List<CostCategory>()));
