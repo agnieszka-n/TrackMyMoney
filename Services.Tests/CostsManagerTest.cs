@@ -45,5 +45,21 @@ namespace Services.Tests
             Assert.AreEqual("Pasta", cost.Subject, "Invalid cost subject.");
             Assert.AreEqual(12, cost.Amount, "Invalid cost amount.");
         }
+
+        [Test]
+        public void Can_Save_Cost()
+        {
+            // Arrange
+            var dbProxyMock = new Mock<IDatabaseProxy>();
+            dbProxyMock.Setup(x => x.ExecuteNonQuery(It.IsAny<DbConnection>(), It.IsAny<string>(), It.IsAny<Dictionary<string, object>>())).Returns(1);
+
+            var manager = new CostsManager(dbProxyMock.Object);
+
+            // Act
+            OperationResult result = manager.SaveCost(new Cost());
+
+            // Assert
+            Assert.AreEqual(true, result.IsSuccess, "Should return success from a database.");
+        }
     }
 }

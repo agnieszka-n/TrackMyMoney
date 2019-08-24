@@ -45,5 +45,21 @@ namespace Services.Database
             var reader = command.ExecuteReader();
             return new QueryResultReader(reader);
         }
+
+        public int ExecuteNonQuery(DbConnection connection, string query, Dictionary<string, object> queryParameters = null)
+        {
+            DbCommand command = connection.CreateCommand();
+            command.CommandText = query;
+
+            if (queryParameters != null)
+            {
+                foreach (var parameter in queryParameters)
+                {
+                    command.Parameters.Add(new SQLiteParameter() { ParameterName = parameter.Key, Value = parameter.Value });
+                }
+            }
+
+            return command.ExecuteNonQuery();
+        }
     }
 }

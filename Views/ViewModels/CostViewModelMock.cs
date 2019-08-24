@@ -5,7 +5,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Models;
-using ViewModels;
 using ViewModels.Contracts;
 
 namespace Views.ViewModels
@@ -24,6 +23,13 @@ namespace Views.ViewModels
             Category = category;
             Subject = subject;
             Amount = amount;
+        }
+
+        public bool IsValid => true;
+
+        public Cost ToModel()
+        {
+            throw new NotImplementedException();
         }
     }
 }

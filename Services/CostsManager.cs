@@ -58,7 +58,48 @@ namespace Services
                     dbProxy.CloseConnection(connection);
                 }
             }
+        }
 
+        public OperationResult SaveCost(Cost cost)
+        {
+            using (DbConnection connection = dbProxy.GetConnection())
+            {
+                try
+                {
+                    dbProxy.OpenConnection(connection);
+
+                    string query = "insert into costs(date, categoryId, subject, amount)" +
+                                   " values(@date, @categoryId, @subject, @amount)";
+
+                    Dictionary<string, object> parameters = new Dictionary<string, object>()
+                    {
+                        { "@date", cost.Date.Date },
+                        { "@categoryId", cost.CategoryId },
+                        { "@subject", cost.Subject },
+                        { "@amount", cost.Amount }
+                    };
+
+                    int affectedRowsCount = dbProxy.ExecuteNonQuery(connection, query, parameters);
+
+                    if (affectedRowsCount == 1)
+                    {
+                        return new OperationResult();
+                    }
+                    else
+                    {
+                        throw new Exception("Inserting a new row failed.");
+                    }
+                }
+                catch (Exception e)
+                {
+                    Trace.WriteLine(e);
+                    return new OperationResult("An error occurred while saving a cost.");
+                }
+                finally
+                {
+                    dbProxy.CloseConnection(connection);
+                }
+            }
         }
     }
 }

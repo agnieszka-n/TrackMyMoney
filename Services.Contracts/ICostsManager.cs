@@ -11,5 +11,6 @@ namespace Services.Contracts
     public interface ICostsManager
     {
         OperationResult<List<Cost>> GetCosts();
+        OperationResult SaveCost(Cost cost);
     }
 }

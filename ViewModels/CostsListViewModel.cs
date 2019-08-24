@@ -67,10 +67,22 @@ namespace ViewModels
 
         private void SaveCost()
         {
-            // TODO use a database
-            Costs.Add(NewCost);
-            IsAddingCost = false;
-            ClearNewCost();
+            var model = NewCost.ToModel();
+
+            if (model == null)
+            {
+                return;
+            }
+
+            OperationResult result = costsManager.SaveCost(model);
+
+            if (result.IsSuccess)
+            {
+                IsAddingCost = false;
+                ClearNewCost();
+                LoadCosts();
+            }
+            // TODO implement an error message 
         }
 
         private void CancelAdding()
@@ -92,7 +104,7 @@ namespace ViewModels
                 var categoryViewModels = categoriesResult.Data.Select(x => new CostCategoryViewModel(x));
                 Categories = new ObservableCollection<ICostCategoryViewModel>(categoryViewModels);
             }
-            // TODO Agnieszka implement an error message 
+            // TODO implement an error message 
         }
 
         private void LoadCosts()

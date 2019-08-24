@@ -62,7 +62,19 @@ namespace ViewModels.Tests
         public void Can_Save_Cost()
         {
             // Arrange
-            CostsListViewModel vm = GetCostsListViewModelWithoutDatabaseReadings();
+            var mockCategoriesManager = new Mock<ICategoriesManager>();
+            var categoriesInDatabase = new List<CostCategory>() { new CostCategory() { Id = 1 } };
+            mockCategoriesManager.Setup(x => x.GetCategories()).Returns(new OperationResult<List<CostCategory>>(categoriesInDatabase));
+
+            var mockCostsManager = new Mock<ICostsManager>();
+            var costsInDatabase = new List<Cost>();
+            mockCostsManager.Setup(x => x.GetCosts()).Returns(new OperationResult<List<Cost>>(costsInDatabase));
+            mockCostsManager
+                .Setup(x => x.SaveCost(It.IsAny<Cost>()))
+                .Callback<Cost>(cost => { costsInDatabase.Add(cost); })
+                .Returns(new OperationResult());
+            var vm = new CostsListViewModel(mockCategoriesManager.Object, mockCostsManager.Object);
+
             var costsCountBefore = vm.Costs.Count;
 
             vm.ShowAddCostCommand.Execute(null);
@@ -87,6 +99,28 @@ namespace ViewModels.Tests
             Assert.AreEqual("subject", lastCost.Subject);
             Assert.AreEqual(new DateTime(2000, 1, 1), lastCost.Date);
             Assert.AreEqual(123, lastCost.Amount);
+        }
+
+        [Test]
+        public void Can_Save_Only_Valid_Cost()
+        {
+            // Arrange
+            var mockCategoriesManager = new Mock<ICategoriesManager>();
+            var categoriesInDatabase = new List<CostCategory>();
+            mockCategoriesManager.Setup(x => x.GetCategories()).Returns(new OperationResult<List<CostCategory>>(categoriesInDatabase));
+
+            var mockCostsManager = new Mock<ICostsManager>();
+            var costsInDatabase = new List<Cost>();
+            mockCostsManager.Setup(x => x.GetCosts()).Returns(new OperationResult<List<Cost>>(costsInDatabase));
+
+            var vm = new CostsListViewModel(mockCategoriesManager.Object, mockCostsManager.Object);
+            vm.ShowAddCostCommand.Execute(null);
+
+            // Act
+            vm.SaveCostCommand.Execute(null);
+
+            // Assert
+            Assert.DoesNotThrow(() => mockCostsManager.Verify(x => x.SaveCost(It.IsAny<Cost>()), Times.Never()));
         }
 
         [Test]

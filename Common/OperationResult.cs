@@ -18,7 +18,7 @@ namespace Common
         /// <summary>
         /// A result of a successful action.
         /// </summary>
-        protected OperationResult()
+        public OperationResult()
         {
             IsSuccess = true;
         }
@@ -27,7 +27,7 @@ namespace Common
         /// A result of an unsuccessful action with a given error message.
         /// </summary>
         /// <param name="errorMessage">Explanation of an error.</param>
-        protected OperationResult(string errorMessage)
+        public OperationResult(string errorMessage)
         {
             IsSuccess = false;
             ErrorMessage = errorMessage;

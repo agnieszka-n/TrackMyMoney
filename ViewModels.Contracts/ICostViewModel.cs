@@ -1,5 +1,6 @@
 ﻿using GalaSoft.MvvmLight.Command;
 using System;
+using Models;
 
 namespace ViewModels.Contracts
 {
@@ -10,5 +11,7 @@ namespace ViewModels.Contracts
         ICostCategoryViewModel Category { get; set; }
         string Subject { get; set; }
         decimal? Amount { get; set; }
+        bool IsValid { get; }
+        Cost ToModel();
     }
 }

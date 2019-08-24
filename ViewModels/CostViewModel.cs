@@ -47,6 +47,17 @@ namespace ViewModels
             set { Set(() => Amount, ref amount, value); }
         }
 
+        public bool IsValid
+        {
+            get
+            {
+                return !string.IsNullOrWhiteSpace(Subject)
+                       && Amount.HasValue
+                       && Date.HasValue
+                       && Category != null;
+            }
+        }
+
         public CostViewModel()
         {
         }
@@ -58,6 +69,22 @@ namespace ViewModels
             Subject = cost.Subject;
             Amount = cost.Amount;
             Category = category;
+        }
+
+        public Cost ToModel()
+        {
+            if (!IsValid)
+            {
+                return null;
+            }
+
+            return new Cost()
+            {
+                Subject = Subject,
+                Amount = Amount.Value,
+                Date = Date.Value,
+                CategoryId = Category.Id
+            };
         }
     }
 }
