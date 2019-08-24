@@ -78,7 +78,6 @@ namespace ViewModels
 
             if (result.IsSuccess)
             {
-                IsAddingCost = false;
                 ClearNewCost();
                 LoadCosts();
             }

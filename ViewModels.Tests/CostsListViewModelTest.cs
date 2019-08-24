@@ -124,6 +124,39 @@ namespace ViewModels.Tests
         }
 
         [Test]
+        public void Can_Save_Clear_Form()
+        {
+            // Arrange
+            var mockCategoriesManager = new Mock<ICategoriesManager>();
+            var categoriesInDatabase = new List<CostCategory>() { new CostCategory() { Id = 1 } };
+            mockCategoriesManager.Setup(x => x.GetCategories()).Returns(new OperationResult<List<CostCategory>>(categoriesInDatabase));
+
+            var mockCostsManager = new Mock<ICostsManager>();
+            var costsInDatabase = new List<Cost>();
+            mockCostsManager.Setup(x => x.GetCosts()).Returns(new OperationResult<List<Cost>>(costsInDatabase));
+            mockCostsManager.Setup(x => x.SaveCost(It.IsAny<Cost>())).Returns(new OperationResult());
+
+            var vm = new CostsListViewModel(mockCategoriesManager.Object, mockCostsManager.Object);
+
+            vm.ShowAddCostCommand.Execute(null);
+
+            var costCategoryMock = new Mock<ICostCategoryViewModel>();
+            costCategoryMock.Setup(x => x.Id).Returns(1);
+
+            vm.NewCost.Date = new DateTime(2000, 1, 1);
+            vm.NewCost.Category = costCategoryMock.Object;
+            vm.NewCost.Subject = "subject";
+            vm.NewCost.Amount = 123;
+
+            // Act
+            vm.SaveCostCommand.Execute(null);
+
+            // Assert
+            Assert.AreEqual(true, vm.IsAddingCost);
+            Assert.AreEqual(null, vm.NewCost.Subject);
+        }
+
+        [Test]
         public void Can_Load_Categories()
         {
             // Arrange
