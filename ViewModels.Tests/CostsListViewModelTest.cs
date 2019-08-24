@@ -120,7 +120,7 @@ namespace ViewModels.Tests
             vm.SaveCostCommand.Execute(null);
 
             // Assert
-            Assert.DoesNotThrow(() => mockCostsManager.Verify(x => x.SaveCost(It.IsAny<Cost>()), Times.Never()));
+            mockCostsManager.Verify(x => x.SaveCost(It.IsAny<Cost>()), Times.Never, "Should never call saving on an invalid cost.");
         }
 
         [Test]
@@ -198,7 +198,7 @@ namespace ViewModels.Tests
             var vm = new CostsListViewModel(mockCategoriesManager.Object, mockCostsManager.Object);
 
             // Assert
-            Assert.DoesNotThrow(() => mockCostsManager.Verify(x => x.GetCosts(), Times.Never));
+            mockCostsManager.Verify(x => x.GetCosts(), Times.Never, "Should never get costs when there are no categories loaded.");
             Assert.IsNull(vm.Costs);
         }
 
