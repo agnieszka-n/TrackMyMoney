@@ -101,11 +101,6 @@
                             <TextBlock Style="{StaticResource CellTextStyle}" Text="{Binding Category.Name}"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
-                    <DataGridTemplateColumn.CellEditingTemplate>
-                        <DataTemplate DataType="{x:Type vm:CostViewModelMock}">
-                            <TextBox Text="{Binding Category.Id}"/>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellEditingTemplate>
                 </DataGridTemplateColumn>
                 <DataGridTemplateColumn Width="3*" Header="Subject">
                     <DataGridTemplateColumn.CellTemplate>
@@ -113,11 +108,6 @@
                             <TextBlock Style="{StaticResource CellTextStyle}" Text="{Binding Subject}"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
-                    <DataGridTemplateColumn.CellEditingTemplate>
-                        <DataTemplate DataType="{x:Type vm:CostViewModelMock}">
-                            <TextBox Text="{Binding Subject}"/>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellEditingTemplate>
                 </DataGridTemplateColumn>
                 <DataGridTemplateColumn Width="*" Header="Amount">
                     <DataGridTemplateColumn.CellTemplate>
@@ -125,11 +115,6 @@
                             <TextBlock Style="{StaticResource CellTextStyle}" Text="{Binding Amount}"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
-                    <DataGridTemplateColumn.CellEditingTemplate>
-                        <DataTemplate DataType="{x:Type vm:CostViewModelMock}">
-                            <TextBox Text="{Binding Amount}"/>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellEditingTemplate>
                 </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
