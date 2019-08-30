@@ -79,11 +79,11 @@ namespace ViewModels.Tests
 
             vm.ShowAddCostCommand.Execute(null);
 
-            var costCategoryMock = new Mock<ICostCategoryViewModel>();
-            costCategoryMock.Setup(x => x.Id).Returns(1);
+            var mockCostCategory = new Mock<ICostCategoryViewModel>();
+            mockCostCategory.Setup(x => x.Id).Returns(1);
 
             vm.NewCost.Date = new DateTime(2000, 1, 1);
-            vm.NewCost.Category = costCategoryMock.Object;
+            vm.NewCost.Category = mockCostCategory.Object;
             vm.NewCost.Subject = "subject";
             vm.NewCost.Amount = 123;
 
@@ -140,11 +140,11 @@ namespace ViewModels.Tests
 
             vm.ShowAddCostCommand.Execute(null);
 
-            var costCategoryMock = new Mock<ICostCategoryViewModel>();
-            costCategoryMock.Setup(x => x.Id).Returns(1);
+            var mockCostCategory = new Mock<ICostCategoryViewModel>();
+            mockCostCategory.Setup(x => x.Id).Returns(1);
 
             vm.NewCost.Date = new DateTime(2000, 1, 1);
-            vm.NewCost.Category = costCategoryMock.Object;
+            vm.NewCost.Category = mockCostCategory.Object;
             vm.NewCost.Subject = "subject";
             vm.NewCost.Amount = 123;
 

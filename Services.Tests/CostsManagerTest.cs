@@ -50,10 +50,10 @@ namespace Services.Tests
         public void Can_Save_Cost()
         {
             // Arrange
-            var dbProxyMock = new Mock<IDatabaseProxy>();
-            dbProxyMock.Setup(x => x.ExecuteNonQuery(It.IsAny<DbConnection>(), It.IsAny<string>(), It.IsAny<Dictionary<string, object>>())).Returns(1);
+            var mockDbProxy = new Mock<IDatabaseProxy>();
+            mockDbProxy.Setup(x => x.ExecuteNonQuery(It.IsAny<DbConnection>(), It.IsAny<string>(), It.IsAny<Dictionary<string, object>>())).Returns(1);
 
-            var manager = new CostsManager(dbProxyMock.Object);
+            var manager = new CostsManager(mockDbProxy.Object);
 
             // Act
             OperationResult result = manager.SaveCost(new Cost());
