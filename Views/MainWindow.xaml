@@ -14,9 +14,13 @@
         >
     <DockPanel>
         <DockPanel.Resources>
-            <DataTemplate x:Key="CostDate" DataType="{x:Type vm:CostViewModelMock}">
-                <xctk:DateTimePicker TimePickerVisibility="Collapsed" Value="{Binding Date}" Format="Custom" FormatString="d.MM.yyyy" ShowButtonSpinner="False" TextAlignment="Center"/>
-            </DataTemplate>
+            <Style x:Key="DateTimePicker" TargetType="xctk:DateTimePicker">
+                <Setter Property="TimePickerVisibility" Value="Collapsed"></Setter>
+                <Setter Property="Format" Value="Custom"></Setter>
+                <Setter Property="FormatString" Value="d.MM.yyyy"></Setter>
+                <Setter Property="ShowButtonSpinner" Value="False"></Setter>
+                <Setter Property="TextAlignment" Value="Center"></Setter>
+            </Style>
 
             <Style TargetType="Button">
                 <Setter Property="Height" Value="25"></Setter>
@@ -25,6 +29,7 @@
 
             <conv:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"></conv:BoolToVisibilityConverter>
             <conv:BoolToVisibilityNegatedConverter x:Key="BoolToVisibilityNegatedConverter"></conv:BoolToVisibilityNegatedConverter>
+            <conv:MultiStylesConverter x:Key="MultiStylesConverter"></conv:MultiStylesConverter>
         </DockPanel.Resources>
 
         <StackPanel DockPanel.Dock="Top" Margin="5,15">
@@ -47,7 +52,14 @@
                         </Style>
                     </StackPanel.Resources>
                     <TextBlock Text="Date: " HorizontalAlignment="Left" VerticalAlignment="Center"></TextBlock>
-                    <ContentControl Style="{StaticResource EditableControl}" Content="{Binding}" ContentTemplate="{StaticResource CostDate}" Width="90" Height="25"></ContentControl>
+                    <xctk:DateTimePicker Value="{Binding Date}" Width="90">
+                        <xctk:DateTimePicker.Style>
+                            <MultiBinding Converter="{StaticResource MultiStylesConverter}">
+                                <Binding Source="{StaticResource DateTimePicker}"></Binding>
+                                <Binding Source="{StaticResource EditableControl}"></Binding>
+                            </MultiBinding>
+                        </xctk:DateTimePicker.Style>
+                    </xctk:DateTimePicker>
                     <TextBlock Text="Category: "></TextBlock>
                     <ComboBox ItemsSource="{Binding DataContext.Categories, ElementName=Window}" DisplayMemberPath="Name" SelectedValue="{Binding Category}" Style="{StaticResource EditableControl}" Width="100"></ComboBox>
                     <TextBlock Text="Subject: "></TextBlock>
@@ -76,7 +88,13 @@
                 </Style>
             </DataGrid.Resources>
             <DataGrid.Columns>
-                <DataGridTemplateColumn Width="*" Header="Date" CellTemplate="{StaticResource CostDate}" />
+                <DataGridTemplateColumn Width="*" Header="Date">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate DataType="{x:Type vm:CostViewModelMock}">
+                            <TextBlock Style="{StaticResource CellTextStyle}" Text="{Binding Date, StringFormat=d.MM.yyyy}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
                 <DataGridTemplateColumn Width="*" Header="Category">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate DataType="{x:Type vm:CostViewModelMock}">

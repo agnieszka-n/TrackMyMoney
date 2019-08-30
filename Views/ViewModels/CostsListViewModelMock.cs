@@ -36,7 +36,7 @@ namespace Views.ViewModels
             {
                 new CostViewModelMock(new DateTime(2000, 1, 1), Categories[1], "Pasta", 10),
                 new CostViewModelMock(new DateTime(2000, 1, 1), Categories[1], "Pizza", 15),
-                new CostViewModelMock(new DateTime(2000, 1, 2), Categories[1], "Burger", 20),
+                new CostViewModelMock(new DateTime(2000, 1, 22), Categories[1], "Burger", 20),
             };
         }
     }
