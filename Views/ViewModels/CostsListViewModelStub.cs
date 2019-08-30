@@ -11,7 +11,7 @@ using ViewModels.Contracts;
 
 namespace Views.ViewModels
 {
-    internal class CostsListViewModelMock : ICostsListViewModel
+    internal class CostsListViewModelStub : ICostsListViewModel
     {
         public ObservableCollection<ICostViewModel> Costs { get; set; }
         public ICostViewModel NewCost { get; }
@@ -21,7 +21,7 @@ namespace Views.ViewModels
         public RelayCommand CancelAddingCommand => null;
         public RelayCommand SaveCostCommand => null;
 
-        public CostsListViewModelMock()
+        public CostsListViewModelStub()
         {
             IsAddingCost = true;
             Categories = new ObservableCollection<ICostCategoryViewModel>
@@ -30,13 +30,13 @@ namespace Views.ViewModels
                 new CostCategoryViewModel(new CostCategory() { Id = 2, Name = "Another category"})
             };
 
-            NewCost = new CostViewModelMock(DateTime.Now, Categories[0], "Subject", 123);
+            NewCost = new CostViewModelStub(DateTime.Now, Categories[0], "Subject", 123);
 
             Costs = new ObservableCollection<ICostViewModel>
             {
-                new CostViewModelMock(new DateTime(2000, 1, 1), Categories[1], "Pasta", 10),
-                new CostViewModelMock(new DateTime(2000, 1, 1), Categories[1], "Pizza", 15),
-                new CostViewModelMock(new DateTime(2000, 1, 22), Categories[1], "Burger", 20),
+                new CostViewModelStub(new DateTime(2000, 1, 1), Categories[1], "Pasta", 10),
+                new CostViewModelStub(new DateTime(2000, 1, 1), Categories[1], "Pizza", 15),
+                new CostViewModelStub(new DateTime(2000, 1, 22), Categories[1], "Burger", 20),
             };
         }
     }

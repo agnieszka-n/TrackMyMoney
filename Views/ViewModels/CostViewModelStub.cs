@@ -9,7 +9,7 @@ using ViewModels.Contracts;
 
 namespace Views.ViewModels
 {
-    internal class CostViewModelMock : ICostViewModel
+    internal class CostViewModelStub : ICostViewModel
     {
         public int Id { get; set; }
         public DateTime? Date { get; set; }
@@ -17,7 +17,7 @@ namespace Views.ViewModels
         public string Subject { get; set; }
         public decimal? Amount { get; set; }
 
-        public CostViewModelMock(DateTime date, ICostCategoryViewModel category, string subject, decimal amount)
+        public CostViewModelStub(DateTime date, ICostCategoryViewModel category, string subject, decimal amount)
         {
             Date = date;
             Category = category;

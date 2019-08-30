@@ -87,8 +87,8 @@
     <Compile Include="Converters\BoolToVisibilityNegatedConverter.cs" />
     <Compile Include="Converters\BoolToVisibilityConverter.cs" />
     <Compile Include="Converters\MultiStylesConverter.cs" />
-    <Compile Include="ViewModels\CostsListViewModelMock.cs" />
-    <Compile Include="ViewModels\CostViewModelMock.cs" />
+    <Compile Include="ViewModels\CostsListViewModelStub.cs" />
+    <Compile Include="ViewModels\CostViewModelStub.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MainWindow.xaml.cs">

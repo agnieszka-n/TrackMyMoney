@@ -9,7 +9,7 @@
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         mc:Ignorable="d"
         Title="Track My Money" Height="450" Width="850" MinHeight="450" MinWidth="850"
-        d:DataContext="{d:DesignInstance vm:CostsListViewModelMock, IsDesignTimeCreatable=True}"
+        d:DataContext="{d:DesignInstance vm:CostsListViewModelStub, IsDesignTimeCreatable=True}"
         Name="Window"
         >
     <DockPanel>
@@ -90,28 +90,28 @@
             <DataGrid.Columns>
                 <DataGridTemplateColumn Width="*" Header="Date">
                     <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate DataType="{x:Type vm:CostViewModelMock}">
+                        <DataTemplate DataType="{x:Type vm:CostViewModelStub}">
                             <TextBlock Style="{StaticResource CellTextStyle}" Text="{Binding Date, StringFormat=d.MM.yyyy}"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
                 <DataGridTemplateColumn Width="*" Header="Category">
                     <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate DataType="{x:Type vm:CostViewModelMock}">
+                        <DataTemplate DataType="{x:Type vm:CostViewModelStub}">
                             <TextBlock Style="{StaticResource CellTextStyle}" Text="{Binding Category.Name}"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
                 <DataGridTemplateColumn Width="3*" Header="Subject">
                     <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate DataType="{x:Type vm:CostViewModelMock}">
+                        <DataTemplate DataType="{x:Type vm:CostViewModelStub}">
                             <TextBlock Style="{StaticResource CellTextStyle}" Text="{Binding Subject}"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
                 <DataGridTemplateColumn Width="*" Header="Amount">
                     <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate DataType="{x:Type vm:CostViewModelMock}">
+                        <DataTemplate DataType="{x:Type vm:CostViewModelStub}">
                             <TextBlock Style="{StaticResource CellTextStyle}" Text="{Binding Amount}"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
