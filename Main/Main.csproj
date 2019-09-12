@@ -103,7 +103,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DbInitializer.cs" />
+    <Compile Include="DatabaseInitializer.cs" />
     <Compile Include="NinjectConfiguration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
