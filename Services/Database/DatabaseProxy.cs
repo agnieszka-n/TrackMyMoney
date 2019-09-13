@@ -19,7 +19,7 @@ namespace Services.Database
             this.connectionString = connectionString;
         }
 
-        public DbConnection GetConnection()
+        public SQLiteConnection GetConnection()
         {
             return new SQLiteConnection(connectionString);
         }

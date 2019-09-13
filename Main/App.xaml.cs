@@ -14,6 +14,7 @@ using Services.Contracts;
 using ViewModels;
 using ViewModels.Contracts;
 using Views;
+using Services.Contracts.Database;
 
 namespace Main
 {
@@ -39,7 +40,7 @@ namespace Main
                 try
                 {
                     SQLiteConnection.CreateFile(FILE_NAME);
-                    DatabaseInitializer.Initialize(kernel.Get<SQLiteConnection>());
+                    DatabaseInitializer.Initialize(kernel.Get<IDatabaseProxy>().GetConnection());
                 }
                 catch (Exception ex)
                 {
