@@ -15,6 +15,7 @@ using ViewModels;
 using ViewModels.Contracts;
 using Views;
 using Services.Contracts.Database;
+using Common;
 
 namespace Main
 {
@@ -32,8 +33,9 @@ namespace Main
 
             IKernel kernel = new StandardKernel();
             var diConfiguration = new NinjectConfiguration();
-
             diConfiguration.ConfigureKernel(kernel, CONNECTION_STRING);
+
+            LoggerInitalizer.Initialize();
 
             if (!File.Exists(FILE_NAME))
             {
@@ -44,8 +46,9 @@ namespace Main
                 }
                 catch (Exception ex)
                 {
-                    Trace.WriteLine(ex);
-                    return;
+                    Logger.LogError(this, ex);
+                    // TODO implement an error message 
+                    Shutdown();
                 }
             }
 

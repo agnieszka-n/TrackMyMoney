@@ -47,9 +47,9 @@ namespace Services
 
                     return new OperationResult<List<CostCategory>>(result);
                 }
-                catch (Exception e)
+                catch (Exception ex)
                 {
-                    Trace.WriteLine(e);
+                    Logger.LogError(this, ex);
                     return new OperationResult<List<CostCategory>>("An error occurred while getting categories.");
                 }
                 finally

@@ -48,9 +48,9 @@ namespace Services
 
                     return new OperationResult<List<Cost>>(result);
                 }
-                catch (Exception e)
+                catch (Exception ex)
                 {
-                    Trace.WriteLine(e);
+                    Logger.LogError(this, ex);
                     return new OperationResult<List<Cost>>("An error occurred while getting costs.");
                 }
                 finally
@@ -90,9 +90,9 @@ namespace Services
                         throw new Exception("Inserting a new row failed.");
                     }
                 }
-                catch (Exception e)
+                catch (Exception ex)
                 {
-                    Trace.WriteLine(e);
+                    Logger.LogError(this, ex);
                     return new OperationResult("An error occurred while saving a cost.");
                 }
                 finally
