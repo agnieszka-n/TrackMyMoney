@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using GalaSoft.MvvmLight;
-using Models;
-using ViewModels.Contracts;
+using TrackMyMoney.Models;
+using TrackMyMoney.ViewModels.Contracts;
 
-namespace ViewModels
+namespace TrackMyMoney.ViewModels
 {
     public class CostCategoryViewModel : ViewModelBase, ICostCategoryViewModel
     {

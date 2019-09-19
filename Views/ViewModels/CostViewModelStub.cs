@@ -4,10 +4,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Models;
-using ViewModels.Contracts;
+using TrackMyMoney.Models;
+using TrackMyMoney.ViewModels.Contracts;
 
-namespace Views.ViewModels
+namespace TrackMyMoney.Views.ViewModels
 {
     internal class CostViewModelStub : ICostViewModel
     {

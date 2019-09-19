@@ -4,13 +4,13 @@ using System.Data.Common;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Common;
-using Models;
+using TrackMyMoney.Common;
+using TrackMyMoney.Models;
 using Moq;
 using NUnit.Framework;
-using Services.Contracts.Database;
+using TrackMyMoney.Services.Contracts.Database;
 
-namespace Services.Tests
+namespace TrackMyMoney.Services.Tests
 {
     [TestFixture]
     public class CostsManagerTest

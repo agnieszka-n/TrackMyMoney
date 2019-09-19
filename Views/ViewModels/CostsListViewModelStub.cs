@@ -5,11 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using GalaSoft.MvvmLight.Command;
-using Models;
-using ViewModels;
-using ViewModels.Contracts;
+using TrackMyMoney.Models;
+using TrackMyMoney.ViewModels;
+using TrackMyMoney.ViewModels.Contracts;
 
-namespace Views.ViewModels
+namespace TrackMyMoney.Views.ViewModels
 {
     internal class CostsListViewModelStub : ICostsListViewModel
     {

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Data;
 
-namespace Views.Converters
+namespace TrackMyMoney.Views.Converters
 {
     /// <summary>
     /// Combines multiple styles by adding/overwriting their setters.

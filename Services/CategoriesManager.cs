@@ -7,12 +7,12 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Common;
-using Models;
-using Services.Contracts;
-using Services.Contracts.Database;
+using TrackMyMoney.Common;
+using TrackMyMoney.Models;
+using TrackMyMoney.Services.Contracts;
+using TrackMyMoney.Services.Contracts.Database;
 
-namespace Services
+namespace TrackMyMoney.Services
 {
     public class CategoriesManager : ICategoriesManager
     {

@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Services.Contracts.Database;
+using TrackMyMoney.Services.Contracts.Database;
 
-namespace Services.Tests
+namespace TrackMyMoney.Services.Tests
 {
     internal class QueryResultReaderStub : IQueryResultReader
     {

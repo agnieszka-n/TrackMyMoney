@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Main
+namespace TrackMyMoney.Main
 {
     internal static class LoggerInitalizer
     {

@@ -5,10 +5,10 @@ using System.Text;
 using System.Threading.Tasks;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
-using Models;
-using ViewModels.Contracts;
+using TrackMyMoney.Models;
+using TrackMyMoney.ViewModels.Contracts;
 
-namespace ViewModels
+namespace TrackMyMoney.ViewModels
 {
     public class CostViewModel : ViewModelBase, ICostViewModel
     {

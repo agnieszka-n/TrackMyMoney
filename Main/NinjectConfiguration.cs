@@ -6,14 +6,14 @@ using System.Text;
 using System.Threading.Tasks;
 using Ninject;
 using Ninject.Parameters;
-using Services;
-using Services.Contracts;
-using Services.Contracts.Database;
-using Services.Database;
-using ViewModels;
-using ViewModels.Contracts;
+using TrackMyMoney.Services;
+using TrackMyMoney.Services.Contracts;
+using TrackMyMoney.Services.Contracts.Database;
+using TrackMyMoney.Services.Database;
+using TrackMyMoney.ViewModels;
+using TrackMyMoney.ViewModels.Contracts;
 
-namespace Main
+namespace TrackMyMoney.Main
 {
     internal class NinjectConfiguration
     {

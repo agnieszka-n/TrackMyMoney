@@ -5,13 +5,13 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Common;
+using TrackMyMoney.Common;
 using GalaSoft.MvvmLight.Command;
-using Models;
-using Services.Contracts;
-using ViewModels.Contracts;
+using TrackMyMoney.Models;
+using TrackMyMoney.Services.Contracts;
+using TrackMyMoney.ViewModels.Contracts;
 
-namespace ViewModels
+namespace TrackMyMoney.ViewModels
 {
     public class CostsListViewModel : ViewModelBase, ICostsListViewModel
     {

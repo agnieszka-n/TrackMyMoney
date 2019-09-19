@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Main
+namespace TrackMyMoney.Main
 {
     static class DatabaseInitializer
     {

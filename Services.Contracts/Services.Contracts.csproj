@@ -7,8 +7,8 @@
     <ProjectGuid>{FBB6629A-0EA9-458B-8CDF-698829629E0C}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Services.Contracts</RootNamespace>
-    <AssemblyName>Services.Contracts</AssemblyName>
+    <RootNamespace>TrackMyMoney.Services.Contracts</RootNamespace>
+    <AssemblyName>TrackMyMoney.Services.Contracts</AssemblyName>
     <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>

@@ -1,4 +1,4 @@
-﻿namespace ViewModels.Contracts
+﻿namespace TrackMyMoney.ViewModels.Contracts
 {
     public interface ICostCategoryViewModel
     {

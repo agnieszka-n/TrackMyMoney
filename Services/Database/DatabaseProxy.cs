@@ -6,9 +6,9 @@ using System.Data.SQLite;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Services.Contracts.Database;
+using TrackMyMoney.Services.Contracts.Database;
 
-namespace Services.Database
+namespace TrackMyMoney.Services.Database
 {
     public class DatabaseProxy : IDatabaseProxy
     {

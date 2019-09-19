@@ -4,13 +4,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Common;
-using Models;
+using TrackMyMoney.Common;
+using TrackMyMoney.Models;
 using Moq;
-using Services.Contracts;
-using ViewModels.Contracts;
+using TrackMyMoney.Services.Contracts;
+using TrackMyMoney.ViewModels.Contracts;
 
-namespace ViewModels.Tests
+namespace TrackMyMoney.ViewModels.Tests
 {
     [TestFixture]
     public class CostsListViewModelTest

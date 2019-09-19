@@ -7,8 +7,8 @@
     <ProjectGuid>{E2B9D0DD-9DF7-463F-8F24-3249368D09F0}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ViewModels</RootNamespace>
-    <AssemblyName>ViewModels</AssemblyName>
+    <RootNamespace>TrackMyMoney.ViewModels</RootNamespace>
+    <AssemblyName>TrackMyMoney.ViewModels</AssemblyName>
     <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>

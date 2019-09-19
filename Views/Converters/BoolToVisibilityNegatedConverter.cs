@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Data;
 
-namespace Views.Converters
+namespace TrackMyMoney.Views.Converters
 {
     internal class BoolToVisibilityNegatedConverter : IValueConverter
     {

@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.SqlServer.Server;
 
-namespace Common
+namespace TrackMyMoney.Common
 {
     /// <summary>
     /// Represents a result of an operation related to a database.

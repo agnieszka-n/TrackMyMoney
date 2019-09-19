@@ -1,7 +1,7 @@
 ﻿using System.Collections.ObjectModel;
 using GalaSoft.MvvmLight.Command;
 
-namespace ViewModels.Contracts
+namespace TrackMyMoney.ViewModels.Contracts
 {
     public interface ICostsListViewModel
     {

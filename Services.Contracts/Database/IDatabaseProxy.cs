@@ -2,7 +2,7 @@
 ﻿using System.Collections.Generic;
 using System.Data.SQLite;
 
-namespace Services.Contracts.Database
+namespace TrackMyMoney.Services.Contracts.Database
 {
     public interface IDatabaseProxy
     {

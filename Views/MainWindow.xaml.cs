@@ -1,4 +1,4 @@
-﻿using Views.ViewModels;
+﻿using TrackMyMoney.Views.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,9 +13,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using ViewModels.Contracts;
+using TrackMyMoney.ViewModels.Contracts;
 
-namespace Views
+namespace TrackMyMoney.Views
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml

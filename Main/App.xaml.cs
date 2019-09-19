@@ -9,15 +9,15 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
-using Services;
-using Services.Contracts;
-using ViewModels;
-using ViewModels.Contracts;
-using Views;
-using Services.Contracts.Database;
-using Common;
+using TrackMyMoney.Services;
+using TrackMyMoney.Services.Contracts;
+using TrackMyMoney.ViewModels;
+using TrackMyMoney.ViewModels.Contracts;
+using TrackMyMoney.Views;
+using TrackMyMoney.Services.Contracts.Database;
+using TrackMyMoney.Common;
 
-namespace Main
+namespace TrackMyMoney.Main
 {
     /// <summary>
     /// Interaction logic for App.xaml

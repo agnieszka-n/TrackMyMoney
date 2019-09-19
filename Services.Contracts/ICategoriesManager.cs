@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Common;
-using Models;
+using TrackMyMoney.Common;
+using TrackMyMoney.Models;
 
-namespace Services.Contracts
+namespace TrackMyMoney.Services.Contracts
 {
     public interface ICategoriesManager
     {
