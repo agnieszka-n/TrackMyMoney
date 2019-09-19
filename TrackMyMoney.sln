@@ -3,25 +3,25 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28010.2003
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Main", "Main\Main.csproj", "{9A3200C9-DDA3-4E9F-92FE-30F6217B9008}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrackMyMoney.Main", "Main\TrackMyMoney.Main.csproj", "{9A3200C9-DDA3-4E9F-92FE-30F6217B9008}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ViewModels", "ViewModels\ViewModels.csproj", "{E2B9D0DD-9DF7-463F-8F24-3249368D09F0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrackMyMoney.ViewModels", "ViewModels\TrackMyMoney.ViewModels.csproj", "{E2B9D0DD-9DF7-463F-8F24-3249368D09F0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Views", "Views\Views.csproj", "{68CF4E80-B544-4639-A3F3-E3D92F971A69}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrackMyMoney.Views", "Views\TrackMyMoney.Views.csproj", "{68CF4E80-B544-4639-A3F3-E3D92F971A69}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ViewModels.Tests", "ViewModels.Tests\ViewModels.Tests.csproj", "{3F54EAD6-57B5-402E-8539-156896B329A2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrackMyMoney.ViewModels.Tests", "ViewModels.Tests\TrackMyMoney.ViewModels.Tests.csproj", "{3F54EAD6-57B5-402E-8539-156896B329A2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Services.Contracts", "Services.Contracts\Services.Contracts.csproj", "{FBB6629A-0EA9-458B-8CDF-698829629E0C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrackMyMoney.Services.Contracts", "Services.Contracts\TrackMyMoney.Services.Contracts.csproj", "{FBB6629A-0EA9-458B-8CDF-698829629E0C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Services", "Services\Services.csproj", "{4624C635-65BB-47C6-B3C5-637F413B012F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrackMyMoney.Services", "Services\TrackMyMoney.Services.csproj", "{4624C635-65BB-47C6-B3C5-637F413B012F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "Common\Common.csproj", "{0121D3FB-50E0-4AC2-BCE1-3E76FA43FC87}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrackMyMoney.Common", "Common\TrackMyMoney.Common.csproj", "{0121D3FB-50E0-4AC2-BCE1-3E76FA43FC87}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Models", "Models\Models.csproj", "{DF5CFF3A-B31B-428B-B201-F1EA8E0BA3C4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrackMyMoney.Models", "Models\TrackMyMoney.Models.csproj", "{DF5CFF3A-B31B-428B-B201-F1EA8E0BA3C4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ViewModels.Contracts", "ViewModels.Contracts\ViewModels.Contracts.csproj", "{4FA1C5B3-73A6-4518-8E47-FCF43EEB395E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrackMyMoney.ViewModels.Contracts", "ViewModels.Contracts\TrackMyMoney.ViewModels.Contracts.csproj", "{4FA1C5B3-73A6-4518-8E47-FCF43EEB395E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Services.Tests", "Services.Tests\Services.Tests.csproj", "{A8B695F6-275F-4060-97C0-A6F1139EE4C8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrackMyMoney.Services.Tests", "Services.Tests\TrackMyMoney.Services.Tests.csproj", "{A8B695F6-275F-4060-97C0-A6F1139EE4C8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

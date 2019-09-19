@@ -141,29 +141,29 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Common\Common.csproj">
+    <ProjectReference Include="..\Common\TrackMyMoney.Common.csproj">
       <Project>{0121d3fb-50e0-4ac2-bce1-3e76fa43fc87}</Project>
-      <Name>Common</Name>
+      <Name>TrackMyMoney.Common</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Services.Contracts\Services.Contracts.csproj">
+    <ProjectReference Include="..\Services.Contracts\TrackMyMoney.Services.Contracts.csproj">
       <Project>{fbb6629a-0ea9-458b-8cdf-698829629e0c}</Project>
-      <Name>Services.Contracts</Name>
+      <Name>TrackMyMoney.Services.Contracts</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Services\Services.csproj">
+    <ProjectReference Include="..\Services\TrackMyMoney.Services.csproj">
       <Project>{4624c635-65bb-47c6-b3c5-637f413b012f}</Project>
-      <Name>Services</Name>
+      <Name>TrackMyMoney.Services</Name>
     </ProjectReference>
-    <ProjectReference Include="..\ViewModels.Contracts\ViewModels.Contracts.csproj">
+    <ProjectReference Include="..\ViewModels.Contracts\TrackMyMoney.ViewModels.Contracts.csproj">
       <Project>{4FA1C5B3-73A6-4518-8E47-FCF43EEB395E}</Project>
-      <Name>ViewModels.Contracts</Name>
+      <Name>TrackMyMoney.ViewModels.Contracts</Name>
     </ProjectReference>
-    <ProjectReference Include="..\ViewModels\ViewModels.csproj">
+    <ProjectReference Include="..\ViewModels\TrackMyMoney.ViewModels.csproj">
       <Project>{e2b9d0dd-9df7-463f-8f24-3249368d09f0}</Project>
-      <Name>ViewModels</Name>
+      <Name>TrackMyMoney.ViewModels</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Views\Views.csproj">
+    <ProjectReference Include="..\Views\TrackMyMoney.Views.csproj">
       <Project>{68cf4e80-b544-4639-a3f3-e3d92f971a69}</Project>
-      <Name>Views</Name>
+      <Name>TrackMyMoney.Views</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

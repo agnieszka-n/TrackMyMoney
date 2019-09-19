@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{E2B9D0DD-9DF7-463F-8F24-3249368D09F0}</ProjectGuid>
+    <ProjectGuid>{4FA1C5B3-73A6-4518-8E47-FCF43EEB395E}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>TrackMyMoney.ViewModels</RootNamespace>
-    <AssemblyName>TrackMyMoney.ViewModels</AssemblyName>
+    <RootNamespace>TrackMyMoney.ViewModels.Contracts</RootNamespace>
+    <AssemblyName>TrackMyMoney.ViewModels.Contracts</AssemblyName>
     <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -56,30 +56,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CostCategoryViewModel.cs" />
-    <Compile Include="CostsListViewModel.cs" />
-    <Compile Include="CostViewModel.cs" />
+    <Compile Include="ICostCategoryViewModel.cs" />
+    <Compile Include="ICostsListViewModel.cs" />
+    <Compile Include="ICostViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Common\Common.csproj">
-      <Project>{0121D3FB-50E0-4AC2-BCE1-3E76FA43FC87}</Project>
-      <Name>Common</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Models\Models.csproj">
+    <ProjectReference Include="..\Models\TrackMyMoney.Models.csproj">
       <Project>{DF5CFF3A-B31B-428B-B201-F1EA8E0BA3C4}</Project>
-      <Name>Models</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Services.Contracts\Services.Contracts.csproj">
-      <Project>{fbb6629a-0ea9-458b-8cdf-698829629e0c}</Project>
-      <Name>Services.Contracts</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\ViewModels.Contracts\ViewModels.Contracts.csproj">
-      <Project>{4fa1c5b3-73a6-4518-8e47-fcf43eeb395e}</Project>
-      <Name>ViewModels.Contracts</Name>
+      <Name>TrackMyMoney.Models</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
