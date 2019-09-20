@@ -71,6 +71,7 @@ namespace TrackMyMoney.ViewModels
 
             if (model == null)
             {
+                // TODO add a clear validation message
                 return;
             }
 
