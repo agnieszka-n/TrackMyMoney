@@ -28,8 +28,10 @@ namespace TrackMyMoney.Services
                 try
                 {
                     dbProxy.OpenConnection(connection);
-
-                    string query = "select id, date, categoryId, subject, amount from costs";
+                    
+                    string query = "select id, date, categoryId, subject, amount" +
+                                   " from costs" +
+                                   " order by date";
                     IQueryResultReader reader = dbProxy.ExecuteReader(query, connection);
                     var result = new List<Cost>();
 
@@ -69,7 +71,7 @@ namespace TrackMyMoney.Services
                     dbProxy.OpenConnection(connection);
 
                     string query = "insert into costs(date, categoryId, subject, amount)" +
-                                   " values(@date, @categoryId, @subject, @amount)";
+                                   " values(date(@date), @categoryId, @subject, @amount)";
 
                     Dictionary<string, object> parameters = new Dictionary<string, object>()
                     {
