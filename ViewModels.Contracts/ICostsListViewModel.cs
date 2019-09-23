@@ -10,7 +10,7 @@ namespace TrackMyMoney.ViewModels.Contracts
         bool IsAddingCost { get; }
         ObservableCollection<ICostCategoryViewModel> Categories { get;}
         RelayCommand ShowAddCostCommand { get; }
-        RelayCommand CancelAddingCommand { get; }
+        RelayCommand CancelAddCostCommand { get; }
         RelayCommand SaveCostCommand { get; }
     }
 }

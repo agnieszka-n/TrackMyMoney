@@ -16,7 +16,7 @@ namespace TrackMyMoney.ViewModels.Tests
     public class CostsListViewModelTest
     {
         [Test]
-        public void Can_Add_Cost_Show_New_Cost_Panel()
+        public void Can_Add_Cost_Click_Show_Panel()
         {
             // Arrange
             CostsListViewModel vm = GetCostsListViewModelWithoutDatabaseReadings();
@@ -29,21 +29,21 @@ namespace TrackMyMoney.ViewModels.Tests
         }
 
         [Test]
-        public void Can_Cancel_Hide_New_Cost_Panel()
+        public void Can_Cancel_Add_Cost_Hide_Panel()
         {
             // Arrange
             CostsListViewModel vm = GetCostsListViewModelWithoutDatabaseReadings();
             vm.ShowAddCostCommand.Execute(null);
 
             // Act
-            vm.CancelAddingCommand.Execute(null);
+            vm.CancelAddCostCommand.Execute(null);
 
             // Assert
             Assert.AreEqual(false, vm.IsAddingCost);
         }
 
         [Test]
-        public void Can_Cancelling_Clear_New_Cost()
+        public void Can_Cancel_Clear_New_Cost()
         {
             // Arrange
             CostsListViewModel vm = GetCostsListViewModelWithoutDatabaseReadings();
@@ -51,7 +51,7 @@ namespace TrackMyMoney.ViewModels.Tests
             vm.NewCost.Amount = 123;
 
             // Act
-            vm.CancelAddingCommand.Execute(null);
+            vm.CancelAddCostCommand.Execute(null);
             vm.ShowAddCostCommand.Execute(null);
 
             // Assert

@@ -76,7 +76,7 @@
 
         <StackPanel Grid.Column="1" Orientation="Horizontal">
             <Button Content="Save" Command="{Binding SaveCostCommand}" Width="80" Margin="0,0,10,0"></Button>
-            <Button Content="Cancel" Command="{Binding CancelAddingCommand}" Width="80"></Button>
+            <Button Content="Cancel" Command="{Binding CancelAddCostCommand}" Width="80"></Button>
         </StackPanel>
     </Grid>
 </UserControl>

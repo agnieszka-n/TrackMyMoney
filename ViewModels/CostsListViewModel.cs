@@ -47,7 +47,7 @@ namespace TrackMyMoney.ViewModels
         }
 
         public RelayCommand ShowAddCostCommand { get; }
-        public RelayCommand CancelAddingCommand { get; }
+        public RelayCommand CancelAddCostCommand { get; }
         public RelayCommand SaveCostCommand { get; }
 
         public CostsListViewModel(ICategoriesManager categoriesManager, ICostsManager costsManager)
@@ -58,7 +58,7 @@ namespace TrackMyMoney.ViewModels
             ClearNewCost();
 
             ShowAddCostCommand = new RelayCommand(ShowAddCost);
-            CancelAddingCommand = new RelayCommand(CancelAdding);
+            CancelAddCostCommand = new RelayCommand(CancelAddCost);
             SaveCostCommand = new RelayCommand(SaveCost);
 
             LoadCategories();
@@ -85,7 +85,7 @@ namespace TrackMyMoney.ViewModels
             // TODO implement an error message 
         }
 
-        private void CancelAdding()
+        private void CancelAddCost()
         {
             ClearNewCost();
             IsAddingCost = false;
