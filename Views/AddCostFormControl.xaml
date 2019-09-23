@@ -1,0 +1,82 @@
+﻿<UserControl x:Class="TrackMyMoney.Views.AddCostFormControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:TrackMyMoney.Views"
+             xmlns:vm="clr-namespace:TrackMyMoney.Views.ViewModels"
+             xmlns:conv="clr-namespace:TrackMyMoney.Views.Converters"
+             xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+             mc:Ignorable="d" 
+             d:DesignHeight="25" d:DesignWidth="950"
+             d:DataContext="{d:DesignInstance vm:CostsListViewModelStub, IsDesignTimeCreatable=True}"
+             Name="Control">
+    <Grid>
+        <Grid.Resources>
+            <conv:MultiStylesConverter x:Key="MultiStylesConverter"></conv:MultiStylesConverter>
+            <Style x:Key="DateTimePicker" TargetType="xctk:DateTimePicker">
+                <Setter Property="TimePickerVisibility" Value="Collapsed"></Setter>
+                <Setter Property="Format" Value="Custom"></Setter>
+                <Setter Property="FormatString" Value="d.MM.yyyy"></Setter>
+                <Setter Property="ShowButtonSpinner" Value="False"></Setter>
+                <Setter Property="TextAlignment" Value="Center"></Setter>
+            </Style>
+        </Grid.Resources>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="Auto"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid DataContext="{Binding NewCost}">
+            <Grid.Resources>
+                <Style x:Key="EditableControl" TargetType="Control">
+                    <Setter Property="Margin" Value="0,0,10,0"></Setter>
+                </Style>
+                <Style TargetType="TextBox" BasedOn="{StaticResource EditableControl}">
+                    <Setter Property="Padding" Value="5,0"></Setter>
+                    <Setter Property="HorizontalContentAlignment" Value="Center"></Setter>
+                    <Setter Property="VerticalContentAlignment" Value="Center"></Setter>
+                </Style>
+                <Style TargetType="TextBlock">
+                    <Setter Property="Margin" Value="0,0,5,0"></Setter>
+                    <Setter Property="HorizontalAlignment" Value="Left"></Setter>
+                    <Setter Property="VerticalAlignment" Value="Center"></Setter>
+                </Style>
+            </Grid.Resources>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                <ColumnDefinition Width="2*"></ColumnDefinition>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                <ColumnDefinition Width="2*"></ColumnDefinition>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Text="Date:"></TextBlock>
+            <xctk:DateTimePicker Grid.Column="1" Value="{Binding Date}">
+                <xctk:DateTimePicker.Style>
+                    <MultiBinding Converter="{StaticResource MultiStylesConverter}">
+                        <Binding Source="{StaticResource DateTimePicker}"></Binding>
+                        <Binding Source="{StaticResource EditableControl}"></Binding>
+                    </MultiBinding>
+                </xctk:DateTimePicker.Style>
+            </xctk:DateTimePicker>
+
+            <TextBlock Grid.Column="2" Text="Category:"></TextBlock>
+            <ComboBox Grid.Column="3" ItemsSource="{Binding DataContext.Categories, ElementName=Control}" DisplayMemberPath="Name" SelectedValue="{Binding Category}" Style="{StaticResource EditableControl}" VerticalContentAlignment="Center"></ComboBox>
+
+            <TextBlock Grid.Column="4" Text="Subject:"></TextBlock>
+            <TextBox Grid.Column="5" Text="{Binding Subject}"/>
+
+            <TextBlock Grid.Column="6" Text="Amount: "></TextBlock>
+            <TextBox Grid.Column="7" Text="{Binding Amount}"/>
+        </Grid>
+
+        <StackPanel Grid.Column="1" Orientation="Horizontal">
+            <Button Content="Save" Command="{Binding SaveCostCommand}" Width="80" Margin="0,0,10,0"></Button>
+            <Button Content="Cancel" Command="{Binding CancelAddingCommand}" Width="80"></Button>
+        </StackPanel>
+    </Grid>
+</UserControl>

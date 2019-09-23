@@ -35,64 +35,7 @@
         <StackPanel DockPanel.Dock="Top" Margin="5,15">
             <Button Content="Add a cost" Visibility="{Binding IsAddingCost, Converter={StaticResource BoolToVisibilityNegatedConverter}}" HorizontalAlignment="Left" Width="80" Command="{Binding ShowAddCostCommand}"></Button>
 
-            <Grid Visibility="{Binding IsAddingCost, Converter={StaticResource BoolToVisibilityConverter}}">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"></ColumnDefinition>
-                    <ColumnDefinition Width="Auto"></ColumnDefinition>
-                </Grid.ColumnDefinitions>
-                <Grid DataContext="{Binding NewCost}">
-                    <Grid.Resources>
-                        <Style x:Key="EditableControl" TargetType="Control">
-                            <Setter Property="Margin" Value="0,0,10,0"></Setter>
-                        </Style>
-                        <Style TargetType="TextBox" BasedOn="{StaticResource EditableControl}">
-                            <Setter Property="Padding" Value="5,0"></Setter>
-                            <Setter Property="HorizontalContentAlignment" Value="Center"></Setter>
-                            <Setter Property="VerticalContentAlignment" Value="Center"></Setter>
-                        </Style>
-                        <Style TargetType="TextBlock">
-                            <Setter Property="Margin" Value="0,0,5,0"></Setter>
-                            <Setter Property="HorizontalAlignment" Value="Left"></Setter>
-                            <Setter Property="VerticalAlignment" Value="Center"></Setter>
-                        </Style>
-                    </Grid.Resources>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto"></ColumnDefinition>
-                        <ColumnDefinition Width="*"></ColumnDefinition>
-                        <ColumnDefinition Width="Auto"></ColumnDefinition>
-                        <ColumnDefinition Width="2*"></ColumnDefinition>
-                        <ColumnDefinition Width="Auto"></ColumnDefinition>
-                        <ColumnDefinition Width="2*"></ColumnDefinition>
-                        <ColumnDefinition Width="Auto"></ColumnDefinition>
-                        <ColumnDefinition Width="*"></ColumnDefinition>
-                        <ColumnDefinition Width="Auto"></ColumnDefinition>
-                    </Grid.ColumnDefinitions>
-
-                    <TextBlock Text="Date:"></TextBlock>
-                    <xctk:DateTimePicker Grid.Column="1" Value="{Binding Date}">
-                        <xctk:DateTimePicker.Style>
-                            <MultiBinding Converter="{StaticResource MultiStylesConverter}">
-                                <Binding Source="{StaticResource DateTimePicker}"></Binding>
-                                <Binding Source="{StaticResource EditableControl}"></Binding>
-                            </MultiBinding>
-                        </xctk:DateTimePicker.Style>
-                    </xctk:DateTimePicker>
-
-                    <TextBlock Grid.Column="2" Text="Category:"></TextBlock>
-                    <ComboBox Grid.Column="3" ItemsSource="{Binding DataContext.Categories, ElementName=Window}" DisplayMemberPath="Name" SelectedValue="{Binding Category}" Style="{StaticResource EditableControl}" VerticalContentAlignment="Center"></ComboBox>
-
-                    <TextBlock Grid.Column="4" Text="Subject:"></TextBlock>
-                    <TextBox Grid.Column="5" Text="{Binding Subject}"/>
-
-                    <TextBlock Grid.Column="6" Text="Amount: "></TextBlock>
-                    <TextBox Grid.Column="7" Text="{Binding Amount}"/>
-                </Grid>
-
-                <StackPanel Grid.Column="1" Orientation="Horizontal">
-                    <Button Content="Save" Command="{Binding SaveCostCommand}" Width="80" Margin="0,0,10,0"></Button>
-                    <Button Content="Cancel" Command="{Binding CancelAddingCommand}" Width="80"></Button>
-                </StackPanel>
-            </Grid>
+            <local:AddCostFormControl Visibility="{Binding IsAddingCost, Converter={StaticResource BoolToVisibilityConverter}}"></local:AddCostFormControl>
         </StackPanel>
 
         <DataGrid ItemsSource="{Binding Costs}" AutoGenerateColumns="False" RowHeaderWidth="0" Padding="5,0" BorderThickness="0,1,0,0">
