@@ -20,6 +20,7 @@ namespace TrackMyMoney.Main
         public void ConfigureKernel(IKernel kernel, string connectionString)
         {
             kernel.Bind<ICostsListViewModel>().To<CostsListViewModel>();
+            kernel.Bind<IAddCostFormViewModel>().To<AddCostFormViewModel>();
             kernel.Bind<ICategoriesManager>().To<CategoriesManager>();
             kernel.Bind<ICostsManager>().To<CostsManager>();
             kernel.Bind<IDatabaseProxy>().ToMethod(context => new DatabaseProxy(connectionString));

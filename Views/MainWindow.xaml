@@ -6,7 +6,6 @@
         xmlns:local="clr-namespace:TrackMyMoney.Views"
         xmlns:vm="clr-namespace:TrackMyMoney.Views.ViewModels"
         xmlns:conv="clr-namespace:TrackMyMoney.Views.Converters"
-        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         mc:Ignorable="d"
         Title="Track My Money" Height="450" Width="950" MinHeight="450" MinWidth="950"
         d:DataContext="{d:DesignInstance vm:CostsListViewModelStub, IsDesignTimeCreatable=True}"
@@ -14,14 +13,6 @@
         >
     <DockPanel>
         <DockPanel.Resources>
-            <Style x:Key="DateTimePicker" TargetType="xctk:DateTimePicker">
-                <Setter Property="TimePickerVisibility" Value="Collapsed"></Setter>
-                <Setter Property="Format" Value="Custom"></Setter>
-                <Setter Property="FormatString" Value="d.MM.yyyy"></Setter>
-                <Setter Property="ShowButtonSpinner" Value="False"></Setter>
-                <Setter Property="TextAlignment" Value="Center"></Setter>
-            </Style>
-
             <Style TargetType="Button">
                 <Setter Property="Height" Value="25"></Setter>
                 <Setter Property="Padding" Value="5,0"></Setter>
@@ -29,13 +20,12 @@
 
             <conv:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"></conv:BoolToVisibilityConverter>
             <conv:BoolToVisibilityNegatedConverter x:Key="BoolToVisibilityNegatedConverter"></conv:BoolToVisibilityNegatedConverter>
-            <conv:MultiStylesConverter x:Key="MultiStylesConverter"></conv:MultiStylesConverter>
         </DockPanel.Resources>
 
         <StackPanel DockPanel.Dock="Top" Margin="5,15">
             <Button Content="Add a cost" Visibility="{Binding IsAddingCost, Converter={StaticResource BoolToVisibilityNegatedConverter}}" HorizontalAlignment="Left" Width="80" Command="{Binding ShowAddCostCommand}"></Button>
 
-            <local:AddCostFormControl Visibility="{Binding IsAddingCost, Converter={StaticResource BoolToVisibilityConverter}}"></local:AddCostFormControl>
+            <local:AddCostFormControl DataContext="{Binding DataContext.AddCostFormViewModel, ElementName=Window}" Visibility="{Binding DataContext.IsAddingCost, ElementName=Window, Converter={StaticResource BoolToVisibilityConverter}}"></local:AddCostFormControl>
         </StackPanel>
 
         <DataGrid ItemsSource="{Binding Costs}" AutoGenerateColumns="False" RowHeaderWidth="0" Padding="5,0" BorderThickness="0,1,0,0">

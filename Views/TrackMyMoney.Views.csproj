@@ -90,6 +90,7 @@
     <Compile Include="Converters\BoolToVisibilityNegatedConverter.cs" />
     <Compile Include="Converters\BoolToVisibilityConverter.cs" />
     <Compile Include="Converters\MultiStylesConverter.cs" />
+    <Compile Include="ViewModels\AddCostFormViewModelStub.cs" />
     <Compile Include="ViewModels\CostsListViewModelStub.cs" />
     <Compile Include="ViewModels\CostViewModelStub.cs" />
   </ItemGroup>

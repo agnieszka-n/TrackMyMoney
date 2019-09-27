@@ -13,16 +13,16 @@ namespace TrackMyMoney.Views.ViewModels
 {
     internal class CostsListViewModelStub : ICostsListViewModel
     {
+        public IAddCostFormViewModel AddCostFormViewModel { get; }
         public ObservableCollection<ICostViewModel> Costs { get; set; }
-        public ICostViewModel NewCost { get; }
         public bool IsAddingCost { get; }
         public ObservableCollection<ICostCategoryViewModel> Categories { get; }
         public RelayCommand ShowAddCostCommand => null;
-        public RelayCommand CancelAddCostCommand => null;
-        public RelayCommand SaveCostCommand => null;
 
         public CostsListViewModelStub()
         {
+            AddCostFormViewModel = new AddCostFormViewModelStub();
+
             IsAddingCost = true;
             Categories = new ObservableCollection<ICostCategoryViewModel>
             {
@@ -30,7 +30,6 @@ namespace TrackMyMoney.Views.ViewModels
                 new CostCategoryViewModel(new CostCategory() { Id = 2, Name = "Another category"})
             };
 
-            NewCost = new CostViewModelStub(DateTime.Now, Categories[0], "Subject", 123);
 
             Costs = new ObservableCollection<ICostViewModel>
             {

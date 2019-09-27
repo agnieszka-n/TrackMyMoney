@@ -5,12 +5,10 @@ namespace TrackMyMoney.ViewModels.Contracts
 {
     public interface ICostsListViewModel
     {
+        IAddCostFormViewModel AddCostFormViewModel { get; }
         ObservableCollection<ICostViewModel> Costs { get; }
-        ICostViewModel NewCost { get; }
         bool IsAddingCost { get; }
         ObservableCollection<ICostCategoryViewModel> Categories { get;}
         RelayCommand ShowAddCostCommand { get; }
-        RelayCommand CancelAddCostCommand { get; }
-        RelayCommand SaveCostCommand { get; }
     }
 }

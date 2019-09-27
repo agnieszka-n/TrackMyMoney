@@ -56,6 +56,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AddCostFormViewModel.cs" />
     <Compile Include="CostCategoryViewModel.cs" />
     <Compile Include="CostsListViewModel.cs" />
     <Compile Include="CostViewModel.cs" />

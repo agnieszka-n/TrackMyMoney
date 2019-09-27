@@ -22,7 +22,11 @@ namespace TrackMyMoney.ViewModels
         public ObservableCollection<ICostCategoryViewModel> Categories
         {
             get => categories;
-            set { Set(() => Categories, ref categories, value); }
+            set
+            {
+                AddCostFormViewModel.Categories = value;
+                Set(() => Categories, ref categories, value);
+            }
         }
 
         private ObservableCollection<ICostViewModel> costs;
@@ -32,11 +36,11 @@ namespace TrackMyMoney.ViewModels
             set { Set(() => Costs, ref costs, value); }
         }
 
-        private ICostViewModel newCost;
-        public ICostViewModel NewCost
+        private IAddCostFormViewModel addCostFormViewModel;
+        public IAddCostFormViewModel AddCostFormViewModel
         {
-            get => newCost;
-            set { Set(() => NewCost, ref newCost, value); }
+            get => addCostFormViewModel;
+            set { Set(() => AddCostFormViewModel, ref addCostFormViewModel, value); }
         }
 
         private bool isAddingCost;
@@ -47,47 +51,24 @@ namespace TrackMyMoney.ViewModels
         }
 
         public RelayCommand ShowAddCostCommand { get; }
-        public RelayCommand CancelAddCostCommand { get; }
-        public RelayCommand SaveCostCommand { get; }
 
-        public CostsListViewModel(ICategoriesManager categoriesManager, ICostsManager costsManager)
+        public CostsListViewModel(ICategoriesManager categoriesManager, ICostsManager costsManager, IAddCostFormViewModel addCostFormViewModel)
         {
             this.categoriesManager = categoriesManager;
             this.costsManager = costsManager;
 
-            ClearNewCost();
+            AddCostFormViewModel = addCostFormViewModel;
+            AddCostFormViewModel.CostSaved += LoadCosts;
+            AddCostFormViewModel.CostCancelled += CancelAddCost;
 
             ShowAddCostCommand = new RelayCommand(ShowAddCost);
-            CancelAddCostCommand = new RelayCommand(CancelAddCost);
-            SaveCostCommand = new RelayCommand(SaveCost);
 
             LoadCategories();
             LoadCosts();
         }
 
-        private void SaveCost()
-        {
-            var model = NewCost.ToModel();
-
-            if (model == null)
-            {
-                // TODO add a clear validation message
-                return;
-            }
-
-            OperationResult result = costsManager.SaveCost(model);
-
-            if (result.IsSuccess)
-            {
-                ClearNewCost();
-                LoadCosts();
-            }
-            // TODO implement an error message 
-        }
-
         private void CancelAddCost()
         {
-            ClearNewCost();
             IsAddingCost = false;
         }
 
@@ -121,11 +102,6 @@ namespace TrackMyMoney.ViewModels
                 Costs = new ObservableCollection<ICostViewModel>(costsViewModels);
             }
             // TODO implement an error message 
-        }
-
-        private void ClearNewCost()
-        {
-            NewCost = new CostViewModel();
         }
     }
 }
