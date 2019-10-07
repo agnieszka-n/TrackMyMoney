@@ -43,14 +43,15 @@ namespace TrackMyMoney.ViewModels
             set { Set(() => AddCostFormViewModel, ref addCostFormViewModel, value); }
         }
 
-        private bool isAddingCost;
-        public bool IsAddingCost
+        private CostsListMenuState menuState;
+        public CostsListMenuState MenuState
         {
-            get => isAddingCost;
-            set { Set(() => IsAddingCost, ref isAddingCost, value); }
+            get => menuState;
+            set { Set(() => MenuState, ref menuState, value); }
         }
 
         public RelayCommand ShowAddCostCommand { get; }
+        public RelayCommand ShowManageCategoriesCommand { get; }
 
         public CostsListViewModel(ICategoriesManager categoriesManager, ICostsManager costsManager, IAddCostFormViewModel addCostFormViewModel)
         {
@@ -62,6 +63,7 @@ namespace TrackMyMoney.ViewModels
             AddCostFormViewModel.CostCancelled += CancelAddCost;
 
             ShowAddCostCommand = new RelayCommand(ShowAddCost);
+            ShowManageCategoriesCommand = new RelayCommand(ShowManageCategories);
 
             LoadCategories();
             LoadCosts();
@@ -69,12 +71,17 @@ namespace TrackMyMoney.ViewModels
 
         private void CancelAddCost()
         {
-            IsAddingCost = false;
+            MenuState = CostsListMenuState.DEFAULT;
         }
 
         private void ShowAddCost()
         {
-            IsAddingCost = true;
+            MenuState = CostsListMenuState.ADD_COST;
+        }
+
+        private void ShowManageCategories()
+        {
+            MenuState = CostsListMenuState.MANAGE_CATEGORIES;
         }
 
         private void LoadCategories()

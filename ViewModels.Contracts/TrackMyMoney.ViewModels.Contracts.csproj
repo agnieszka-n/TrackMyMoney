@@ -66,6 +66,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Common\TrackMyMoney.Common.csproj">
+      <Project>{0121D3FB-50E0-4AC2-BCE1-3E76FA43FC87}</Project>
+      <Name>TrackMyMoney.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Models\TrackMyMoney.Models.csproj">
       <Project>{DF5CFF3A-B31B-428B-B201-F1EA8E0BA3C4}</Project>
       <Name>TrackMyMoney.Models</Name>

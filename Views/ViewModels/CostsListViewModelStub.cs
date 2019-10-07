@@ -8,6 +8,7 @@ using GalaSoft.MvvmLight.Command;
 using TrackMyMoney.Models;
 using TrackMyMoney.ViewModels;
 using TrackMyMoney.ViewModels.Contracts;
+using TrackMyMoney.Common;
 
 namespace TrackMyMoney.Views.ViewModels
 {
@@ -15,15 +16,16 @@ namespace TrackMyMoney.Views.ViewModels
     {
         public IAddCostFormViewModel AddCostFormViewModel { get; }
         public ObservableCollection<ICostViewModel> Costs { get; set; }
-        public bool IsAddingCost { get; }
+        public CostsListMenuState MenuState { get; }
         public ObservableCollection<ICostCategoryViewModel> Categories { get; }
         public RelayCommand ShowAddCostCommand => null;
+        public RelayCommand ShowManageCategoriesCommand => null;
 
         public CostsListViewModelStub()
         {
             AddCostFormViewModel = new AddCostFormViewModelStub();
 
-            IsAddingCost = true;
+            MenuState = CostsListMenuState.DEFAULT;
             Categories = new ObservableCollection<ICostCategoryViewModel>
             {
                 new CostCategoryViewModel(new CostCategory() { Id = 1, Name = "Selected category"}),

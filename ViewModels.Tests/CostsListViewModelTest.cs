@@ -26,7 +26,7 @@ namespace TrackMyMoney.ViewModels.Tests
             vm.ShowAddCostCommand.Execute(null);
 
             // Assert
-            Assert.AreEqual(true, vm.IsAddingCost);
+            Assert.AreEqual(CostsListMenuState.ADD_COST, vm.MenuState);
         }
 
         [Test]
@@ -46,9 +46,21 @@ namespace TrackMyMoney.ViewModels.Tests
             mockAddCostFormViewModel.Raise(x => x.CostCancelled += null);
 
             // Assert
-            Assert.AreEqual(false, vm.IsAddingCost);
+            Assert.AreEqual(CostsListMenuState.DEFAULT, vm.MenuState);
         }
 
+        [Test]
+        public void Can_Manage_Categories_Click_Show_Panel()
+        {
+            // Arrange
+            CostsListViewModel vm = GetCostsListViewModelWithoutDatabaseReadings();
+
+            // Act
+            vm.ShowManageCategoriesCommand.Execute(null);
+
+            // Assert
+            Assert.AreEqual(CostsListMenuState.MANAGE_CATEGORIES, vm.MenuState);
+        }
         [Test]
         public void Can_Save_Cost_Refresh_List()
         {

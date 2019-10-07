@@ -87,9 +87,11 @@
     <Compile Include="AddCostFormControl.xaml.cs">
       <DependentUpon>AddCostFormControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Converters\BoolToVisibilityNegatedConverter.cs" />
-    <Compile Include="Converters\BoolToVisibilityConverter.cs" />
+    <Compile Include="Converters\MenuStateToVisibilityConverter.cs" />
     <Compile Include="Converters\MultiStylesConverter.cs" />
+    <Compile Include="ManageCategoriesControl.xaml.cs">
+      <DependentUpon>ManageCategoriesControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ViewModels\AddCostFormViewModelStub.cs" />
     <Compile Include="ViewModels\CostsListViewModelStub.cs" />
     <Compile Include="ViewModels\CostViewModelStub.cs" />
@@ -130,8 +132,16 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="ManageCategoriesControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Common\TrackMyMoney.Common.csproj">
+      <Project>{0121d3fb-50e0-4ac2-bce1-3e76fa43fc87}</Project>
+      <Name>TrackMyMoney.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Models\TrackMyMoney.Models.csproj">
       <Project>{df5cff3a-b31b-428b-b201-f1ea8e0ba3c4}</Project>
       <Name>TrackMyMoney.Models</Name>

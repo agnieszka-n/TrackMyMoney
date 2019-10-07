@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TrackMyMoney.Views"
+        xmlns:common="clr-namespace:TrackMyMoney.Common;assembly=TrackMyMoney.Common"
         xmlns:vm="clr-namespace:TrackMyMoney.Views.ViewModels"
         xmlns:conv="clr-namespace:TrackMyMoney.Views.Converters"
         mc:Ignorable="d"
@@ -18,14 +19,17 @@
                 <Setter Property="Padding" Value="5,0"></Setter>
             </Style>
 
-            <conv:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"></conv:BoolToVisibilityConverter>
-            <conv:BoolToVisibilityNegatedConverter x:Key="BoolToVisibilityNegatedConverter"></conv:BoolToVisibilityNegatedConverter>
+            <conv:MenuStateToVisibilityConverter x:Key="MenuStateToVisibilityConverter"></conv:MenuStateToVisibilityConverter>
         </DockPanel.Resources>
 
         <StackPanel DockPanel.Dock="Top" Margin="5,15">
-            <Button Content="Add a cost" Visibility="{Binding IsAddingCost, Converter={StaticResource BoolToVisibilityNegatedConverter}}" HorizontalAlignment="Left" Width="80" Command="{Binding ShowAddCostCommand}"></Button>
+            <StackPanel Orientation="Horizontal" Visibility="{Binding MenuState, Converter={StaticResource MenuStateToVisibilityConverter}, ConverterParameter={x:Static common:CostsListMenuState.DEFAULT}}">
+                <Button Content="Add a cost" HorizontalAlignment="Left" Padding="10,0" Margin="0,0,5,0" Command="{Binding ShowAddCostCommand}"></Button>
+                <Button Content="Manage categories" HorizontalAlignment="Left" Padding="10,0" Command="{Binding ShowManageCategoriesCommand}"></Button>
+            </StackPanel>
 
-            <local:AddCostFormControl DataContext="{Binding DataContext.AddCostFormViewModel, ElementName=Window}" Visibility="{Binding DataContext.IsAddingCost, ElementName=Window, Converter={StaticResource BoolToVisibilityConverter}}"></local:AddCostFormControl>
+            <local:AddCostFormControl DataContext="{Binding DataContext.AddCostFormViewModel, ElementName=Window}" Visibility="{Binding DataContext.MenuState, ElementName=Window, Converter={StaticResource MenuStateToVisibilityConverter}, ConverterParameter={x:Static common:CostsListMenuState.ADD_COST}}" ></local:AddCostFormControl>
+            <local:ManageCategoriesControl Visibility="{Binding DataContext.MenuState, ElementName=Window, Converter={StaticResource MenuStateToVisibilityConverter}, ConverterParameter={x:Static common:CostsListMenuState.MANAGE_CATEGORIES}}" ></local:ManageCategoriesControl>
         </StackPanel>
 
         <DataGrid ItemsSource="{Binding Costs}" AutoGenerateColumns="False" RowHeaderWidth="0" Padding="5,0" BorderThickness="0,1,0,0">

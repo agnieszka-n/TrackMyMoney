@@ -6,19 +6,25 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Data;
+using TrackMyMoney.Common;
 
 namespace TrackMyMoney.Views.Converters
 {
-    internal class BoolToVisibilityConverter : IValueConverter
+    internal class MenuStateToVisibilityConverter: IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (!(value is bool isVisible))
+            if (!(value is CostsListMenuState actualState && parameter is CostsListMenuState expectedState))
             {
-                return null;
+                return Binding.DoNothing;
             }
 
-            return isVisible ? Visibility.Visible : Visibility.Collapsed;
+            if (actualState == expectedState)
+            {
+                return Visibility.Visible;
+            }
+
+            return Visibility.Collapsed;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
