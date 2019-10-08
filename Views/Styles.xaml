@@ -1,0 +1,34 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:TrackMyMoney.Views"
+                    xmlns:conv="clr-namespace:TrackMyMoney.Views.Converters">
+
+    <conv:MultiStylesConverter x:Key="MultiStylesConverter"></conv:MultiStylesConverter>
+
+    <Style x:Key="EditableControl" TargetType="Control">
+        <Setter Property="Margin" Value="0,0,10,0"></Setter>
+    </Style>
+
+    <Style x:Key="TextBox" TargetType="TextBox">
+        <Setter Property="Padding" Value="5,0"></Setter>
+        <Setter Property="VerticalContentAlignment" Value="Center"></Setter>
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+    </Style>
+
+    <Style x:Key="Button" TargetType="Button">
+        <Setter Property="Height" Value="25"></Setter>
+        <Setter Property="Padding" Value="10,0"></Setter>
+        <Setter Property="MinWidth" Value="80"></Setter>
+    </Style>
+    <Style TargetType="Button" BasedOn="{StaticResource Button}"></Style>
+
+    <Style x:Key="TextBlock" TargetType="TextBlock">
+        <Setter Property="Margin" Value="0,0,5,0"></Setter>
+        <Setter Property="VerticalAlignment" Value="Center"></Setter>
+    </Style>
+    <Style TargetType="TextBlock" BasedOn="{StaticResource TextBlock}"></Style>
+
+    <Style x:Key="LastButOneInRow" TargetType="{x:Type Control}">
+        <Setter Property="Margin" Value="0,0,5,0"></Setter>
+    </Style>
+</ResourceDictionary>

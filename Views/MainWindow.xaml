@@ -12,20 +12,30 @@
         d:DataContext="{d:DesignInstance vm:CostsListViewModelStub, IsDesignTimeCreatable=True}"
         Name="Window"
         >
-    <DockPanel>
-        <DockPanel.Resources>
-            <Style TargetType="Button">
-                <Setter Property="Height" Value="25"></Setter>
-                <Setter Property="Padding" Value="5,0"></Setter>
-            </Style>
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Styles.xaml"></ResourceDictionary>
 
-            <conv:MenuStateToVisibilityConverter x:Key="MenuStateToVisibilityConverter"></conv:MenuStateToVisibilityConverter>
-        </DockPanel.Resources>
+                <ResourceDictionary>
+                    <conv:MenuStateToVisibilityConverter x:Key="MenuStateToVisibilityConverter"></conv:MenuStateToVisibilityConverter>
+                </ResourceDictionary>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+    <DockPanel>
 
         <StackPanel DockPanel.Dock="Top" Margin="5,15">
             <StackPanel Orientation="Horizontal" Visibility="{Binding MenuState, Converter={StaticResource MenuStateToVisibilityConverter}, ConverterParameter={x:Static common:CostsListMenuState.DEFAULT}}">
-                <Button Content="Add a cost" HorizontalAlignment="Left" Padding="10,0" Margin="0,0,5,0" Command="{Binding ShowAddCostCommand}"></Button>
-                <Button Content="Manage categories" HorizontalAlignment="Left" Padding="10,0" Command="{Binding ShowManageCategoriesCommand}"></Button>
+                <Button Content="Add a cost" Command="{Binding ShowAddCostCommand}">
+                    <Button.Style>
+                        <MultiBinding Converter="{StaticResource MultiStylesConverter}">
+                            <Binding Source="{StaticResource Button}"></Binding>
+                            <Binding Source="{StaticResource LastButOneInRow}"></Binding>
+                        </MultiBinding>
+                    </Button.Style>
+                </Button>
+                <Button Content="Manage categories" Command="{Binding ShowManageCategoriesCommand}"></Button>
             </StackPanel>
 
             <local:AddCostFormControl DataContext="{Binding DataContext.AddCostFormViewModel, ElementName=Window}" Visibility="{Binding DataContext.MenuState, ElementName=Window, Converter={StaticResource MenuStateToVisibilityConverter}, ConverterParameter={x:Static common:CostsListMenuState.ADD_COST}}" ></local:AddCostFormControl>
@@ -42,9 +52,6 @@
                 <Style x:Key="CellTextStyle" TargetType="TextBlock">
                     <Setter Property="Margin" Value="5"/>
                     <Setter Property="HorizontalAlignment" Value="Center"/>
-                </Style>
-                <Style TargetType="TextBox">
-                    <Setter Property="HorizontalContentAlignment" Value="Center"/>
                 </Style>
             </DataGrid.Resources>
             <DataGrid.Columns>

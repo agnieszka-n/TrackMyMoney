@@ -21,6 +21,7 @@ namespace TrackMyMoney.Views.Converters
             Style result = new Style();
             foreach (var style in styles)
             {
+                // We don't care about EventSetters for now.
                 foreach (var setter in style.Setters)
                 {
                     if (!(setter is Setter propertySetter))
