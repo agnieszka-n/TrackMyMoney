@@ -60,6 +60,7 @@
     <Compile Include="CostCategoryViewModel.cs" />
     <Compile Include="CostsListViewModel.cs" />
     <Compile Include="CostViewModel.cs" />
+    <Compile Include="ManageCategoriesViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

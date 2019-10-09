@@ -21,6 +21,7 @@ namespace TrackMyMoney.Main
         {
             kernel.Bind<ICostsListViewModel>().To<CostsListViewModel>();
             kernel.Bind<IAddCostFormViewModel>().To<AddCostFormViewModel>();
+            kernel.Bind<IManageCategoriesViewModel>().To<ManageCategoriesViewModel>();
             kernel.Bind<ICategoriesManager>().To<CategoriesManager>();
             kernel.Bind<ICostsManager>().To<CostsManager>();
             kernel.Bind<IDatabaseProxy>().ToMethod(context => new DatabaseProxy(connectionString));

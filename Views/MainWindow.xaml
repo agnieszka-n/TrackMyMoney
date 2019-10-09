@@ -38,8 +38,8 @@
                 <Button Content="Manage categories" Command="{Binding ShowManageCategoriesCommand}"></Button>
             </StackPanel>
 
-            <local:AddCostFormControl DataContext="{Binding DataContext.AddCostFormViewModel, ElementName=Window}" Visibility="{Binding DataContext.MenuState, ElementName=Window, Converter={StaticResource MenuStateToVisibilityConverter}, ConverterParameter={x:Static common:CostsListMenuState.ADD_COST}}" ></local:AddCostFormControl>
-            <local:ManageCategoriesControl Visibility="{Binding DataContext.MenuState, ElementName=Window, Converter={StaticResource MenuStateToVisibilityConverter}, ConverterParameter={x:Static common:CostsListMenuState.MANAGE_CATEGORIES}}" ></local:ManageCategoriesControl>
+            <local:AddCostFormControl DataContext="{Binding DataContext.AddCostFormViewModel, ElementName=Window}" Visibility="{Binding DataContext.MenuState, ElementName=Window, Converter={StaticResource MenuStateToVisibilityConverter}, ConverterParameter={x:Static common:CostsListMenuState.ADD_COST}}"></local:AddCostFormControl>
+            <local:ManageCategoriesControl DataContext="{Binding DataContext.ManageCategoriesViewModel, ElementName=Window}" Visibility="{Binding DataContext.MenuState, ElementName=Window, Converter={StaticResource MenuStateToVisibilityConverter}, ConverterParameter={x:Static common:CostsListMenuState.MANAGE_CATEGORIES}}"></local:ManageCategoriesControl>
         </StackPanel>
 
         <DataGrid ItemsSource="{Binding Costs}" AutoGenerateColumns="False" RowHeaderWidth="0" Padding="5,0" BorderThickness="0,1,0,0">

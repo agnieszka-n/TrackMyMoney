@@ -4,9 +4,49 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:TrackMyMoney.Views"
+             xmlns:vm="clr-namespace:TrackMyMoney.Views.ViewModels"
              mc:Ignorable="d" 
-             d:DesignHeight="25" d:DesignWidth="950">
+             d:DesignHeight="25" d:DesignWidth="950"
+             d:DataContext="{d:DesignInstance vm:ManageCategoriesViewModelStub, IsDesignTimeCreatable=True}"
+             >
+    <UserControl.Resources>
+        <ResourceDictionary Source="Styles.xaml"></ResourceDictionary>
+    </UserControl.Resources>
     <Grid>
-        <TextBlock Text="TODO Manage Categories"></TextBlock>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition Width="Auto"></ColumnDefinition>
+            <ColumnDefinition Width="Auto"></ColumnDefinition>
+            <ColumnDefinition Width="Auto"></ColumnDefinition>
+            <ColumnDefinition Width="Auto"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <TextBlock Text="Current categories:" Margin="0,0,5,0" VerticalAlignment="Center"></TextBlock>
+        <ComboBox Grid.Column="1" Style="{StaticResource EditableControl}" ItemsSource="{Binding Categories}" SelectedValue="{Binding SelectedCategory}" DisplayMemberPath="Name"></ComboBox>
+        <Button Grid.Column="2" Content="Rename selected">
+            <Button.Style>
+                <MultiBinding Converter="{StaticResource MultiStylesConverter}">
+                    <Binding Source="{StaticResource Button}"></Binding>
+                    <Binding Source="{StaticResource LastButOneInRow}"></Binding>
+                </MultiBinding>
+            </Button.Style>
+        </Button>
+        <Button Grid.Column="3" Content="Delete selected">
+            <Button.Style>
+                <MultiBinding Converter="{StaticResource MultiStylesConverter}">
+                    <Binding Source="{StaticResource Button}"></Binding>
+                    <Binding Source="{StaticResource LastButOneInRow}"></Binding>
+                </MultiBinding>
+            </Button.Style>
+        </Button>
+        <Button Grid.Column="4" Content="Add">
+            <Button.Style>
+                <MultiBinding Converter="{StaticResource MultiStylesConverter}">
+                    <Binding Source="{StaticResource Button}"></Binding>
+                    <Binding Source="{StaticResource LastButOneInRow}"></Binding>
+                </MultiBinding>
+            </Button.Style>
+        </Button>
+        <Button Grid.Column="5" Content="Cancel" Command="{Binding CancelCommand}"></Button>
     </Grid>
 </UserControl>

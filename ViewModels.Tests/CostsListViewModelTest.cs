@@ -39,7 +39,7 @@ namespace TrackMyMoney.ViewModels.Tests
             mockCostsManager.Setup(x => x.GetCosts()).Returns(new OperationResult<List<Cost>>(new List<Cost>()));
             var mockAddCostFormViewModel = new Mock<IAddCostFormViewModel>();
 
-            var vm = new CostsListViewModel(mockCategoriesManager.Object, mockCostsManager.Object, mockAddCostFormViewModel.Object);
+            var vm = GetCostsListViewModel(mockCategoriesManager, mockCostsManager, mockAddCostFormViewModel, null);
             vm.ShowAddCostCommand.Execute(null);
 
             // Act
@@ -61,8 +61,25 @@ namespace TrackMyMoney.ViewModels.Tests
             // Assert
             Assert.AreEqual(CostsListMenuState.MANAGE_CATEGORIES, vm.MenuState);
         }
+
         [Test]
-        public void Can_Save_Cost_Refresh_List()
+        public void Can_Cancel_Manage_Categories_Hide_Panel()
+        {
+            // Arrange
+            var mockManageCategoriesViewModel = new Mock<IManageCategoriesViewModel>();
+
+            var vm = GetCostsListViewModel(null, null, null, mockManageCategoriesViewModel);
+            vm.ShowManageCategoriesCommand.Execute(null);
+
+            // Act
+            mockManageCategoriesViewModel.Raise(x => x.Cancelled += null);
+
+            // Assert
+            Assert.AreEqual(CostsListMenuState.DEFAULT, vm.MenuState);
+        }
+
+        [Test]
+        public void Can_Refresh_List_On_Save_Cost()
         {
             // Arrange
             var mockCategoriesManager = new Mock<ICategoriesManager>();
@@ -75,7 +92,7 @@ namespace TrackMyMoney.ViewModels.Tests
                 .Returns(new OperationResult<List<Cost>>(new List<Cost>()));
             var mockAddCostFormViewModel = new Mock<IAddCostFormViewModel>();
 
-            var vm = new CostsListViewModel(mockCategoriesManager.Object, mockCostsManager.Object, mockAddCostFormViewModel.Object);
+            var vm = GetCostsListViewModel(mockCategoriesManager, mockCostsManager, mockAddCostFormViewModel, null);
             vm.ShowAddCostCommand.Execute(null);
             int loadingCostsCountBefore = loadingCostsCount;
 
@@ -100,11 +117,9 @@ namespace TrackMyMoney.ViewModels.Tests
             mockCategoriesManager.Setup(x => x.GetCategories()).Returns(new OperationResult<List<CostCategory>>(sampleCategories));
             var mockCostsManager = new Mock<ICostsManager>();
             mockCostsManager.Setup(x => x.GetCosts()).Returns(new OperationResult<List<Cost>>(new List<Cost>()));
-            var mockAddCostFormViewModel = new Mock<IAddCostFormViewModel>();
 
             // Act
-            var vm = new CostsListViewModel(mockCategoriesManager.Object, mockCostsManager.Object, mockAddCostFormViewModel.Object);
-
+            var vm = GetCostsListViewModel(mockCategoriesManager, mockCostsManager, null, null);
             // Assert
             Assert.IsNotNull(vm.Categories);
             Assert.AreEqual(2, vm.Categories.Count);
@@ -132,10 +147,9 @@ namespace TrackMyMoney.ViewModels.Tests
             mockCategoriesManager.Setup(x => x.GetCategories()).Returns(new OperationResult<List<CostCategory>>(sampleCategories));
             var mockCostsManager = new Mock<ICostsManager>();
             mockCostsManager.Setup(x => x.GetCosts()).Returns(new OperationResult<List<Cost>>(sampleCosts));
-            var mockAddCostFormViewModel = new Mock<IAddCostFormViewModel>();
 
             // Act
-            var vm = new CostsListViewModel(mockCategoriesManager.Object, mockCostsManager.Object, mockAddCostFormViewModel.Object);
+            var vm = GetCostsListViewModel(mockCategoriesManager, mockCostsManager, null, null);
 
             // Assert
             Assert.IsNotNull(vm.Costs);
@@ -158,10 +172,9 @@ namespace TrackMyMoney.ViewModels.Tests
             mockCategoriesManager.Setup(x => x.GetCategories()).Returns(new OperationResult<List<CostCategory>>("Something went wrong!"));
             var mockCostsManager = new Mock<ICostsManager>();
             mockCostsManager.Setup(x => x.GetCosts()).Returns(new OperationResult<List<Cost>>(sampleCosts));
-            var mockAddCostFormViewModel = new Mock<IAddCostFormViewModel>();
 
             // Act
-            var vm = new CostsListViewModel(mockCategoriesManager.Object, mockCostsManager.Object, mockAddCostFormViewModel.Object);
+            var vm = GetCostsListViewModel(mockCategoriesManager, mockCostsManager, null, null);
 
             // Assert
             mockCostsManager.Verify(x => x.GetCosts(), Times.Never, "Should never get costs when there are no categories loaded.");
@@ -174,8 +187,28 @@ namespace TrackMyMoney.ViewModels.Tests
             mockCategoriesManager.Setup(x => x.GetCategories()).Returns(new OperationResult<List<CostCategory>>(new List<CostCategory>()));
             var mockCostsManager = new Mock<ICostsManager>();
             mockCostsManager.Setup(x => x.GetCosts()).Returns(new OperationResult<List<Cost>>(new List<Cost>()));
-            var mockAddCostFormViewModel = new Mock<IAddCostFormViewModel>();
-            return new CostsListViewModel(mockCategoriesManager.Object, mockCostsManager.Object, mockAddCostFormViewModel.Object);
+
+            return GetCostsListViewModel(mockCategoriesManager, mockCostsManager, null, null);
+        }
+
+        private CostsListViewModel GetCostsListViewModel(Mock<ICategoriesManager> mockCategoriesManager, Mock<ICostsManager> mockCostsManager, Mock<IAddCostFormViewModel> mockAddCostFormVm, Mock<IManageCategoriesViewModel> mockManageCategoriesVm)
+        {
+            if (mockCategoriesManager == null)
+            {
+                mockCategoriesManager = new Mock<ICategoriesManager>();
+                mockCategoriesManager.Setup(x => x.GetCategories()).Returns(new OperationResult<List<CostCategory>>(new List<CostCategory>()));
+            }
+
+            if (mockCostsManager == null)
+            {
+                mockCostsManager = new Mock<ICostsManager>();
+                mockCostsManager.Setup(x => x.GetCosts()).Returns(new OperationResult<List<Cost>>(new List<Cost>()));
+            }
+
+            mockAddCostFormVm = mockAddCostFormVm ?? new Mock<IAddCostFormViewModel>();
+            mockManageCategoriesVm = mockManageCategoriesVm ?? new Mock<IManageCategoriesViewModel>();
+
+            return new CostsListViewModel(mockCategoriesManager.Object, mockCostsManager.Object, mockAddCostFormVm.Object, mockManageCategoriesVm.Object);
         }
     }
 }

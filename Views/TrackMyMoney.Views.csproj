@@ -93,8 +93,10 @@
       <DependentUpon>ManageCategoriesControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\AddCostFormViewModelStub.cs" />
+    <Compile Include="ViewModels\CostCategoryViewModelStub.cs" />
     <Compile Include="ViewModels\CostsListViewModelStub.cs" />
     <Compile Include="ViewModels\CostViewModelStub.cs" />
+    <Compile Include="ViewModels\ManageCategoriesViewModelStub.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MainWindow.xaml.cs">

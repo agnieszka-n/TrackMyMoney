@@ -25,6 +25,7 @@ namespace TrackMyMoney.ViewModels
             set
             {
                 AddCostFormViewModel.Categories = value;
+                ManageCategoriesViewModel.Categories = value;
                 Set(() => Categories, ref categories, value);
             }
         }
@@ -43,6 +44,13 @@ namespace TrackMyMoney.ViewModels
             set { Set(() => AddCostFormViewModel, ref addCostFormViewModel, value); }
         }
 
+        private IManageCategoriesViewModel manageCategoriesViewModel;
+        public IManageCategoriesViewModel ManageCategoriesViewModel
+        {
+            get => manageCategoriesViewModel;
+            set { Set(() => ManageCategoriesViewModel, ref manageCategoriesViewModel, value); }
+        }
+
         private CostsListMenuState menuState;
         public CostsListMenuState MenuState
         {
@@ -53,23 +61,26 @@ namespace TrackMyMoney.ViewModels
         public RelayCommand ShowAddCostCommand { get; }
         public RelayCommand ShowManageCategoriesCommand { get; }
 
-        public CostsListViewModel(ICategoriesManager categoriesManager, ICostsManager costsManager, IAddCostFormViewModel addCostFormViewModel)
+        public CostsListViewModel(ICategoriesManager categoriesManager, ICostsManager costsManager, IAddCostFormViewModel addCostFormViewModel, IManageCategoriesViewModel manageCategoriesViewModel)
         {
             this.categoriesManager = categoriesManager;
             this.costsManager = costsManager;
 
             AddCostFormViewModel = addCostFormViewModel;
             AddCostFormViewModel.CostSaved += LoadCosts;
-            AddCostFormViewModel.CostCancelled += CancelAddCost;
+            AddCostFormViewModel.CostCancelled += OnMenuOptionCancelled;
 
             ShowAddCostCommand = new RelayCommand(ShowAddCost);
             ShowManageCategoriesCommand = new RelayCommand(ShowManageCategories);
+
+            ManageCategoriesViewModel = manageCategoriesViewModel;
+            ManageCategoriesViewModel.Cancelled += OnMenuOptionCancelled;
 
             LoadCategories();
             LoadCosts();
         }
 
-        private void CancelAddCost()
+        private void OnMenuOptionCancelled()
         {
             MenuState = CostsListMenuState.DEFAULT;
         }
