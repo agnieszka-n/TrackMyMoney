@@ -37,7 +37,7 @@ namespace TrackMyMoney.ViewModels.Tests
             vm.NewCost.Amount = 123;
 
             bool eventRaised = false;
-            vm.CostCancelled += () => eventRaised = true;
+            vm.Cancelled += () => eventRaised = true;
 
             // Act
             vm.CancelCommand.Execute(null);
@@ -59,7 +59,7 @@ namespace TrackMyMoney.ViewModels.Tests
             FillNewCostValues(vm);
 
             bool eventRaised = false;
-            vm.CostSaved += () => eventRaised = true;
+            vm.Saved += () => eventRaised = true;
 
             // Act
             vm.SaveCommand.Execute(null);

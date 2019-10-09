@@ -67,8 +67,8 @@ namespace TrackMyMoney.ViewModels
             this.costsManager = costsManager;
 
             AddCostFormViewModel = addCostFormViewModel;
-            AddCostFormViewModel.CostSaved += LoadCosts;
-            AddCostFormViewModel.CostCancelled += OnMenuOptionCancelled;
+            AddCostFormViewModel.Saved += LoadCosts;
+            AddCostFormViewModel.Cancelled += OnMenuOptionCancelled;
 
             ShowAddCostCommand = new RelayCommand(ShowAddCost);
             ShowManageCategoriesCommand = new RelayCommand(ShowManageCategories);

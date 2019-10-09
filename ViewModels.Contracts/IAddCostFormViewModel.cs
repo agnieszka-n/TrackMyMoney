@@ -10,8 +10,8 @@ namespace TrackMyMoney.ViewModels.Contracts
 {
     public interface IAddCostFormViewModel
     {
-        event Action CostSaved;
-        event Action CostCancelled;
+        event Action Saved;
+        event Action Cancelled;
         ObservableCollection<ICostCategoryViewModel> Categories { get; set; }
         ICostViewModel NewCost { get; }
         RelayCommand CancelCommand { get; }

@@ -30,8 +30,8 @@ namespace TrackMyMoney.ViewModels
             set { Set(() => Categories, ref categories, value); }
         }
 
-        public event Action CostSaved;
-        public event Action CostCancelled;
+        public event Action Saved;
+        public event Action Cancelled;
 
         public RelayCommand CancelCommand { get; }
         public RelayCommand SaveCommand { get; }
@@ -49,7 +49,7 @@ namespace TrackMyMoney.ViewModels
         private void CancelAddCost()
         {
             ClearNewCost();
-            CostCancelled?.Invoke();
+            Cancelled?.Invoke();
         }
 
         private void SaveCost()
@@ -66,7 +66,7 @@ namespace TrackMyMoney.ViewModels
             if (result.IsSuccess)
             {
                 ClearNewCost();
-                CostSaved?.Invoke();
+                Saved?.Invoke();
             }
             // TODO implement an error message 
         }

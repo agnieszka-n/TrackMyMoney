@@ -43,7 +43,7 @@ namespace TrackMyMoney.ViewModels.Tests
             vm.ShowAddCostCommand.Execute(null);
 
             // Act
-            mockAddCostFormViewModel.Raise(x => x.CostCancelled += null);
+            mockAddCostFormViewModel.Raise(x => x.Cancelled += null);
 
             // Assert
             Assert.AreEqual(CostsListMenuState.DEFAULT, vm.MenuState);
@@ -97,7 +97,7 @@ namespace TrackMyMoney.ViewModels.Tests
             int loadingCostsCountBefore = loadingCostsCount;
 
             // Act
-            mockAddCostFormViewModel.Raise(x => x.CostSaved += null);
+            mockAddCostFormViewModel.Raise(x => x.Saved += null);
 
             // Assert
             mockCostsManager.Verify(x => x.GetCosts(), Times.Exactly(loadingCostsCountBefore + 1), "Should load costs after saving a new one.");

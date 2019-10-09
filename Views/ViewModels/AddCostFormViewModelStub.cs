@@ -11,8 +11,8 @@ namespace TrackMyMoney.Views.ViewModels
 {
     internal class AddCostFormViewModelStub : IAddCostFormViewModel
     {
-        public event Action CostSaved;
-        public event Action CostCancelled;
+        public event Action Saved;
+        public event Action Cancelled;
         public ObservableCollection<ICostCategoryViewModel> Categories { get; set; }
         public ICostViewModel NewCost { get; }
         public RelayCommand CancelCommand => null;
