@@ -12,11 +12,11 @@ namespace TrackMyMoney.ViewModels
 {
     public class ManageCategoriesViewModel : ViewModelBase, IManageCategoriesViewModel
     {
-        public event Action Cancelled;
+        public event Action WentBack;
+
+        public RelayCommand GoBackCommand { get; }
 
         private ICostCategoryViewModel selectedCategory;
-        public RelayCommand CancelCommand { get; }
-
         public ICostCategoryViewModel SelectedCategory
         {
             get => selectedCategory;
@@ -35,13 +35,13 @@ namespace TrackMyMoney.ViewModels
 
         public ManageCategoriesViewModel()
         {
-            CancelCommand = new RelayCommand(Cancel);
+            GoBackCommand = new RelayCommand(GoBack);
         }
 
-        private void Cancel()
+        private void GoBack()
         {
             SelectedCategory = null;
-            Cancelled?.Invoke();
+            WentBack?.Invoke();
         }
     }
 }

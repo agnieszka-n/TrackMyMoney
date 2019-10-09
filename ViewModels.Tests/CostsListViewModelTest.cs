@@ -72,7 +72,7 @@ namespace TrackMyMoney.ViewModels.Tests
             vm.ShowManageCategoriesCommand.Execute(null);
 
             // Act
-            mockManageCategoriesViewModel.Raise(x => x.Cancelled += null);
+            mockManageCategoriesViewModel.Raise(x => x.WentBack += null);
 
             // Assert
             Assert.AreEqual(CostsListMenuState.DEFAULT, vm.MenuState);

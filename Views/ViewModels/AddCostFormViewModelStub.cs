@@ -13,10 +13,10 @@ namespace TrackMyMoney.Views.ViewModels
     {
         public event Action Saved;
         public event Action Cancelled;
-        public ObservableCollection<ICostCategoryViewModel> Categories { get; set; }
-        public ICostViewModel NewCost { get; }
         public RelayCommand CancelCommand => null;
         public RelayCommand SaveCommand => null;
+        public ObservableCollection<ICostCategoryViewModel> Categories { get; set; }
+        public ICostViewModel NewCost { get; }
 
         public AddCostFormViewModelStub()
         {

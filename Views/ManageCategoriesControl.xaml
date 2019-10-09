@@ -47,6 +47,6 @@
                 </MultiBinding>
             </Button.Style>
         </Button>
-        <Button Grid.Column="5" Content="Cancel" Command="{Binding CancelCommand}"></Button>
+        <Button Grid.Column="5" Content="Go back" Command="{Binding GoBackCommand}"></Button>
     </Grid>
 </UserControl>

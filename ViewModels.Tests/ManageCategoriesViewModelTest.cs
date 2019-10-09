@@ -17,7 +17,7 @@ namespace TrackMyMoney.ViewModels.Tests
             var vm = new ManageCategoriesViewModel();
 
             // Act
-            vm.CancelCommand.Execute(null);
+            vm.GoBackCommand.Execute(null);
             
             // Assert
             Assert.IsNull(vm.SelectedCategory);

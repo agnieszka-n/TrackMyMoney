@@ -12,9 +12,9 @@ namespace TrackMyMoney.ViewModels.Contracts
     {
         event Action Saved;
         event Action Cancelled;
-        ObservableCollection<ICostCategoryViewModel> Categories { get; set; }
-        ICostViewModel NewCost { get; }
         RelayCommand CancelCommand { get; }
         RelayCommand SaveCommand { get; }
+        ObservableCollection<ICostCategoryViewModel> Categories { get; set; }
+        ICostViewModel NewCost { get; }
     }
 }

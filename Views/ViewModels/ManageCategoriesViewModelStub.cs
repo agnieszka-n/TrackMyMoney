@@ -12,8 +12,8 @@ namespace TrackMyMoney.Views.ViewModels
 {
     class ManageCategoriesViewModelStub : IManageCategoriesViewModel
     {
-        public event Action Cancelled;
-        public RelayCommand CancelCommand => null;
+        public event Action WentBack;
+        public RelayCommand GoBackCommand => null;
         public ICostCategoryViewModel SelectedCategory { get; set; }
         public ObservableCollection<ICostCategoryViewModel> Categories { get; set; }
 

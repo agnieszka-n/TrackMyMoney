@@ -10,9 +10,9 @@ namespace TrackMyMoney.ViewModels.Contracts
 {
     public interface IManageCategoriesViewModel
     {
-        event Action Cancelled;
+        event Action WentBack;
 
-        RelayCommand CancelCommand { get; }
+        RelayCommand GoBackCommand { get; }
         ICostCategoryViewModel SelectedCategory { get; set; }
         ObservableCollection<ICostCategoryViewModel> Categories { get; set; }
     }
