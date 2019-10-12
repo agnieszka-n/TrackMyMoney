@@ -14,88 +14,69 @@ using TrackMyMoney.Services.Contracts.Database;
 
 namespace TrackMyMoney.Services
 {
-    public class CategoriesManager : ICategoriesManager
+    public class CategoriesManager : ManagerBase, ICategoriesManager
     {
-        private readonly IDatabaseProxy dbProxy;
-
-        public CategoriesManager(IDatabaseProxy dbProxy)
-        {
-            this.dbProxy = dbProxy;
-        }
+        public CategoriesManager(IDatabaseProxy dbProxy) : base(dbProxy) { }
 
         public OperationResult<List<CostCategory>> GetCategories()
         {
-            using (DbConnection connection = dbProxy.GetConnection())
+            OperationResult<List<CostCategory>> FunctionBody(DbConnection connection)
             {
-                try
+                string query = "select id, name from categories order by name";
+                IQueryResultReader reader = dbProxy.ExecuteReader(query, connection);
+                var result = new List<CostCategory>();
+
+                while (reader.Read())
                 {
-                    dbProxy.OpenConnection(connection);
-
-                    string query = "select id, name from categories order by name";
-                    IQueryResultReader reader = dbProxy.ExecuteReader(query, connection);
-                    var result = new List<CostCategory>();
-
-                    while (reader.Read())
+                    var category = new CostCategory
                     {
-                        var category = new CostCategory
-                        {
-                            Id = Convert.ToInt32(reader[0]),
-                            Name = (string)reader[1]
-                        };
-                        result.Add(category);
-                    }
+                        Id = Convert.ToInt32(reader[0]),
+                        Name = (string)reader[1]
+                    };
+                    result.Add(category);
+                }
 
-                    return new OperationResult<List<CostCategory>>(result);
-                }
-                catch (Exception ex)
-                {
-                    Logger.LogError(this, ex);
-                    return new OperationResult<List<CostCategory>>("An error occurred while getting categories.");
-                }
-                finally
-                {
-                    dbProxy.CloseConnection(connection);
-                }
+                return new OperationResult<List<CostCategory>>(result);
             }
+
+            OperationResult<List<CostCategory>> ErrorHandler(Exception ex)
+            {
+                Logger.LogError(this, ex);
+                return new OperationResult<List<CostCategory>>("An error occurred while getting categories.");
+            }
+
+            return ExecuteFunction(FunctionBody, ErrorHandler);
         }
 
         public OperationResult RenameCategory(int id, string newName)
         {
-            using (DbConnection connection = dbProxy.GetConnection())
+            OperationResult FunctionBody(DbConnection connection)
             {
-                try
+                string query = "update categories set name = @name where id = @id";
+
+                Dictionary<string, object> parameters = new Dictionary<string, object>()
                 {
-                    dbProxy.OpenConnection(connection);
+                    { "@id", id },
+                    { "@name", newName }
+                };
 
-                    string query = "update categories set name = @name where id = @id";
+                int affectedRowsCount = dbProxy.ExecuteNonQuery(connection, query, parameters);
 
-                    Dictionary<string, object> parameters = new Dictionary<string, object>()
-                    {
-                        { "@id", id },
-                        { "@name", newName }
-                    };
-
-                    int affectedRowsCount = dbProxy.ExecuteNonQuery(connection, query, parameters);
-
-                    if (affectedRowsCount == 1)
-                    {
-                        return new OperationResult();
-                    }
-                    else
-                    {
-                        throw new Exception("Renaming a category failed.");
-                    }
-                }
-                catch (Exception ex)
+                if (affectedRowsCount == 1)
                 {
-                    Logger.LogError(this, ex, $"An error occurred while renaming a category with id = [{id}] to [{newName}].");
-                    return new OperationResult<List<CostCategory>>("An error occurred while renaming a category.");
+                    return new OperationResult();
                 }
-                finally
-                {
-                    dbProxy.CloseConnection(connection);
-                }
+
+                throw new Exception("Renaming a category failed.");
             }
+
+            OperationResult ErrorHandler(Exception ex)
+            {
+                Logger.LogError(this, ex, $"An error occurred while renaming a category with id = [{id}] to [{newName}].");
+                return new OperationResult<List<CostCategory>>("An error occurred while renaming a category.");
+            }
+
+            return ExecuteFunction(FunctionBody, ErrorHandler);
         }
     }
 }
