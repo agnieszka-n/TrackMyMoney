@@ -16,5 +16,13 @@ namespace TrackMyMoney.Common
             logger.Error(ex);
             Trace.WriteLine(ex);
         }
+
+        public static void LogError(object source, Exception ex, string leadingMessage)
+        {
+            NLog.Logger logger = LogManager.GetLogger(source.GetType().Name);
+            logger.Error(leadingMessage);
+            logger.Error(ex);
+            Trace.WriteLine(ex);
+        }
     }
 }

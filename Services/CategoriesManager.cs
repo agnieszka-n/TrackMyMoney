@@ -88,8 +88,8 @@ namespace TrackMyMoney.Services
                 }
                 catch (Exception ex)
                 {
-                    Logger.LogError(this, ex);
-                    return new OperationResult<List<CostCategory>>("An error occurred while getting categories.");
+                    Logger.LogError(this, ex, $"An error occurred while renaming a category with id = [{id}] to [{newName}].");
+                    return new OperationResult<List<CostCategory>>("An error occurred while renaming a category.");
                 }
                 finally
                 {
