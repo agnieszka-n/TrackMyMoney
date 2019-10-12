@@ -61,7 +61,7 @@ namespace TrackMyMoney.ViewModels
                 return;
             }
 
-            OperationResult result = costsManager.SaveCost(model);
+            OperationResult result = costsManager.AddCost(model);
 
             if (result.IsSuccess)
             {

@@ -56,7 +56,7 @@ namespace TrackMyMoney.Services.Tests
             var manager = new CostsManager(mockDbProxy.Object);
 
             // Act
-            OperationResult result = manager.SaveCost(new Cost());
+            OperationResult result = manager.AddCost(new Cost());
 
             // Assert
             Assert.AreEqual(true, result.IsSuccess, "Should return success from a database.");

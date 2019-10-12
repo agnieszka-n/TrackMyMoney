@@ -11,6 +11,6 @@ namespace TrackMyMoney.Services.Contracts
     public interface ICostsManager
     {
         OperationResult<List<Cost>> GetCosts();
-        OperationResult SaveCost(Cost cost);
+        OperationResult AddCost(Cost cost);
     }
 }

@@ -52,7 +52,7 @@ namespace TrackMyMoney.ViewModels.Tests
             // Arrange
             var mockCostsManager = new Mock<ICostsManager>();
             mockCostsManager
-                .Setup(x => x.SaveCost(It.IsAny<Cost>()))
+                .Setup(x => x.AddCost(It.IsAny<Cost>()))
                 .Returns(new OperationResult());
 
             AddCostFormViewModel vm = GetViewModel(mockCostsManager);
@@ -80,7 +80,7 @@ namespace TrackMyMoney.ViewModels.Tests
                 .Setup(x => x.GetCosts())
                 .Returns(new OperationResult<List<Cost>>(costsInDatabase));
             mockCostsManager
-                .Setup(x => x.SaveCost(It.IsAny<Cost>()))
+                .Setup(x => x.AddCost(It.IsAny<Cost>()))
                 .Callback<Cost>(cost => newCost = cost)
                 .Returns(new OperationResult());
 
@@ -91,7 +91,7 @@ namespace TrackMyMoney.ViewModels.Tests
             vm.SaveCommand.Execute(null);
 
             // Assert
-            mockCostsManager.Verify(x => x.SaveCost(It.IsAny<Cost>()), Times.Once(), "Should call saving on a cost.");
+            mockCostsManager.Verify(x => x.AddCost(It.IsAny<Cost>()), Times.Once(), "Should call saving on a cost.");
 
             Assert.AreEqual(1, newCost.CategoryId);
             Assert.AreEqual("subject", newCost.Subject);
@@ -113,7 +113,7 @@ namespace TrackMyMoney.ViewModels.Tests
             vm.SaveCommand.Execute(null);
 
             // Assert
-            mockCostsManager.Verify(x => x.SaveCost(It.IsAny<Cost>()), Times.Never, "Should never call saving on an invalid cost.");
+            mockCostsManager.Verify(x => x.AddCost(It.IsAny<Cost>()), Times.Never, "Should never call saving on an invalid cost.");
         }
 
         [Test]
@@ -123,7 +123,7 @@ namespace TrackMyMoney.ViewModels.Tests
             var mockCostsManager = new Mock<ICostsManager>();
             var costsInDatabase = new List<Cost>();
             mockCostsManager.Setup(x => x.GetCosts()).Returns(new OperationResult<List<Cost>>(costsInDatabase));
-            mockCostsManager.Setup(x => x.SaveCost(It.IsAny<Cost>())).Returns(new OperationResult());
+            mockCostsManager.Setup(x => x.AddCost(It.IsAny<Cost>())).Returns(new OperationResult());
 
             AddCostFormViewModel vm = GetViewModel(mockCostsManager);
             FillNewCostValues(vm);

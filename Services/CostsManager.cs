@@ -51,7 +51,7 @@ namespace TrackMyMoney.Services
             return ExecuteFunction(FunctionBody, ErrorHandler);
         }
 
-        public OperationResult SaveCost(Cost cost)
+        public OperationResult AddCost(Cost cost)
         {
             OperationResult FunctionBody(DbConnection connection)
             {
