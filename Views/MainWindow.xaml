@@ -7,6 +7,7 @@
         xmlns:common="clr-namespace:TrackMyMoney.Common;assembly=TrackMyMoney.Common"
         xmlns:vm="clr-namespace:TrackMyMoney.Views.ViewModels"
         xmlns:conv="clr-namespace:TrackMyMoney.Views.Converters"
+        xmlns:contracts="clr-namespace:TrackMyMoney.ViewModels.Contracts;assembly=TrackMyMoney.ViewModels.Contracts"
         mc:Ignorable="d"
         Title="Track My Money" Height="450" Width="950" MinHeight="450" MinWidth="950"
         d:DataContext="{d:DesignInstance vm:CostsListViewModelStub, IsDesignTimeCreatable=True}"
@@ -18,7 +19,7 @@
                 <ResourceDictionary Source="Styles.xaml"></ResourceDictionary>
 
                 <ResourceDictionary>
-                    <conv:MenuStateToVisibilityConverter x:Key="MenuStateToVisibilityConverter"></conv:MenuStateToVisibilityConverter>
+                    <conv:EnumToVisibilityConverter x:Key="EnumToVisibilityConverter"></conv:EnumToVisibilityConverter>
                 </ResourceDictionary>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
@@ -26,7 +27,7 @@
     <DockPanel>
 
         <StackPanel DockPanel.Dock="Top" Margin="5,15">
-            <StackPanel Orientation="Horizontal" Visibility="{Binding MenuState, Converter={StaticResource MenuStateToVisibilityConverter}, ConverterParameter={x:Static common:CostsListMenuState.DEFAULT}}">
+            <StackPanel Orientation="Horizontal" Visibility="{Binding MenuState, Converter={StaticResource EnumToVisibilityConverter}, ConverterParameter={x:Static contracts:CostsListMenuState.DEFAULT}}">
                 <Button Content="Add a cost" Command="{Binding ShowAddCostCommand}">
                     <Button.Style>
                         <MultiBinding Converter="{StaticResource MultiStylesConverter}">
@@ -38,8 +39,8 @@
                 <Button Content="Manage categories" Command="{Binding ShowManageCategoriesCommand}"></Button>
             </StackPanel>
 
-            <local:AddCostFormControl DataContext="{Binding DataContext.AddCostFormViewModel, ElementName=Window}" Visibility="{Binding DataContext.MenuState, ElementName=Window, Converter={StaticResource MenuStateToVisibilityConverter}, ConverterParameter={x:Static common:CostsListMenuState.ADD_COST}}"></local:AddCostFormControl>
-            <local:ManageCategoriesControl DataContext="{Binding DataContext.ManageCategoriesViewModel, ElementName=Window}" Visibility="{Binding DataContext.MenuState, ElementName=Window, Converter={StaticResource MenuStateToVisibilityConverter}, ConverterParameter={x:Static common:CostsListMenuState.MANAGE_CATEGORIES}}"></local:ManageCategoriesControl>
+            <local:AddCostFormControl DataContext="{Binding DataContext.AddCostFormViewModel, ElementName=Window}" Visibility="{Binding DataContext.MenuState, ElementName=Window, Converter={StaticResource EnumToVisibilityConverter}, ConverterParameter={x:Static contracts:CostsListMenuState.ADD_COST}}"></local:AddCostFormControl>
+            <local:ManageCategoriesControl DataContext="{Binding DataContext.ManageCategoriesViewModel, ElementName=Window}" Visibility="{Binding DataContext.MenuState, ElementName=Window, Converter={StaticResource EnumToVisibilityConverter}, ConverterParameter={x:Static contracts:CostsListMenuState.MANAGE_CATEGORIES}}"></local:ManageCategoriesControl>
         </StackPanel>
 
         <DataGrid ItemsSource="{Binding Costs}" AutoGenerateColumns="False" RowHeaderWidth="0" Padding="5,0" BorderThickness="0,1,0,0">

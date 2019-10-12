@@ -7,19 +7,20 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Data;
 using TrackMyMoney.Common;
+using TrackMyMoney.ViewModels.Contracts;
 
 namespace TrackMyMoney.Views.Converters
 {
-    internal class MenuStateToVisibilityConverter: IValueConverter
+    internal class EnumToVisibilityConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (!(value is CostsListMenuState actualState && parameter is CostsListMenuState expectedState))
+            if (!(value is Enum actualValue && parameter is Enum expectedValue))
             {
                 return Binding.DoNothing;
             }
 
-            if (actualState == expectedState)
+            if (Equals(actualValue, expectedValue))
             {
                 return Visibility.Visible;
             }

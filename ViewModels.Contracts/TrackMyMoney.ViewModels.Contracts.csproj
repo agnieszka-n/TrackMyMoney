@@ -56,11 +56,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CostsListMenuState.cs" />
     <Compile Include="IAddCostFormViewModel.cs" />
     <Compile Include="ICostCategoryViewModel.cs" />
     <Compile Include="ICostsListViewModel.cs" />
     <Compile Include="ICostViewModel.cs" />
     <Compile Include="IManageCategoriesViewModel.cs" />
+    <Compile Include="ManageCategoriesMenuState.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

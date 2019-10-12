@@ -31,7 +31,7 @@ namespace TrackMyMoney.Services
                 {
                     dbProxy.OpenConnection(connection);
 
-                    string query = "select id, name from categories";
+                    string query = "select id, name from categories order by name";
                     IQueryResultReader reader = dbProxy.ExecuteReader(query, connection);
                     var result = new List<CostCategory>();
 
@@ -46,6 +46,45 @@ namespace TrackMyMoney.Services
                     }
 
                     return new OperationResult<List<CostCategory>>(result);
+                }
+                catch (Exception ex)
+                {
+                    Logger.LogError(this, ex);
+                    return new OperationResult<List<CostCategory>>("An error occurred while getting categories.");
+                }
+                finally
+                {
+                    dbProxy.CloseConnection(connection);
+                }
+            }
+        }
+
+        public OperationResult RenameCategory(int id, string newName)
+        {
+            using (DbConnection connection = dbProxy.GetConnection())
+            {
+                try
+                {
+                    dbProxy.OpenConnection(connection);
+
+                    string query = "update categories set name = @name where id = @id";
+
+                    Dictionary<string, object> parameters = new Dictionary<string, object>()
+                    {
+                        { "@id", id },
+                        { "@name", newName }
+                    };
+
+                    int affectedRowsCount = dbProxy.ExecuteNonQuery(connection, query, parameters);
+
+                    if (affectedRowsCount == 1)
+                    {
+                        return new OperationResult();
+                    }
+                    else
+                    {
+                        throw new Exception("Renaming a category failed.");
+                    }
                 }
                 catch (Exception ex)
                 {

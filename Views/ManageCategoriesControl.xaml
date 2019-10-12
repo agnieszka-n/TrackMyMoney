@@ -5,48 +5,76 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:TrackMyMoney.Views"
              xmlns:vm="clr-namespace:TrackMyMoney.Views.ViewModels"
+             xmlns:conv="clr-namespace:TrackMyMoney.Views.Converters"
+             xmlns:contracts="clr-namespace:TrackMyMoney.ViewModels.Contracts;assembly=TrackMyMoney.ViewModels.Contracts"
              mc:Ignorable="d" 
              d:DesignHeight="25" d:DesignWidth="950"
              d:DataContext="{d:DesignInstance vm:ManageCategoriesViewModelStub, IsDesignTimeCreatable=True}"
              >
     <UserControl.Resources>
-        <ResourceDictionary Source="Styles.xaml"></ResourceDictionary>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Styles.xaml"></ResourceDictionary>
+
+                <ResourceDictionary>
+                    <conv:EnumToVisibilityConverter x:Key="EnumToVisibilityConverter"></conv:EnumToVisibilityConverter>
+                    <conv:IsCategorySelectionEditableConverter x:Key="IsCategorySelectionEditableConverter"></conv:IsCategorySelectionEditableConverter>
+                    <conv:IsNotNullConverter x:Key="IsNotNullConverter"></conv:IsNotNullConverter>
+
+                    <Button x:Key="ButtonLastButOneInRow">
+                        <Button.Style>
+                            <MultiBinding Converter="{StaticResource MultiStylesConverter}">
+                                <Binding Source="{StaticResource Button}"></Binding>
+                                <Binding Source="{StaticResource LastButOneInRow}"></Binding>
+                            </MultiBinding>
+                        </Button.Style>
+                    </Button>
+                </ResourceDictionary>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
     </UserControl.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"></ColumnDefinition>
             <ColumnDefinition></ColumnDefinition>
-            <ColumnDefinition Width="Auto"></ColumnDefinition>
-            <ColumnDefinition Width="Auto"></ColumnDefinition>
-            <ColumnDefinition Width="Auto"></ColumnDefinition>
-            <ColumnDefinition Width="Auto"></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <TextBlock Text="Current categories:" Margin="0,0,5,0" VerticalAlignment="Center"></TextBlock>
-        <ComboBox Grid.Column="1" Style="{StaticResource EditableControl}" ItemsSource="{Binding Categories}" SelectedValue="{Binding SelectedCategory}" DisplayMemberPath="Name"></ComboBox>
-        <Button Grid.Column="2" Content="Rename selected">
-            <Button.Style>
-                <MultiBinding Converter="{StaticResource MultiStylesConverter}">
-                    <Binding Source="{StaticResource Button}"></Binding>
-                    <Binding Source="{StaticResource LastButOneInRow}"></Binding>
-                </MultiBinding>
-            </Button.Style>
-        </Button>
-        <Button Grid.Column="3" Content="Delete selected">
-            <Button.Style>
-                <MultiBinding Converter="{StaticResource MultiStylesConverter}">
-                    <Binding Source="{StaticResource Button}"></Binding>
-                    <Binding Source="{StaticResource LastButOneInRow}"></Binding>
-                </MultiBinding>
-            </Button.Style>
-        </Button>
-        <Button Grid.Column="4" Content="Add">
-            <Button.Style>
-                <MultiBinding Converter="{StaticResource MultiStylesConverter}">
-                    <Binding Source="{StaticResource Button}"></Binding>
-                    <Binding Source="{StaticResource LastButOneInRow}"></Binding>
-                </MultiBinding>
-            </Button.Style>
-        </Button>
-        <Button Grid.Column="5" Content="Go back" Command="{Binding GoBackCommand}"></Button>
+        <ComboBox IsEnabled="{Binding MenuState, Converter={StaticResource IsCategorySelectionEditableConverter}}" Grid.Column="1" Style="{StaticResource EditableControl}" ItemsSource="{Binding Categories}" SelectedValue="{Binding SelectedCategory, Mode=TwoWay}" DisplayMemberPath="Name" VerticalAlignment="Center"></ComboBox>
+
+        <!--DEFAULT-->
+        <Grid Grid.Column="2" Visibility="{Binding MenuState, Converter={StaticResource EnumToVisibilityConverter}, ConverterParameter={x:Static contracts:ManageCategoriesMenuState.DEFAULT}}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Button IsEnabled="{Binding SelectedCategory, Converter={StaticResource IsNotNullConverter}}" Content="Rename selected" Command="{Binding ShowRenameCommand}" Style="{Binding Style, Source={StaticResource ButtonLastButOneInRow}}"></Button>
+            <Button Grid.Column="1" IsEnabled="{Binding SelectedCategory, Converter={StaticResource IsNotNullConverter}}" Content="Delete selected" Style="{Binding Style, Source={StaticResource ButtonLastButOneInRow}}"></Button>
+            <Button Grid.Column="2" Content="Add" Style="{Binding Style, Source={StaticResource ButtonLastButOneInRow}}"></Button>
+            <Button Grid.Column="3" Content="Go back" Command="{Binding GoBackCommand}"></Button>
+        </Grid>
+
+        <!--RENAME-->
+        <Grid Column="2" Visibility="{Binding MenuState, Converter={StaticResource EnumToVisibilityConverter}, ConverterParameter={x:Static contracts:ManageCategoriesMenuState.RENAME}}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <TextBlock Text="Rename to:"></TextBlock>
+            <TextBox Grid.Column="1" Text="{Binding RenamedCategoryNewName}">
+                <TextBox.Style>
+                    <MultiBinding Converter="{StaticResource MultiStylesConverter}">
+                        <Binding Source="{StaticResource EditableControl}"></Binding>
+                        <Binding Source="{StaticResource TextBox}"></Binding>
+                    </MultiBinding>
+                </TextBox.Style>
+            </TextBox>
+            <Button Grid.Column="2" Content="Save" Style="{Binding Style, Source={StaticResource ButtonLastButOneInRow}}" Command="{Binding SaveRenameCommand}"></Button>
+            <Button Grid.Column="3" Content="Cancel" Command="{Binding CancelActionCommand}"></Button>
+        </Grid>
     </Grid>
 </UserControl>

@@ -181,6 +181,40 @@ namespace TrackMyMoney.ViewModels.Tests
             Assert.IsNull(vm.Costs);
         }
 
+        [Test]
+        public void Can_Refresh_List_On_Category_Renamed()
+        {
+            // Arrange
+            var mockCategoriesManager = new Mock<ICategoriesManager>();
+            var loadingCategoriesCount = 0;
+            mockCategoriesManager
+                .Setup(x => x.GetCategories())
+                .Callback(() => { loadingCategoriesCount++; })
+                .Returns(new OperationResult<List<CostCategory>>(new List<CostCategory>()));
+
+            var mockCostsManager = new Mock<ICostsManager>();
+            var loadingCostsCount = 0;
+            mockCostsManager
+                .Setup(x => x.GetCosts())
+                .Callback(() => { loadingCostsCount++; })
+                .Returns(new OperationResult<List<Cost>>(new List<Cost>()));
+
+            var mockManageCategoriesViewModel = new Mock<IManageCategoriesViewModel>();
+            var vm = GetCostsListViewModel(mockCategoriesManager, mockCostsManager, null, mockManageCategoriesViewModel);
+
+            vm.ShowManageCategoriesCommand.Execute(null);
+
+            var loadingCategoriesCountBefore = loadingCategoriesCount;
+
+            // Act
+            mockManageCategoriesViewModel.Raise(x => x.Renamed += null);
+
+            // Assert
+            Assert.AreEqual(CostsListMenuState.MANAGE_CATEGORIES, vm.MenuState);
+            mockCategoriesManager.Verify(x => x.GetCategories(), Times.Exactly(loadingCategoriesCountBefore + 1), "Should reload categories after renaming one of them.");
+            mockCostsManager.Verify(x => x.GetCosts(), Times.Exactly(loadingCostsCount), "Should not reload costs after renaming a category.");
+        }
+
         private CostsListViewModel GetCostsListViewModelWithoutDatabaseReadings()
         {
             var mockCategoriesManager = new Mock<ICategoriesManager>();

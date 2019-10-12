@@ -55,7 +55,7 @@ namespace TrackMyMoney.ViewModels
         public CostsListMenuState MenuState
         {
             get => menuState;
-            set { Set(() => MenuState, ref menuState, value); }
+            private set { Set(() => MenuState, ref menuState, value); }
         }
 
         public RelayCommand ShowAddCostCommand { get; }
@@ -68,19 +68,20 @@ namespace TrackMyMoney.ViewModels
 
             AddCostFormViewModel = addCostFormViewModel;
             AddCostFormViewModel.Saved += LoadCosts;
-            AddCostFormViewModel.Cancelled += OnMenuOptionDiscarded;
+            AddCostFormViewModel.Cancelled += SetDefaultMenuOption;
 
             ShowAddCostCommand = new RelayCommand(ShowAddCost);
             ShowManageCategoriesCommand = new RelayCommand(ShowManageCategories);
 
             ManageCategoriesViewModel = manageCategoriesViewModel;
-            ManageCategoriesViewModel.WentBack += OnMenuOptionDiscarded;
+            ManageCategoriesViewModel.WentBack += SetDefaultMenuOption;
+            ManageCategoriesViewModel.Renamed += ReloadCostCategories;
 
             LoadCategories();
             LoadCosts();
         }
 
-        private void OnMenuOptionDiscarded()
+        private void SetDefaultMenuOption()
         {
             MenuState = CostsListMenuState.DEFAULT;
         }
@@ -93,6 +94,12 @@ namespace TrackMyMoney.ViewModels
         private void ShowManageCategories()
         {
             MenuState = CostsListMenuState.MANAGE_CATEGORIES;
+        }
+
+        private void ReloadCostCategories()
+        {
+            LoadCategories();
+            SetCategoryForCosts();
         }
 
         private void LoadCategories()
@@ -116,10 +123,19 @@ namespace TrackMyMoney.ViewModels
             OperationResult<List<Cost>> costsResult = costsManager.GetCosts();
             if (costsResult.IsSuccess)
             {
-                var costsViewModels = costsResult.Data.Select(x => new CostViewModel(x, Categories.Single(category => category.Id == x.CategoryId)));
+                var costsViewModels = costsResult.Data.Select(x =>
+                    new CostViewModel(x, Categories.Single(category => category.Id == x.CategoryId)));
                 Costs = new ObservableCollection<ICostViewModel>(costsViewModels);
             }
             // TODO implement an error message 
+        }
+
+        private void SetCategoryForCosts()
+        {
+            foreach (var cost in Costs)
+            {
+                cost.Category = Categories.Single(category => category.Id == cost.Category.Id);
+            }
         }
     }
 }

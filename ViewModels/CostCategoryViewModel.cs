@@ -1,9 +1,9 @@
-﻿using System;
+﻿using GalaSoft.MvvmLight;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using GalaSoft.MvvmLight;
 using TrackMyMoney.Models;
 using TrackMyMoney.ViewModels.Contracts;
 
@@ -24,6 +24,8 @@ namespace TrackMyMoney.ViewModels
             get => name;
             set { Set(() => Name, ref name, value); }
         }
+
+        public CostCategoryViewModel() { }
 
         public CostCategoryViewModel(CostCategory category)
         {

@@ -11,5 +11,6 @@ namespace TrackMyMoney.Services.Contracts
     public interface ICategoriesManager
     {
         OperationResult<List<CostCategory>> GetCategories();
+        OperationResult RenameCategory(int id, string newName);
     }
 }

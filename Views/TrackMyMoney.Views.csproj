@@ -87,8 +87,10 @@
     <Compile Include="AddCostFormControl.xaml.cs">
       <DependentUpon>AddCostFormControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Converters\MenuStateToVisibilityConverter.cs" />
+    <Compile Include="Converters\EnumToVisibilityConverter.cs" />
+    <Compile Include="Converters\IsNotNullConverter.cs" />
     <Compile Include="Converters\MultiStylesConverter.cs" />
+    <Compile Include="Converters\IsCategorySelectionEditableConverter.cs" />
     <Compile Include="ManageCategoriesControl.xaml.cs">
       <DependentUpon>ManageCategoriesControl.xaml</DependentUpon>
     </Compile>

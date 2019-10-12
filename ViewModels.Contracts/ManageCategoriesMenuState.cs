@@ -4,12 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TrackMyMoney.Common
+namespace TrackMyMoney.ViewModels.Contracts
 {
-    public enum CostsListMenuState
+    public enum ManageCategoriesMenuState
     {
         DEFAULT,
-        ADD_COST,
-        MANAGE_CATEGORIES
+        ADD,
+        RENAME,
+        DELETE
     }
 }
