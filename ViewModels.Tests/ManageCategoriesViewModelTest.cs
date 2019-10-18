@@ -61,6 +61,7 @@ namespace TrackMyMoney.ViewModels.Tests
             mockCategory.Setup(x => x.Id).Returns(1);
 
             var vm = new ManageCategoriesViewModel(mockCategoriesManager.Object);
+            vm.ShowRenameCommand.Execute(null);
             vm.RenamedCategoryNewName = "New name";
             vm.SelectedCategory = mockCategory.Object;
 
@@ -72,8 +73,33 @@ namespace TrackMyMoney.ViewModels.Tests
 
             // Assert
             Assert.AreEqual(true, isRenamedInvoked);
+            Assert.AreEqual(ManageCategoriesMenuState.DEFAULT, vm.MenuState);
             Assert.IsNull(vm.RenamedCategoryNewName);
             mockCategoriesManager.Verify(x => x.GetCategories(), Times.Never, "Should not reload categories after renaming one of them.");
+        }
+
+        [Test]
+        public void Can_Add_Category()
+        {
+            // Arrange
+            var mockCategoriesManager = new Mock<ICategoriesManager>();
+            mockCategoriesManager.Setup(x => x.AddCategory(It.IsAny<string>())).Returns(new OperationResult());
+
+            var vm = new ManageCategoriesViewModel(mockCategoriesManager.Object);
+            vm.ShowAddCommand.Execute(null);
+            vm.NewCategoryName = "New category";
+
+            var isAddedInvoked = false;
+            vm.Added += () => isAddedInvoked = true;
+
+            // Act
+            vm.SaveAddCommand.Execute(null);
+
+            // Assert
+            Assert.AreEqual(true, isAddedInvoked);
+            Assert.AreEqual(ManageCategoriesMenuState.DEFAULT, vm.MenuState);
+            Assert.IsNull(vm.NewCategoryName);
+            mockCategoriesManager.Verify(x => x.GetCategories(), Times.Never, "Should not reload categories after adding one.");
         }
     }
 }

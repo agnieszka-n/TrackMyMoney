@@ -52,7 +52,7 @@
             </Grid.ColumnDefinitions>
             <Button IsEnabled="{Binding SelectedCategory, Converter={StaticResource IsNotNullConverter}}" Content="Rename selected" Command="{Binding ShowRenameCommand}" Style="{Binding Style, Source={StaticResource ButtonLastButOneInRow}}"></Button>
             <Button Grid.Column="1" IsEnabled="{Binding SelectedCategory, Converter={StaticResource IsNotNullConverter}}" Content="Delete selected" Style="{Binding Style, Source={StaticResource ButtonLastButOneInRow}}"></Button>
-            <Button Grid.Column="2" Content="Add" Style="{Binding Style, Source={StaticResource ButtonLastButOneInRow}}"></Button>
+            <Button Grid.Column="2" Content="Add" Command="{Binding ShowAddCommand}" Style="{Binding Style, Source={StaticResource ButtonLastButOneInRow}}"></Button>
             <Button Grid.Column="3" Content="Go back" Command="{Binding GoBackCommand}"></Button>
         </Grid>
 
@@ -74,6 +74,27 @@
                 </TextBox.Style>
             </TextBox>
             <Button Grid.Column="2" Content="Save" Style="{Binding Style, Source={StaticResource ButtonLastButOneInRow}}" Command="{Binding SaveRenameCommand}"></Button>
+            <Button Grid.Column="3" Content="Cancel" Command="{Binding CancelActionCommand}"></Button>
+        </Grid>
+
+        <!--ADD-->
+        <Grid Column="2" Visibility="{Binding MenuState, Converter={StaticResource EnumToVisibilityConverter}, ConverterParameter={x:Static contracts:ManageCategoriesMenuState.ADD}}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <TextBlock Text="New category:"></TextBlock>
+            <TextBox Grid.Column="1" Text="{Binding NewCategoryName}">
+                <TextBox.Style>
+                    <MultiBinding Converter="{StaticResource MultiStylesConverter}">
+                        <Binding Source="{StaticResource EditableControl}"></Binding>
+                        <Binding Source="{StaticResource TextBox}"></Binding>
+                    </MultiBinding>
+                </TextBox.Style>
+            </TextBox>
+            <Button Grid.Column="2" Content="Save" Style="{Binding Style, Source={StaticResource ButtonLastButOneInRow}}" Command="{Binding SaveAddCommand}"></Button>
             <Button Grid.Column="3" Content="Cancel" Command="{Binding CancelActionCommand}"></Button>
         </Grid>
     </Grid>

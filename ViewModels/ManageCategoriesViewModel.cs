@@ -15,11 +15,14 @@ namespace TrackMyMoney.ViewModels
     {
         public event Action WentBack;
         public event Action Renamed;
+        public event Action Added;
 
         public RelayCommand GoBackCommand { get; }
         public RelayCommand ShowRenameCommand { get; }
         public RelayCommand SaveRenameCommand { get; }
         public RelayCommand CancelActionCommand { get; }
+        public RelayCommand ShowAddCommand { get; }
+        public RelayCommand SaveAddCommand { get; }
 
         private readonly ICategoriesManager categoriesManager;
 
@@ -66,17 +69,45 @@ namespace TrackMyMoney.ViewModels
             }
         }
 
+        private string newCategoryName;
+        public string NewCategoryName
+        {
+            get => newCategoryName;
+            set { Set(() => NewCategoryName, ref newCategoryName, value); }
+        }
+
         public ManageCategoriesViewModel(ICategoriesManager categoriesManager)
         {
             this.categoriesManager = categoriesManager;
             GoBackCommand = new RelayCommand(GoBack);
-            SaveRenameCommand = new RelayCommand(SaveRename);
             ShowRenameCommand = new RelayCommand(ShowRename);
-            CancelActionCommand = new RelayCommand(CancelAction);
+            SaveRenameCommand = new RelayCommand(SaveRename);
+            ShowAddCommand = new RelayCommand(ShowAdd);
+            SaveAddCommand = new RelayCommand(SaveAdd);
+            CancelActionCommand = new RelayCommand(SetDefaultMenuState);
             MenuState = ManageCategoriesMenuState.DEFAULT;
         }
 
-        private void CancelAction()
+        private void ShowAdd()
+        {
+            MenuState = ManageCategoriesMenuState.ADD;
+        }
+
+        private void SaveAdd()
+        {
+            var result = categoriesManager.AddCategory(NewCategoryName);
+
+            if (result.IsSuccess)
+            {
+                NewCategoryName = null;
+                SetDefaultMenuState();
+                Added?.Invoke();
+            }
+
+            // TODO implement an error message
+        }
+
+        private void SetDefaultMenuState()
         {
             MenuState = ManageCategoriesMenuState.DEFAULT;
         }
@@ -93,7 +124,7 @@ namespace TrackMyMoney.ViewModels
             if (result.IsSuccess)
             {
                 RenamedCategoryNewName = null;
-                CancelAction();
+                SetDefaultMenuState();
                 Renamed?.Invoke();
             }
 

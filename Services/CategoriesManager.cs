@@ -78,5 +78,35 @@ namespace TrackMyMoney.Services
 
             return ExecuteFunction(FunctionBody, ErrorHandler);
         }
+
+        public OperationResult AddCategory(string name)
+        {
+            OperationResult FunctionBody(DbConnection connection)
+            {
+                string query = "insert into categories(name) values (@name)";
+
+                Dictionary<string, object> parameters = new Dictionary<string, object>()
+                {
+                    { "@name", name }
+                };
+
+                int affectedRowsCount = dbProxy.ExecuteNonQuery(connection, query, parameters);
+
+                if (affectedRowsCount == 1)
+                {
+                    return new OperationResult();
+                }
+
+                throw new Exception("Renaming a category failed.");
+            }
+
+            OperationResult ErrorHandler(Exception ex)
+            {
+                Logger.LogError(this, ex, $"An error occurred while adding a category with name = [{name}].");
+                return new OperationResult<List<CostCategory>>("An error occurred while adding a category.");
+            }
+
+            return ExecuteFunction(FunctionBody, ErrorHandler);
+        }
     }
 }
