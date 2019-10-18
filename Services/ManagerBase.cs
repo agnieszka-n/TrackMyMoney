@@ -18,12 +18,12 @@ namespace TrackMyMoney.Services
             this.dbProxy = dbProxy;
         }
 
-        public OperationResult ExecuteFunction(Func<DbConnection, OperationResult> function, Func<Exception, OperationResult> errorHandler)
+        protected OperationResult ExecuteFunction(Func<DbConnection, OperationResult> function, Func<Exception, OperationResult> errorHandler)
         {
             return ExecuteFunction<OperationResult>(function, errorHandler);
         }
 
-        public OperationResult<T> ExecuteFunction<T>(Func<DbConnection, OperationResult<T>> function, Func<Exception, OperationResult<T>> errorHandler)
+        protected OperationResult<T> ExecuteFunction<T>(Func<DbConnection, OperationResult<T>> function, Func<Exception, OperationResult<T>> errorHandler)
         {
             return ExecuteFunction<OperationResult<T>>(function, errorHandler);
         }

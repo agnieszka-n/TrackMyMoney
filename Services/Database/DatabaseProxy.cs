@@ -50,7 +50,22 @@ namespace TrackMyMoney.Services.Database
         {
             DbCommand command = connection.CreateCommand();
             command.CommandText = query;
+            AddParametersToCommand(command, queryParameters);
 
+            return command.ExecuteNonQuery();
+        }
+
+        public object ExecuteScalar(DbConnection connection, string query, Dictionary<string, object> queryParameters = null)
+        {
+            DbCommand command = connection.CreateCommand();
+            command.CommandText = query;
+            AddParametersToCommand(command, queryParameters);
+
+            return command.ExecuteScalar();
+        }
+
+        private static void AddParametersToCommand(DbCommand command, Dictionary<string, object> queryParameters)
+        {
             if (queryParameters != null)
             {
                 foreach (var parameter in queryParameters)
@@ -58,8 +73,6 @@ namespace TrackMyMoney.Services.Database
                     command.Parameters.Add(new SQLiteParameter() { ParameterName = parameter.Key, Value = parameter.Value });
                 }
             }
-
-            return command.ExecuteNonQuery();
         }
     }
 }

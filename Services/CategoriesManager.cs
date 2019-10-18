@@ -76,7 +76,8 @@ namespace TrackMyMoney.Services
                 return new OperationResult<List<CostCategory>>("An error occurred while renaming a category.");
             }
 
-            return ExecuteFunction(FunctionBody, ErrorHandler);
+            var nameAlreadyInUseCheckResult = CheckCategoryNameInUse(newName, ErrorHandler);
+            return nameAlreadyInUseCheckResult.IsSuccess ? ExecuteFunction(FunctionBody, ErrorHandler) : nameAlreadyInUseCheckResult;
         }
 
         public OperationResult AddCategory(string name)
@@ -106,7 +107,31 @@ namespace TrackMyMoney.Services
                 return new OperationResult<List<CostCategory>>("An error occurred while adding a category.");
             }
 
-            return ExecuteFunction(FunctionBody, ErrorHandler);
+            var nameAlreadyInUseCheckResult = CheckCategoryNameInUse(name, ErrorHandler);
+            return nameAlreadyInUseCheckResult.IsSuccess ? ExecuteFunction(FunctionBody, ErrorHandler) : nameAlreadyInUseCheckResult;
+        }
+
+        private OperationResult CheckCategoryNameInUse(string name, Func<Exception, OperationResult> errorHandler)
+        {
+            OperationResult CheckNameAlreadyInUseFunctionBody(DbConnection connection)
+            {
+                string alreadyExistsQuery = "select count(*) from categories where name = @name";
+                Dictionary<string, object> parameters = new Dictionary<string, object>()
+                {
+                    { "@name", name }
+                };
+
+                int rowsCount = Convert.ToInt32(dbProxy.ExecuteScalar(connection, alreadyExistsQuery, parameters));
+
+                if (rowsCount == 0)
+                {
+                    return new OperationResult();
+                }
+
+                return new OperationResult($"A category with name = [{name}] already exists.");
+            }
+
+            return ExecuteFunction(CheckNameAlreadyInUseFunctionBody, errorHandler);
         }
     }
 }
