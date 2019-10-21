@@ -95,6 +95,11 @@ namespace TrackMyMoney.ViewModels
 
         private void SaveAdd()
         {
+            if (string.IsNullOrWhiteSpace(NewCategoryName))
+            {
+                return;
+            }
+
             var result = categoriesManager.AddCategory(NewCategoryName);
 
             if (result.IsSuccess)
@@ -119,6 +124,11 @@ namespace TrackMyMoney.ViewModels
 
         private void SaveRename()
         {
+            if (string.IsNullOrWhiteSpace(RenamedCategoryNewName))
+            {
+                return;
+            }
+
             var result = categoriesManager.RenameCategory(SelectedCategory.Id, RenamedCategoryNewName);
 
             if (result.IsSuccess)

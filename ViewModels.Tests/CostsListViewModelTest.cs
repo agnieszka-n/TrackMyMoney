@@ -79,7 +79,7 @@ namespace TrackMyMoney.ViewModels.Tests
         }
 
         [Test]
-        public void Can_Refresh_List_On_Save_Cost()
+        public void Can_Refresh_List_On_Cost_Added()
         {
             // Arrange
             var mockCategoriesManager = new Mock<ICategoriesManager>();
