@@ -77,6 +77,7 @@ namespace TrackMyMoney.ViewModels
             ManageCategoriesViewModel.WentBack += SetDefaultMenuState;
             ManageCategoriesViewModel.Renamed += ReloadCostCategories;
             ManageCategoriesViewModel.Added += ReloadCostCategories;
+            ManageCategoriesViewModel.Deleted += ReloadCostCategories;
 
             LoadCategories();
             LoadCosts();

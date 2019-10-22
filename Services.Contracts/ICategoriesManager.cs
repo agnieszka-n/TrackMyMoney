@@ -13,5 +13,6 @@ namespace TrackMyMoney.Services.Contracts
         OperationResult<List<CostCategory>> GetCategories();
         OperationResult RenameCategory(int id, string newName);
         OperationResult AddCategory(string name);
+        OperationResult DeleteCategory(int id);
     }
 }

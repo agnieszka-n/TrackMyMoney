@@ -16,6 +16,7 @@ namespace TrackMyMoney.ViewModels
         public event Action WentBack;
         public event Action Renamed;
         public event Action Added;
+        public event Action Deleted;
 
         public RelayCommand GoBackCommand { get; }
         public RelayCommand ShowRenameCommand { get; }
@@ -23,6 +24,8 @@ namespace TrackMyMoney.ViewModels
         public RelayCommand CancelActionCommand { get; }
         public RelayCommand ShowAddCommand { get; }
         public RelayCommand SaveAddCommand { get; }
+        public RelayCommand ShowDeleteCommand { get; }
+        public RelayCommand ConfirmDeleteCommand { get; }
 
         private readonly ICategoriesManager categoriesManager;
 
@@ -84,6 +87,8 @@ namespace TrackMyMoney.ViewModels
             SaveRenameCommand = new RelayCommand(SaveRename);
             ShowAddCommand = new RelayCommand(ShowAdd);
             SaveAddCommand = new RelayCommand(SaveAdd);
+            ShowDeleteCommand = new RelayCommand(ShowDelete);
+            ConfirmDeleteCommand = new RelayCommand(ConfirmDelete);
             CancelActionCommand = new RelayCommand(SetDefaultMenuState);
             MenuState = ManageCategoriesMenuState.DEFAULT;
         }
@@ -136,6 +141,30 @@ namespace TrackMyMoney.ViewModels
                 RenamedCategoryNewName = null;
                 SetDefaultMenuState();
                 Renamed?.Invoke();
+            }
+
+            // TODO implement an error message
+        }
+
+        private void ShowDelete()
+        {
+            MenuState = ManageCategoriesMenuState.DELETE;
+        }
+
+        private void ConfirmDelete()
+        {
+            if (SelectedCategory == null)
+            {
+                return;
+            }
+
+            var result = categoriesManager.DeleteCategory(SelectedCategory.Id);
+
+            if (result.IsSuccess)
+            {
+                SelectedCategory = null;
+                SetDefaultMenuState();
+                Deleted?.Invoke();
             }
 
             // TODO implement an error message

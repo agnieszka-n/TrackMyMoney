@@ -211,5 +211,57 @@ namespace TrackMyMoney.ViewModels.Tests
             Assert.AreEqual(categoryName, vm.NewCategoryName);
             mockCategoriesManager.Verify(x => x.GetCategories(), Times.Never, "Should not reload categories when a category hasn't been added.");
         }
+
+        [Test]
+        public void Can_Delete_Category()
+        {
+            // Arrange
+            var mockCategoriesManager = new Mock<ICategoriesManager>();
+            mockCategoriesManager.Setup(x => x.DeleteCategory(It.IsAny<int>())).Returns(new OperationResult());
+
+            var vm = new ManageCategoriesViewModel(mockCategoriesManager.Object)
+            {
+                SelectedCategory = new CostCategoryViewModel() { Id = 1 }
+            };
+            vm.ShowDeleteCommand.Execute(null);
+
+            var isDeletedInvoked = false;
+            vm.Deleted += () => isDeletedInvoked = true;
+
+            // Act
+            vm.ConfirmDeleteCommand.Execute(null);
+
+            // Assert
+            Assert.AreEqual(true, isDeletedInvoked);
+            Assert.AreEqual(ManageCategoriesMenuState.DEFAULT, vm.MenuState);
+            Assert.IsNull(vm.SelectedCategory);
+            mockCategoriesManager.Verify(x => x.GetCategories(), Times.Never, "Should not reload categories after deleting one.");
+        }
+
+        [Test]
+        public void Can_Stay_In_Deleting_Category_When_Saving_Fails()
+        {
+            // Arrange
+            var mockCategoriesManager = new Mock<ICategoriesManager>();
+            mockCategoriesManager.Setup(x => x.DeleteCategory(It.IsAny<int>())).Returns(new OperationResult("Something went wrong!"));
+
+            var vm = new ManageCategoriesViewModel(mockCategoriesManager.Object)
+            {
+                SelectedCategory = new CostCategoryViewModel() { Id = 1 }
+            };
+            vm.ShowDeleteCommand.Execute(null);
+
+            var isDeletedInvoked = false;
+            vm.Deleted += () => isDeletedInvoked = true;
+
+            // Act
+            vm.ConfirmDeleteCommand.Execute(null);
+
+            // Assert
+            Assert.AreEqual(false, isDeletedInvoked);
+            Assert.AreEqual(ManageCategoriesMenuState.DELETE, vm.MenuState);
+            Assert.AreEqual(1, vm.SelectedCategory.Id);
+            mockCategoriesManager.Verify(x => x.GetCategories(), Times.Never, "Should not reload categories when deleting fails.");
+        }
     }
 }

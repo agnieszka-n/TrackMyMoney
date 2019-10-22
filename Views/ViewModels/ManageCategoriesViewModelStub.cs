@@ -15,12 +15,15 @@ namespace TrackMyMoney.Views.ViewModels
         public event Action WentBack;
         public event Action Renamed;
         public event Action Added;
+        public event Action Deleted;
 
         public RelayCommand GoBackCommand => null;
         public RelayCommand ShowRenameCommand => null;
         public RelayCommand SaveRenameCommand => null;
         public RelayCommand ShowAddCommand => null;
         public RelayCommand SaveAddCommand => null;
+        public RelayCommand ShowDeleteCommand => null;
+        public RelayCommand ConfirmDeleteCommand => null;
         public RelayCommand CancelActionCommand => null;
 
         public ICostCategoryViewModel SelectedCategory { get; set; }
@@ -37,7 +40,7 @@ namespace TrackMyMoney.Views.ViewModels
                 new CostCategoryViewModelStub() { Name = "Another category"}
             };
 
-            MenuState = ManageCategoriesMenuState.DEFAULT;
+            MenuState = ManageCategoriesMenuState.DELETE;
             Categories = new ObservableCollection<ICostCategoryViewModel>(categories);
             SelectedCategory = Categories.First();
             RenamedCategoryNewName = "Renamed category";

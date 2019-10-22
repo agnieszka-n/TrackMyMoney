@@ -13,6 +13,7 @@ namespace TrackMyMoney.ViewModels.Contracts
         event Action WentBack;
         event Action Renamed;
         event Action Added;
+        event Action Deleted;
 
         RelayCommand GoBackCommand { get; }
         RelayCommand CancelActionCommand { get; }
@@ -20,6 +21,8 @@ namespace TrackMyMoney.ViewModels.Contracts
         RelayCommand SaveRenameCommand { get; }
         RelayCommand ShowAddCommand { get; }
         RelayCommand SaveAddCommand { get; }
+        RelayCommand ShowDeleteCommand { get; }
+        RelayCommand ConfirmDeleteCommand { get; }
 
         ICostCategoryViewModel SelectedCategory { get; set; }
         ObservableCollection<ICostCategoryViewModel> Categories { get; set; }

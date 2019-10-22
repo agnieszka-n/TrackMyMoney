@@ -111,6 +111,37 @@ namespace TrackMyMoney.Services
             return nameAlreadyInUseCheckResult.IsSuccess ? ExecuteFunction(FunctionBody, ErrorHandler) : nameAlreadyInUseCheckResult;
         }
 
+        public OperationResult DeleteCategory(int id)
+        {
+            OperationResult FunctionBody(DbConnection connection)
+            {
+                string query = "delete from categories where id = @id";
+
+                Dictionary<string, object> parameters = new Dictionary<string, object>()
+                {
+                    { "@id", id }
+                };
+
+                int affectedRowsCount = dbProxy.ExecuteNonQuery(connection, query, parameters);
+
+                if (affectedRowsCount == 1)
+                {
+                    return new OperationResult();
+                }
+
+                throw new Exception("Deleting a category failed.");
+            }
+
+            OperationResult ErrorHandler(Exception ex)
+            {
+                Logger.LogError(this, ex, $"An error occurred while deleting a category with id = [{id}].");
+                return new OperationResult<List<CostCategory>>("An error occurred while deleting a category.");
+            }
+
+            var categoryHasCostsCheckResult = CheckCategoryHasCosts(id, ErrorHandler);
+            return categoryHasCostsCheckResult.IsSuccess ? ExecuteFunction(FunctionBody, ErrorHandler) : categoryHasCostsCheckResult;
+        }
+
         private OperationResult CheckCategoryNameInUse(string name, Func<Exception, OperationResult> errorHandler)
         {
             OperationResult CheckNameAlreadyInUseFunctionBody(DbConnection connection)
@@ -132,6 +163,29 @@ namespace TrackMyMoney.Services
             }
 
             return ExecuteFunction(CheckNameAlreadyInUseFunctionBody, errorHandler);
+        }
+
+        private OperationResult CheckCategoryHasCosts(int categoryId, Func<Exception, OperationResult> errorHandler)
+        {
+            OperationResult CheckCategoryHasCosts(DbConnection connection)
+            {
+                string alreadyExistsQuery = "select count(*) from costs where categoryId = @categoryId";
+                Dictionary<string, object> parameters = new Dictionary<string, object>()
+                {
+                    { "@categoryId", categoryId }
+                };
+
+                int rowsCount = Convert.ToInt32(dbProxy.ExecuteScalar(connection, alreadyExistsQuery, parameters));
+
+                if (rowsCount == 0)
+                {
+                    return new OperationResult();
+                }
+
+                return new OperationResult("The category has some costs.");
+            }
+
+            return ExecuteFunction(CheckCategoryHasCosts, errorHandler);
         }
     }
 }
