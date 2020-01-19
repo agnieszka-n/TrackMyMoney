@@ -13,28 +13,18 @@ namespace TrackMyMoney.Services.Database
     public class DatabaseProxy : IDatabaseProxy
     {
         private readonly string connectionString;
+        private readonly bool disposesConnection;
 
         public DatabaseProxy(string connectionString)
         {
             this.connectionString = connectionString;
+            disposesConnection = true;
         }
 
-        public SQLiteConnection GetConnection()
+        public IDatabaseConnectionWrapper CreateConnectionWrapper()
         {
-            return new SQLiteConnection(connectionString);
-        }
-
-        public void OpenConnection(DbConnection connection)
-        {
-            connection.Open();
-        }
-
-        public void CloseConnection(DbConnection connection)
-        {
-            if (connection.State != ConnectionState.Closed)
-            {
-                connection.Close();
-            }
+            var connection = new SQLiteConnection(connectionString);
+            return new DatabaseConnectionWrapper(connection, disposesConnection);
         }
 
         public IQueryResultReader ExecuteReader(string query, DbConnection connection)

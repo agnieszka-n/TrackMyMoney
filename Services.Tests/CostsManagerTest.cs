@@ -9,6 +9,7 @@ using TrackMyMoney.Models;
 using Moq;
 using NUnit.Framework;
 using TrackMyMoney.Services.Contracts.Database;
+using TrackMyMoney.Services.Tests.Helpers;
 
 namespace TrackMyMoney.Services.Tests
 {
@@ -27,6 +28,7 @@ namespace TrackMyMoney.Services.Tests
             };
             var reader = new QueryResultReaderStub(5, values);
             mockDbProxy.Setup(x => x.ExecuteReader(It.IsAny<string>(), It.IsAny<DbConnection>())).Returns(reader);
+            MockDatabaseConnectionWrapperSetup.SetupConnectionWrapperToExecuteFunction<List<Cost>>(mockDbProxy);
 
             var manager = new CostsManager(mockDbProxy.Object);
 
@@ -52,6 +54,7 @@ namespace TrackMyMoney.Services.Tests
             // Arrange
             var mockDbProxy = new Mock<IDatabaseProxy>();
             mockDbProxy.Setup(x => x.ExecuteNonQuery(It.IsAny<DbConnection>(), It.IsAny<string>(), It.IsAny<Dictionary<string, object>>())).Returns(1);
+            MockDatabaseConnectionWrapperSetup.SetupConnectionWrapperToExecuteAction(mockDbProxy);
 
             var manager = new CostsManager(mockDbProxy.Object);
 

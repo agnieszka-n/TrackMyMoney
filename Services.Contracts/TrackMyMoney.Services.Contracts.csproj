@@ -47,6 +47,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Database\IDatabaseConnectionWrapper.cs" />
     <Compile Include="ICategoriesManager.cs" />
     <Compile Include="Database\IDatabaseProxy.cs" />
     <Compile Include="Database\IQueryResultReader.cs" />

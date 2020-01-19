@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TrackMyMoney.Services.Contracts.Database;
+﻿using TrackMyMoney.Services.Contracts.Database;
 
-namespace TrackMyMoney.Services.Tests
+namespace TrackMyMoney.Services.Tests.Helpers
 {
     internal class QueryResultReaderStub : IQueryResultReader
     {

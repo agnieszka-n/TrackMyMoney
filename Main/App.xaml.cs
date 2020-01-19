@@ -42,7 +42,11 @@ namespace TrackMyMoney.Main
                 try
                 {
                     SQLiteConnection.CreateFile(FILE_NAME);
-                    DatabaseInitializer.Initialize(kernel.Get<IDatabaseProxy>().GetConnection());
+
+                    using (var connection = kernel.Get<IDatabaseProxy>().CreateConnectionWrapper())
+                    {
+                        DatabaseInitializer.Initialize(connection);
+                    }
                 }
                 catch (Exception ex)
                 {

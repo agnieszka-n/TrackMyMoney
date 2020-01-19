@@ -30,20 +30,15 @@ namespace TrackMyMoney.Services
 
         private T ExecuteFunction<T>(Func<DbConnection, T> function, Func<Exception, T> errorHandler)
         {
-            using (DbConnection connection = dbProxy.GetConnection())
+            using (IDatabaseConnectionWrapper connectionWrapper = dbProxy.CreateConnectionWrapper())
             {
                 try
                 {
-                    dbProxy.OpenConnection(connection);
-                    return function(connection);
+                    return connectionWrapper.Execute(function);
                 }
                 catch (Exception ex)
                 {
                     return errorHandler(ex);
-                }
-                finally
-                {
-                    dbProxy.CloseConnection(connection);
                 }
             }
         }

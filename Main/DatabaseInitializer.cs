@@ -1,37 +1,40 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Common;
 using System.Data.SQLite;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TrackMyMoney.Services.Contracts.Database;
 
 namespace TrackMyMoney.Main
 {
-    static class DatabaseInitializer
+    public static class DatabaseInitializer
     {
-        public static void Initialize(SQLiteConnection connection)
+        public static void Initialize(IDatabaseConnectionWrapper connectionWrapper)
         {
             string[] queries = GetQueries();
 
-            connection.Open();
-            ExecuteNonQueryCommand(connection, " BEGIN TRANSACTION ");
-
-            foreach (var query in queries)
+            connectionWrapper.Execute(connection =>
             {
-                try
-                {
-                    ExecuteNonQueryCommand(connection, query);
-                }
-                catch (Exception)
-                {
-                    ExecuteNonQueryCommand(connection, " ROLLBACK TRANSACTION ");
-                    throw;
-                }
-            }
+                ExecuteNonQueryCommand(connection, " BEGIN TRANSACTION ");
 
-            ExecuteNonQueryCommand(connection, " COMMIT TRANSACTION ");
-            connection.Close();
+                foreach (var query in queries)
+                {
+                    try
+                    {
+                        ExecuteNonQueryCommand(connection, query);
+                    }
+                    catch (Exception)
+                    {
+                        ExecuteNonQueryCommand(connection, " ROLLBACK TRANSACTION ");
+                        throw;
+                    }
+                }
+
+                ExecuteNonQueryCommand(connection, " COMMIT TRANSACTION ");
+            });
         }
 
         private static string[] GetQueries()

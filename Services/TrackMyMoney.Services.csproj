@@ -70,6 +70,7 @@
   <ItemGroup>
     <Compile Include="CategoriesManager.cs" />
     <Compile Include="CostsManager.cs" />
+    <Compile Include="Database\DatabaseConnectionWrapper.cs" />
     <Compile Include="Database\DatabaseProxy.cs" />
     <Compile Include="Database\QueryResultReader.cs" />
     <Compile Include="ManagerBase.cs" />

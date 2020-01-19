@@ -9,6 +9,7 @@ using TrackMyMoney.Models;
 using Moq;
 using NUnit.Framework;
 using TrackMyMoney.Services.Contracts.Database;
+using TrackMyMoney.Services.Tests.Helpers;
 
 namespace TrackMyMoney.Services.Tests
 {
@@ -27,6 +28,7 @@ namespace TrackMyMoney.Services.Tests
             };
             var reader = new QueryResultReaderStub(2, values);
             mockDbProxy.Setup(x => x.ExecuteReader(It.IsAny<string>(), It.IsAny<DbConnection>())).Returns(reader);
+            MockDatabaseConnectionWrapperSetup.SetupConnectionWrapperToExecuteFunction<List<CostCategory>>(mockDbProxy);
 
             var manager = new CategoriesManager(mockDbProxy.Object);
 
