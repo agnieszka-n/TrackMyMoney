@@ -9,16 +9,16 @@ using System.Threading.Tasks;
 
 namespace TrackMyMoney.Main
 {
-    internal static class LoggerInitalizer
+    public static class LoggerInitalizer
     {
-        public static void Initialize()
+        public static void InitializeFileLogger(string fileName)
         {
             var config = new LoggingConfiguration();
 
             var fileTarget = new FileTarget("fileTarget")
             {
                 Encoding = Encoding.UTF8,
-                FileName = "TrackMyMoney.log",
+                FileName = fileName,
                 Layout = "${longdate} ${level:uppercase=true}\t${logger}\n${message}"
             };
 

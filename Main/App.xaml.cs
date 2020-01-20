@@ -25,6 +25,7 @@ namespace TrackMyMoney.Main
     public partial class App : Application
     {
         private const string FILE_NAME = "db.sqlite";
+        private const string LOGGER_FILE_NAME = "TrackMyMoney.log";
         private readonly string CONNECTION_STRING = $"Data Source={FILE_NAME};Version=3;";
 
         protected override void OnStartup(StartupEventArgs e)
@@ -35,7 +36,7 @@ namespace TrackMyMoney.Main
             var diConfiguration = new NinjectConfiguration();
             diConfiguration.ConfigureKernel(kernel, CONNECTION_STRING);
 
-            LoggerInitalizer.Initialize();
+            LoggerInitalizer.InitializeFileLogger(LOGGER_FILE_NAME);
 
             if (!File.Exists(FILE_NAME))
             {

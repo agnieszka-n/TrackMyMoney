@@ -15,7 +15,7 @@ using TrackMyMoney.ViewModels.Contracts;
 
 namespace TrackMyMoney.Main
 {
-    internal class NinjectConfiguration
+    public class NinjectConfiguration
     {
         public void ConfigureKernel(IKernel kernel, string connectionString)
         {
