@@ -8,6 +8,7 @@ using NUnit.Framework;
 using TrackMyMoney.Common;
 using TrackMyMoney.Models;
 using TrackMyMoney.Services.Contracts;
+using TrackMyMoney.Services.Contracts.Messages;
 using TrackMyMoney.ViewModels.Contracts;
 
 namespace TrackMyMoney.ViewModels.Tests
@@ -137,11 +138,13 @@ namespace TrackMyMoney.ViewModels.Tests
 
         private AddCostFormViewModel GetViewModel(Mock<ICostsManager> mockCostsManager = null)
         {
+            var mockMessagesService = new Mock<IMessagesService>();
+
             if (mockCostsManager == null)
             {
-                return new AddCostFormViewModel(new Mock<ICostsManager>().Object);
+                return new AddCostFormViewModel(new Mock<ICostsManager>().Object, mockMessagesService.Object);
             }
-            return new AddCostFormViewModel(mockCostsManager.Object);
+            return new AddCostFormViewModel(mockCostsManager.Object, mockMessagesService.Object);
         }
 
         private static void FillNewCostValues(AddCostFormViewModel vm)

@@ -88,17 +88,22 @@
       <DependentUpon>AddCostFormControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Converters\EnumToVisibilityConverter.cs" />
+    <Compile Include="Converters\HasItemsToVisibleHiddenConverter.cs" />
     <Compile Include="Converters\IsNotNullConverter.cs" />
     <Compile Include="Converters\MultiStylesConverter.cs" />
     <Compile Include="Converters\IsCategorySelectionEditableConverter.cs" />
     <Compile Include="ManageCategoriesControl.xaml.cs">
       <DependentUpon>ManageCategoriesControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="MessagesControl.xaml.cs">
+      <DependentUpon>MessagesControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ViewModels\AddCostFormViewModelStub.cs" />
     <Compile Include="ViewModels\CostCategoryViewModelStub.cs" />
     <Compile Include="ViewModels\CostsListViewModelStub.cs" />
     <Compile Include="ViewModels\CostViewModelStub.cs" />
     <Compile Include="ViewModels\ManageCategoriesViewModelStub.cs" />
+    <Compile Include="ViewModels\MessagesServiceStub.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MainWindow.xaml.cs">
@@ -137,6 +142,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="ManageCategoriesControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MessagesControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

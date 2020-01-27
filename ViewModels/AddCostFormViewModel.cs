@@ -8,6 +8,7 @@ using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using TrackMyMoney.Common;
 using TrackMyMoney.Services.Contracts;
+using TrackMyMoney.Services.Contracts.Messages;
 using TrackMyMoney.ViewModels.Contracts;
 
 namespace TrackMyMoney.ViewModels
@@ -15,6 +16,7 @@ namespace TrackMyMoney.ViewModels
     public class AddCostFormViewModel : ViewModelBase, IAddCostFormViewModel
     {
         private readonly ICostsManager costsManager;
+        private readonly IMessagesService messagesService;
 
         private ICostViewModel newCost;
         public ICostViewModel NewCost
@@ -36,9 +38,10 @@ namespace TrackMyMoney.ViewModels
         public RelayCommand CancelCommand { get; }
         public RelayCommand SaveCommand { get; }
 
-        public AddCostFormViewModel(ICostsManager costsManager)
+        public AddCostFormViewModel(ICostsManager costsManager, IMessagesService messagesService)
         {
             this.costsManager = costsManager;
+            this.messagesService = messagesService;
 
             CancelCommand = new RelayCommand(CancelAddCost);
             SaveCommand = new RelayCommand(SaveCost);
@@ -68,7 +71,10 @@ namespace TrackMyMoney.ViewModels
                 ClearNewCost();
                 Saved?.Invoke();
             }
-            // TODO implement an error message 
+            else
+            {
+                messagesService.AddMessage(result.ErrorMessage);
+            }
         }
 
         private void ClearNewCost()

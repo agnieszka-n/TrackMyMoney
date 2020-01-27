@@ -9,6 +9,7 @@ using TrackMyMoney.Common;
 using TrackMyMoney.Models;
 using Moq;
 using TrackMyMoney.Services.Contracts;
+using TrackMyMoney.Services.Contracts.Messages;
 using TrackMyMoney.ViewModels.Contracts;
 
 namespace TrackMyMoney.ViewModels.Tests
@@ -311,8 +312,9 @@ namespace TrackMyMoney.ViewModels.Tests
 
             mockAddCostFormVm = mockAddCostFormVm ?? new Mock<IAddCostFormViewModel>();
             mockManageCategoriesVm = mockManageCategoriesVm ?? new Mock<IManageCategoriesViewModel>();
+            var mockMessagesService = new Mock<IMessagesService>();
 
-            return new CostsListViewModel(mockCategoriesManager.Object, mockCostsManager.Object, mockAddCostFormVm.Object, mockManageCategoriesVm.Object);
+            return new CostsListViewModel(mockCategoriesManager.Object, mockCostsManager.Object, mockMessagesService.Object, mockAddCostFormVm.Object, mockManageCategoriesVm.Object);
         }
     }
 }

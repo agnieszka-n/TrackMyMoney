@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TrackMyMoney.Common;
 using TrackMyMoney.Services.Contracts;
+using TrackMyMoney.Services.Contracts.Messages;
 using TrackMyMoney.ViewModels.Contracts;
 
 namespace TrackMyMoney.ViewModels.Tests
@@ -20,9 +21,10 @@ namespace TrackMyMoney.ViewModels.Tests
         {
             // Arrange
             var mockCategoriesManager = new Mock<ICategoriesManager>();
-            var vm = new ManageCategoriesViewModel(mockCategoriesManager.Object)
+            var vm = GetViewModel(mockCategoriesManager);
+            vm.SelectedCategory = new CostCategoryViewModel()
             {
-                SelectedCategory = new CostCategoryViewModel() { Name = "SelectedCategory" }
+                Name = "SelectedCategory"
             };
 
             // Act
@@ -33,14 +35,12 @@ namespace TrackMyMoney.ViewModels.Tests
         }
 
         [Test]
-        public void Can_Cancel_Any_Action()
+        public void Can_Cancel_Renaming()
         {
             // Arrange
             var mockCategoriesManager = new Mock<ICategoriesManager>();
-            var vm = new ManageCategoriesViewModel(mockCategoriesManager.Object)
-            {
-                SelectedCategory = new CostCategoryViewModel()
-            };
+            var vm = GetViewModel(mockCategoriesManager);
+            vm.SelectedCategory = new CostCategoryViewModel();
             vm.ShowRenameCommand.Execute(null);
 
             // Act
@@ -60,7 +60,7 @@ namespace TrackMyMoney.ViewModels.Tests
             var mockCategory = new Mock<ICostCategoryViewModel>();
             mockCategory.Setup(x => x.Id).Returns(1);
 
-            var vm = new ManageCategoriesViewModel(mockCategoriesManager.Object);
+            var vm = GetViewModel(mockCategoriesManager);
             vm.ShowRenameCommand.Execute(null);
             vm.SelectedCategory = mockCategory.Object;
             vm.RenamedCategoryNewName = "New name";
@@ -88,7 +88,7 @@ namespace TrackMyMoney.ViewModels.Tests
             var mockCategory = new Mock<ICostCategoryViewModel>();
             mockCategory.Setup(x => x.Id).Returns(1);
 
-            var vm = new ManageCategoriesViewModel(mockCategoriesManager.Object);
+            var vm = GetViewModel(mockCategoriesManager);
             vm.ShowRenameCommand.Execute(null);
             vm.SelectedCategory = mockCategory.Object;
             vm.RenamedCategoryNewName = "New name";
@@ -119,7 +119,7 @@ namespace TrackMyMoney.ViewModels.Tests
             var mockCategory = new Mock<ICostCategoryViewModel>();
             mockCategory.Setup(x => x.Id).Returns(1);
 
-            var vm = new ManageCategoriesViewModel(mockCategoriesManager.Object);
+            var vm = GetViewModel(mockCategoriesManager);
             vm.ShowRenameCommand.Execute(null);
             vm.SelectedCategory = mockCategory.Object;
             vm.RenamedCategoryNewName = categoryName as string;
@@ -144,7 +144,7 @@ namespace TrackMyMoney.ViewModels.Tests
             var mockCategoriesManager = new Mock<ICategoriesManager>();
             mockCategoriesManager.Setup(x => x.AddCategory(It.IsAny<string>())).Returns(new OperationResult());
 
-            var vm = new ManageCategoriesViewModel(mockCategoriesManager.Object);
+            var vm = GetViewModel(mockCategoriesManager);
             vm.ShowAddCommand.Execute(null);
             vm.NewCategoryName = "New category";
 
@@ -168,7 +168,7 @@ namespace TrackMyMoney.ViewModels.Tests
             var mockCategoriesManager = new Mock<ICategoriesManager>();
             mockCategoriesManager.Setup(x => x.AddCategory(It.IsAny<string>())).Returns(new OperationResult("Something went wrong!"));
 
-            var vm = new ManageCategoriesViewModel(mockCategoriesManager.Object);
+            var vm = GetViewModel(mockCategoriesManager);
             vm.ShowAddCommand.Execute(null);
             vm.NewCategoryName = "New category";
 
@@ -195,7 +195,7 @@ namespace TrackMyMoney.ViewModels.Tests
             var mockCategoriesManager = new Mock<ICategoriesManager>();
             mockCategoriesManager.Setup(x => x.AddCategory(It.IsAny<string>())).Returns(new OperationResult());
 
-            var vm = new ManageCategoriesViewModel(mockCategoriesManager.Object);
+            var vm = GetViewModel(mockCategoriesManager);
             vm.ShowAddCommand.Execute(null);
             vm.NewCategoryName = categoryName as string;
 
@@ -219,9 +219,10 @@ namespace TrackMyMoney.ViewModels.Tests
             var mockCategoriesManager = new Mock<ICategoriesManager>();
             mockCategoriesManager.Setup(x => x.DeleteCategory(It.IsAny<int>())).Returns(new OperationResult());
 
-            var vm = new ManageCategoriesViewModel(mockCategoriesManager.Object)
+            var vm = GetViewModel(mockCategoriesManager);
+            vm.SelectedCategory = new CostCategoryViewModel()
             {
-                SelectedCategory = new CostCategoryViewModel() { Id = 1 }
+                Id = 1
             };
             vm.ShowDeleteCommand.Execute(null);
 
@@ -245,9 +246,10 @@ namespace TrackMyMoney.ViewModels.Tests
             var mockCategoriesManager = new Mock<ICategoriesManager>();
             mockCategoriesManager.Setup(x => x.DeleteCategory(It.IsAny<int>())).Returns(new OperationResult("Something went wrong!"));
 
-            var vm = new ManageCategoriesViewModel(mockCategoriesManager.Object)
+            var vm = GetViewModel(mockCategoriesManager);
+            vm.SelectedCategory = new CostCategoryViewModel()
             {
-                SelectedCategory = new CostCategoryViewModel() { Id = 1 }
+                Id = 1
             };
             vm.ShowDeleteCommand.Execute(null);
 
@@ -262,6 +264,12 @@ namespace TrackMyMoney.ViewModels.Tests
             Assert.AreEqual(ManageCategoriesMenuState.DELETE, vm.MenuState);
             Assert.AreEqual(1, vm.SelectedCategory.Id);
             mockCategoriesManager.Verify(x => x.GetCategories(), Times.Never, "Should not reload categories when deleting fails.");
+        }
+
+        private ManageCategoriesViewModel GetViewModel(Mock<ICategoriesManager> mockCategoriesManager)
+        {
+            var mockMessagesService = new Mock<IMessagesService>();
+            return new ManageCategoriesViewModel(mockCategoriesManager.Object, mockMessagesService.Object);
         }
     }
 }

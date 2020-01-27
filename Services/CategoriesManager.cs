@@ -42,7 +42,7 @@ namespace TrackMyMoney.Services
             OperationResult<List<CostCategory>> ErrorHandler(Exception ex)
             {
                 Logger.LogError(this, ex);
-                return new OperationResult<List<CostCategory>>("An error occurred while getting categories.");
+                return new OperationResult<List<CostCategory>>("An error occurred while loading categories.");
             }
 
             return ExecuteFunction(FunctionBody, ErrorHandler);

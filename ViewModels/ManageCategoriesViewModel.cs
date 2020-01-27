@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TrackMyMoney.Services.Contracts;
+using TrackMyMoney.Services.Contracts.Messages;
 using TrackMyMoney.ViewModels.Contracts;
 
 namespace TrackMyMoney.ViewModels
@@ -28,6 +29,7 @@ namespace TrackMyMoney.ViewModels
         public RelayCommand ConfirmDeleteCommand { get; }
 
         private readonly ICategoriesManager categoriesManager;
+        private readonly IMessagesService messagesService;
 
         private ICostCategoryViewModel selectedCategory;
         public ICostCategoryViewModel SelectedCategory
@@ -79,9 +81,11 @@ namespace TrackMyMoney.ViewModels
             set { Set(() => NewCategoryName, ref newCategoryName, value); }
         }
 
-        public ManageCategoriesViewModel(ICategoriesManager categoriesManager)
+        public ManageCategoriesViewModel(ICategoriesManager categoriesManager, IMessagesService messagesService)
         {
             this.categoriesManager = categoriesManager;
+            this.messagesService = messagesService;
+
             GoBackCommand = new RelayCommand(GoBack);
             ShowRenameCommand = new RelayCommand(ShowRename);
             SaveRenameCommand = new RelayCommand(SaveRename);
@@ -90,6 +94,7 @@ namespace TrackMyMoney.ViewModels
             ShowDeleteCommand = new RelayCommand(ShowDelete);
             ConfirmDeleteCommand = new RelayCommand(ConfirmDelete);
             CancelActionCommand = new RelayCommand(SetDefaultMenuState);
+
             MenuState = ManageCategoriesMenuState.DEFAULT;
         }
 
@@ -113,8 +118,10 @@ namespace TrackMyMoney.ViewModels
                 SetDefaultMenuState();
                 Added?.Invoke();
             }
-
-            // TODO implement an error message
+            else
+            {
+                messagesService.AddMessage(result.ErrorMessage);
+            }
         }
 
         private void SetDefaultMenuState()
@@ -142,8 +149,10 @@ namespace TrackMyMoney.ViewModels
                 SetDefaultMenuState();
                 Renamed?.Invoke();
             }
-
-            // TODO implement an error message
+            else
+            {
+                messagesService.AddMessage(result.ErrorMessage);
+            }
         }
 
         private void ShowDelete()
@@ -166,8 +175,10 @@ namespace TrackMyMoney.ViewModels
                 SetDefaultMenuState();
                 Deleted?.Invoke();
             }
-
-            // TODO implement an error message
+            else
+            {
+                messagesService.AddMessage(result.ErrorMessage);
+            }
         }
 
         private void GoBack()

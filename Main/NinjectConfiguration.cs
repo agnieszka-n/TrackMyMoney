@@ -9,6 +9,7 @@ using Ninject.Parameters;
 using TrackMyMoney.Services;
 using TrackMyMoney.Services.Contracts;
 using TrackMyMoney.Services.Contracts.Database;
+using TrackMyMoney.Services.Contracts.Messages;
 using TrackMyMoney.Services.Database;
 using TrackMyMoney.ViewModels;
 using TrackMyMoney.ViewModels.Contracts;
@@ -24,6 +25,8 @@ namespace TrackMyMoney.Main
             kernel.Bind<IManageCategoriesViewModel>().To<ManageCategoriesViewModel>();
             kernel.Bind<ICategoriesManager>().To<CategoriesManager>();
             kernel.Bind<ICostsManager>().To<CostsManager>();
+            kernel.Bind<IMessagesService>().To<MessagesService>().InSingletonScope();
+
             kernel.Bind<IDatabaseProxy>().ToMethod(context => new DatabaseProxy(connectionString));
         }
     }

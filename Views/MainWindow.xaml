@@ -43,6 +43,8 @@
             <local:ManageCategoriesControl DataContext="{Binding DataContext.ManageCategoriesViewModel, ElementName=Window}" Visibility="{Binding DataContext.MenuState, ElementName=Window, Converter={StaticResource EnumToVisibilityConverter}, ConverterParameter={x:Static contracts:CostsListMenuState.MANAGE_CATEGORIES}}"></local:ManageCategoriesControl>
         </StackPanel>
 
+        <local:MessagesControl Height="45" DockPanel.Dock="Bottom" DataContext="{Binding MessagesService}"></local:MessagesControl>
+
         <DataGrid ItemsSource="{Binding Costs}" AutoGenerateColumns="False" RowHeaderWidth="0" Padding="5,0" BorderThickness="0,1,0,0">
             <DataGrid.Resources>
                 <Style TargetType="DataGridColumnHeader">

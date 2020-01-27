@@ -5,20 +5,31 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using GalaSoft.MvvmLight;
 using TrackMyMoney.Common;
 using TrackMyMoney.Models;
+using TrackMyMoney.Services.Contracts.Messages;
 using TrackMyMoney.ViewModels;
 using TrackMyMoney.ViewModels.Contracts;
 
 namespace TrackMyMoney.Views.ViewModels
 {
-    internal class CostsListViewModelStub : ICostsListViewModel
+    internal class CostsListViewModelStub : ViewModelBase, ICostsListViewModel
     {
+        private IMessagesService messagesService;
+        public IMessagesService MessagesService
+        {
+            get => messagesService;
+            set { Set(() => MessagesService, ref messagesService, value); }
+        }
+
         public IAddCostFormViewModel AddCostFormViewModel { get; }
         public IManageCategoriesViewModel ManageCategoriesViewModel { get; }
+
         public ObservableCollection<ICostViewModel> Costs { get; set; }
         public CostsListMenuState MenuState { get; }
         public ObservableCollection<ICostCategoryViewModel> Categories { get; }
+
         public RelayCommand ShowAddCostCommand => null;
         public RelayCommand ShowManageCategoriesCommand => null;
 
@@ -34,13 +45,14 @@ namespace TrackMyMoney.Views.ViewModels
                 new CostCategoryViewModelStub() { Name = "Another category"}
             };
 
-
             Costs = new ObservableCollection<ICostViewModel>
             {
                 new CostViewModelStub(new DateTime(2000, 1, 1), Categories[0], "Pasta", 10),
                 new CostViewModelStub(new DateTime(2000, 1, 1), Categories[1], "Pizza", 15),
                 new CostViewModelStub(new DateTime(2000, 1, 22), Categories[1], "Burger", 20),
             };
+
+            MessagesService = new MessagesServiceStub();
         }
     }
 }

@@ -5,7 +5,6 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:TrackMyMoney.Views"
              xmlns:vm="clr-namespace:TrackMyMoney.Views.ViewModels"
-             xmlns:conv="clr-namespace:TrackMyMoney.Views.Converters"
              xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
              mc:Ignorable="d" 
              d:DesignHeight="25" d:DesignWidth="950"

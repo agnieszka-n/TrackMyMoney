@@ -52,6 +52,8 @@
     <Compile Include="Database\IDatabaseProxy.cs" />
     <Compile Include="Database\IQueryResultReader.cs" />
     <Compile Include="ICostsManager.cs" />
+    <Compile Include="Messages\IMessagesService.cs" />
+    <Compile Include="Messages\Message.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -9,6 +9,7 @@ using TrackMyMoney.Common;
 using GalaSoft.MvvmLight.Command;
 using TrackMyMoney.Models;
 using TrackMyMoney.Services.Contracts;
+using TrackMyMoney.Services.Contracts.Messages;
 using TrackMyMoney.ViewModels.Contracts;
 
 namespace TrackMyMoney.ViewModels
@@ -37,6 +38,20 @@ namespace TrackMyMoney.ViewModels
             set { Set(() => Costs, ref costs, value); }
         }
 
+        private CostsListMenuState menuState;
+        public CostsListMenuState MenuState
+        {
+            get => menuState;
+            private set { Set(() => MenuState, ref menuState, value); }
+        }
+
+        private IMessagesService messagesService;
+        public IMessagesService MessagesService
+        {
+            get => messagesService;
+            set { Set(() => MessagesService, ref messagesService, value); }
+        }
+
         private IAddCostFormViewModel addCostFormViewModel;
         public IAddCostFormViewModel AddCostFormViewModel
         {
@@ -51,20 +66,14 @@ namespace TrackMyMoney.ViewModels
             set { Set(() => ManageCategoriesViewModel, ref manageCategoriesViewModel, value); }
         }
 
-        private CostsListMenuState menuState;
-        public CostsListMenuState MenuState
-        {
-            get => menuState;
-            private set { Set(() => MenuState, ref menuState, value); }
-        }
-
         public RelayCommand ShowAddCostCommand { get; }
         public RelayCommand ShowManageCategoriesCommand { get; }
 
-        public CostsListViewModel(ICategoriesManager categoriesManager, ICostsManager costsManager, IAddCostFormViewModel addCostFormViewModel, IManageCategoriesViewModel manageCategoriesViewModel)
+        public CostsListViewModel(ICategoriesManager categoriesManager, ICostsManager costsManager, IMessagesService messagesService, IAddCostFormViewModel addCostFormViewModel, IManageCategoriesViewModel manageCategoriesViewModel)
         {
             this.categoriesManager = categoriesManager;
             this.costsManager = costsManager;
+            MessagesService = messagesService;
 
             AddCostFormViewModel = addCostFormViewModel;
             AddCostFormViewModel.Saved += LoadCosts;
@@ -114,7 +123,10 @@ namespace TrackMyMoney.ViewModels
                 var categoryViewModels = categoriesResult.Data.Select(x => new CostCategoryViewModel(x));
                 Categories = new ObservableCollection<ICostCategoryViewModel>(categoryViewModels);
             }
-            // TODO implement an error message 
+            else
+            {
+                messagesService.AddMessage(categoriesResult.ErrorMessage);
+            }
         }
 
         private void LoadCosts()
@@ -131,7 +143,10 @@ namespace TrackMyMoney.ViewModels
                     new CostViewModel(x, Categories.Single(category => category.Id == x.CategoryId)));
                 Costs = new ObservableCollection<ICostViewModel>(costsViewModels);
             }
-            // TODO implement an error message 
+            else
+            {
+                messagesService.AddMessage(costsResult.ErrorMessage);
+            }
         }
 
         private void SetCategoryForCosts()

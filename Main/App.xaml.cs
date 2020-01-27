@@ -16,6 +16,7 @@ using TrackMyMoney.ViewModels.Contracts;
 using TrackMyMoney.Views;
 using TrackMyMoney.Services.Contracts.Database;
 using TrackMyMoney.Common;
+using TrackMyMoney.Services.Contracts.Messages;
 
 namespace TrackMyMoney.Main
 {
@@ -52,8 +53,7 @@ namespace TrackMyMoney.Main
                 catch (Exception ex)
                 {
                     Logger.LogError(this, ex);
-                    // TODO implement an error message 
-                    Shutdown();
+                    kernel.Get<IMessagesService>().AddMessage("An error occurred while creating a database.");
                 }
             }
 

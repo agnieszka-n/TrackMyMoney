@@ -45,7 +45,7 @@ namespace TrackMyMoney.Services
             OperationResult<List<Cost>> ErrorHandler(Exception ex)
             {
                 Logger.LogError(this, ex);
-                return new OperationResult<List<Cost>>("An error occurred while getting costs.");
+                return new OperationResult<List<Cost>>("An error occurred while loading costs.");
             }
 
             return ExecuteFunction(FunctionBody, ErrorHandler);
