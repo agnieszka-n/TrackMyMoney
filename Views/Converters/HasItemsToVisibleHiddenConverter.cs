@@ -14,12 +14,12 @@ namespace TrackMyMoney.Views.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (!(value is IList collection))
+            if (!(value is int collectionCount))
             {
                 return Visibility.Hidden;
             }
 
-            return collection.Count > 0 ? Visibility.Visible : Visibility.Hidden;
+            return collectionCount > 0 ? Visibility.Visible : Visibility.Hidden;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

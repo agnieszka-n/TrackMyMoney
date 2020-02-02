@@ -12,7 +12,7 @@
     <UserControl.Resources>
         <conv:HasItemsToVisibleHiddenConverter x:Key="HasItemsToVisibleHiddenConverter"></conv:HasItemsToVisibleHiddenConverter>
     </UserControl.Resources>
-    <Grid Visibility="{Binding Messages, Converter={StaticResource HasItemsToVisibleHiddenConverter}}" Background="DarkRed">
+    <Grid Visibility="{Binding Messages.Count, Converter={StaticResource HasItemsToVisibleHiddenConverter}}" Background="DarkRed">
         <ScrollViewer Padding="15,5" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Auto">
             <TextBlock MaxWidth="{Binding ViewportWidth, RelativeSource={RelativeSource AncestorType=ScrollViewer}}" Text="{Binding Messages[0].Text}" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" TextWrapping="Wrap"></TextBlock>
         </ScrollViewer>
