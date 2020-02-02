@@ -1,18 +1,17 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
-using TrackMyMoney.Services.Contracts.Messages;
+using GalaSoft.MvvmLight;
+using TrackMyMoney.ViewModels.Contracts;
 
-namespace TrackMyMoney.Services
+namespace TrackMyMoney.ViewModels
 {
-    public class MessagesService : IMessagesService
+    public class MessagesViewModel : ViewModelBase, IMessagesViewModel
     {
         public ObservableCollection<Message> Messages { get; }
 
-        public MessagesService()
+        public MessagesViewModel()
         {
             Messages = new ObservableCollection<Message>();
         }

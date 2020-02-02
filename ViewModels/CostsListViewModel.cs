@@ -9,7 +9,6 @@ using TrackMyMoney.Common;
 using GalaSoft.MvvmLight.Command;
 using TrackMyMoney.Models;
 using TrackMyMoney.Services.Contracts;
-using TrackMyMoney.Services.Contracts.Messages;
 using TrackMyMoney.ViewModels.Contracts;
 
 namespace TrackMyMoney.ViewModels
@@ -45,11 +44,11 @@ namespace TrackMyMoney.ViewModels
             private set { Set(() => MenuState, ref menuState, value); }
         }
 
-        private IMessagesService messagesService;
-        public IMessagesService MessagesService
+        private IMessagesViewModel messagesViewModel;
+        public IMessagesViewModel MessagesViewModel
         {
-            get => messagesService;
-            set { Set(() => MessagesService, ref messagesService, value); }
+            get => messagesViewModel;
+            set { Set(() => MessagesViewModel, ref messagesViewModel, value); }
         }
 
         private IAddCostFormViewModel addCostFormViewModel;
@@ -69,11 +68,11 @@ namespace TrackMyMoney.ViewModels
         public RelayCommand ShowAddCostCommand { get; }
         public RelayCommand ShowManageCategoriesCommand { get; }
 
-        public CostsListViewModel(ICategoriesManager categoriesManager, ICostsManager costsManager, IMessagesService messagesService, IAddCostFormViewModel addCostFormViewModel, IManageCategoriesViewModel manageCategoriesViewModel)
+        public CostsListViewModel(ICategoriesManager categoriesManager, ICostsManager costsManager, IMessagesViewModel messagesViewModel, IAddCostFormViewModel addCostFormViewModel, IManageCategoriesViewModel manageCategoriesViewModel)
         {
             this.categoriesManager = categoriesManager;
             this.costsManager = costsManager;
-            MessagesService = messagesService;
+            MessagesViewModel = messagesViewModel;
 
             AddCostFormViewModel = addCostFormViewModel;
             AddCostFormViewModel.Saved += LoadCosts;
@@ -125,7 +124,7 @@ namespace TrackMyMoney.ViewModels
             }
             else
             {
-                messagesService.AddMessage(categoriesResult.ErrorMessage);
+                messagesViewModel.AddMessage(categoriesResult.ErrorMessage);
             }
         }
 
@@ -145,7 +144,7 @@ namespace TrackMyMoney.ViewModels
             }
             else
             {
-                messagesService.AddMessage(costsResult.ErrorMessage);
+                messagesViewModel.AddMessage(costsResult.ErrorMessage);
             }
         }
 

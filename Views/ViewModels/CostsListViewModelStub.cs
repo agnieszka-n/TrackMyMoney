@@ -8,7 +8,6 @@ using System.Threading.Tasks;
 using GalaSoft.MvvmLight;
 using TrackMyMoney.Common;
 using TrackMyMoney.Models;
-using TrackMyMoney.Services.Contracts.Messages;
 using TrackMyMoney.ViewModels;
 using TrackMyMoney.ViewModels.Contracts;
 
@@ -16,11 +15,11 @@ namespace TrackMyMoney.Views.ViewModels
 {
     internal class CostsListViewModelStub : ViewModelBase, ICostsListViewModel
     {
-        private IMessagesService messagesService;
-        public IMessagesService MessagesService
+        private IMessagesViewModel messagesViewModel;
+        public IMessagesViewModel MessagesViewModel
         {
-            get => messagesService;
-            set { Set(() => MessagesService, ref messagesService, value); }
+            get => messagesViewModel;
+            set { Set(() => MessagesViewModel, ref messagesViewModel, value); }
         }
 
         public IAddCostFormViewModel AddCostFormViewModel { get; }
@@ -52,7 +51,7 @@ namespace TrackMyMoney.Views.ViewModels
                 new CostViewModelStub(new DateTime(2000, 1, 22), Categories[1], "Burger", 20),
             };
 
-            MessagesService = new MessagesServiceStub();
+            MessagesViewModel = new MessagesViewModelStub();
         }
     }
 }

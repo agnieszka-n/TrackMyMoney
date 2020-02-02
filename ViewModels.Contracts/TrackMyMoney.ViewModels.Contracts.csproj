@@ -62,7 +62,9 @@
     <Compile Include="ICostsListViewModel.cs" />
     <Compile Include="ICostViewModel.cs" />
     <Compile Include="IManageCategoriesViewModel.cs" />
+    <Compile Include="IMessagesViewModel.cs" />
     <Compile Include="ManageCategoriesMenuState.cs" />
+    <Compile Include="Message.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

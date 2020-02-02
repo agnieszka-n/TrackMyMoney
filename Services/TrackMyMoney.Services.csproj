@@ -74,7 +74,6 @@
     <Compile Include="Database\DatabaseProxy.cs" />
     <Compile Include="Database\QueryResultReader.cs" />
     <Compile Include="ManagerBase.cs" />
-    <Compile Include="MessagesService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

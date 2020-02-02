@@ -7,7 +7,6 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Data;
-using TrackMyMoney.Services.Contracts.Messages;
 
 namespace TrackMyMoney.Views.Converters
 {

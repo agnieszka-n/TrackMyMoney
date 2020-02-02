@@ -8,7 +8,6 @@ using System.Text;
 using System.Threading.Tasks;
 using TrackMyMoney.Common;
 using TrackMyMoney.Services.Contracts;
-using TrackMyMoney.Services.Contracts.Messages;
 using TrackMyMoney.ViewModels.Contracts;
 
 namespace TrackMyMoney.ViewModels.Tests
@@ -268,8 +267,8 @@ namespace TrackMyMoney.ViewModels.Tests
 
         private ManageCategoriesViewModel GetViewModel(Mock<ICategoriesManager> mockCategoriesManager)
         {
-            var mockMessagesService = new Mock<IMessagesService>();
-            return new ManageCategoriesViewModel(mockCategoriesManager.Object, mockMessagesService.Object);
+            var mockMessagesVm = new Mock<IMessagesViewModel>();
+            return new ManageCategoriesViewModel(mockCategoriesManager.Object, mockMessagesVm.Object);
         }
     }
 }

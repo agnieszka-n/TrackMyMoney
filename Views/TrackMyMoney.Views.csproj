@@ -103,7 +103,7 @@
     <Compile Include="ViewModels\CostsListViewModelStub.cs" />
     <Compile Include="ViewModels\CostViewModelStub.cs" />
     <Compile Include="ViewModels\ManageCategoriesViewModelStub.cs" />
-    <Compile Include="ViewModels\MessagesServiceStub.cs" />
+    <Compile Include="ViewModels\MessagesViewModelStub.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MainWindow.xaml.cs">

@@ -4,15 +4,15 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TrackMyMoney.Services.Contracts.Messages;
+using TrackMyMoney.ViewModels.Contracts;
 
 namespace TrackMyMoney.Views.ViewModels
 {
-    class MessagesServiceStub : IMessagesService
+    internal class MessagesViewModelStub : IMessagesViewModel
     {
         public ObservableCollection<Message> Messages { get; set; }
 
-        public MessagesServiceStub()
+        public MessagesViewModelStub()
         {
             var messages = new List<Message>()
             {

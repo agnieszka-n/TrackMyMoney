@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TrackMyMoney.Services.Contracts.Messages
+namespace TrackMyMoney.ViewModels.Contracts
 {
-    public interface IMessagesService
+    public interface IMessagesViewModel
     {
         ObservableCollection<Message> Messages { get; }
         void AddMessage(string message);

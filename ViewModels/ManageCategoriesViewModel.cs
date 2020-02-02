@@ -7,7 +7,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TrackMyMoney.Services.Contracts;
-using TrackMyMoney.Services.Contracts.Messages;
 using TrackMyMoney.ViewModels.Contracts;
 
 namespace TrackMyMoney.ViewModels
@@ -29,7 +28,7 @@ namespace TrackMyMoney.ViewModels
         public RelayCommand ConfirmDeleteCommand { get; }
 
         private readonly ICategoriesManager categoriesManager;
-        private readonly IMessagesService messagesService;
+        private readonly IMessagesViewModel messagesViewModel;
 
         private ICostCategoryViewModel selectedCategory;
         public ICostCategoryViewModel SelectedCategory
@@ -81,10 +80,10 @@ namespace TrackMyMoney.ViewModels
             set { Set(() => NewCategoryName, ref newCategoryName, value); }
         }
 
-        public ManageCategoriesViewModel(ICategoriesManager categoriesManager, IMessagesService messagesService)
+        public ManageCategoriesViewModel(ICategoriesManager categoriesManager, IMessagesViewModel messagesViewModel)
         {
             this.categoriesManager = categoriesManager;
-            this.messagesService = messagesService;
+            this.messagesViewModel = messagesViewModel;
 
             GoBackCommand = new RelayCommand(GoBack);
             ShowRenameCommand = new RelayCommand(ShowRename);
@@ -120,7 +119,7 @@ namespace TrackMyMoney.ViewModels
             }
             else
             {
-                messagesService.AddMessage(result.ErrorMessage);
+                messagesViewModel.AddMessage(result.ErrorMessage);
             }
         }
 
@@ -151,7 +150,7 @@ namespace TrackMyMoney.ViewModels
             }
             else
             {
-                messagesService.AddMessage(result.ErrorMessage);
+                messagesViewModel.AddMessage(result.ErrorMessage);
             }
         }
 
@@ -177,7 +176,7 @@ namespace TrackMyMoney.ViewModels
             }
             else
             {
-                messagesService.AddMessage(result.ErrorMessage);
+                messagesViewModel.AddMessage(result.ErrorMessage);
             }
         }
 

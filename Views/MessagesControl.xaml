@@ -8,7 +8,7 @@
              xmlns:vm="clr-namespace:TrackMyMoney.Views.ViewModels"
              mc:Ignorable="d" 
              d:DesignHeight="100" d:DesignWidth="400"
-             d:DataContext="{d:DesignInstance vm:MessagesServiceStub, IsDesignTimeCreatable=True}">
+             d:DataContext="{d:DesignInstance vm:MessagesViewModelStub, IsDesignTimeCreatable=True}">
     <UserControl.Resources>
         <conv:HasItemsToVisibleHiddenConverter x:Key="HasItemsToVisibleHiddenConverter"></conv:HasItemsToVisibleHiddenConverter>
     </UserControl.Resources>
