@@ -69,6 +69,7 @@ namespace TrackMyMoney.ViewModels
             {
                 ClearNewCost();
                 Saved?.Invoke();
+                messagesViewModel.AddMessage("A cost has been added.", MessageTypes.SUCCESS);
             }
             else
             {

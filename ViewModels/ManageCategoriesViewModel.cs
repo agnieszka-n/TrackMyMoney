@@ -116,6 +116,7 @@ namespace TrackMyMoney.ViewModels
                 NewCategoryName = null;
                 SetDefaultMenuState();
                 Added?.Invoke();
+                messagesViewModel.AddMessage("A category has been added.", MessageTypes.SUCCESS);
             }
             else
             {
@@ -147,6 +148,7 @@ namespace TrackMyMoney.ViewModels
                 RenamedCategoryNewName = null;
                 SetDefaultMenuState();
                 Renamed?.Invoke();
+                messagesViewModel.AddMessage("A category has been renamed.", MessageTypes.SUCCESS);
             }
             else
             {
@@ -173,6 +175,7 @@ namespace TrackMyMoney.ViewModels
                 SelectedCategory = null;
                 SetDefaultMenuState();
                 Deleted?.Invoke();
+                messagesViewModel.AddMessage("A category has been deleted.", MessageTypes.SUCCESS);
             }
             else
             {
