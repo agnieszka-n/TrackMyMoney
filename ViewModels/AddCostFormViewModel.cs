@@ -72,7 +72,7 @@ namespace TrackMyMoney.ViewModels
             }
             else
             {
-                messagesViewModel.AddMessage(result.ErrorMessage);
+                messagesViewModel.AddMessage(result.ErrorMessage, MessageTypes.ERROR);
             }
         }
 

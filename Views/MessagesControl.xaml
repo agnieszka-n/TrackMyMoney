@@ -11,8 +11,9 @@
              d:DataContext="{d:DesignInstance vm:MessagesViewModelStub, IsDesignTimeCreatable=True}">
     <UserControl.Resources>
         <conv:HasItemsToVisibleHiddenConverter x:Key="HasItemsToVisibleHiddenConverter"></conv:HasItemsToVisibleHiddenConverter>
+        <conv:MessageTypeToBrushConverter x:Key="MessageTypeToColorConverter"></conv:MessageTypeToBrushConverter>
     </UserControl.Resources>
-    <Grid Visibility="{Binding Messages.Count, Converter={StaticResource HasItemsToVisibleHiddenConverter}}" Background="DarkRed">
+    <Grid Visibility="{Binding Messages.Count, Converter={StaticResource HasItemsToVisibleHiddenConverter}}" Background="{Binding Messages[0].Type, Converter={StaticResource MessageTypeToColorConverter}}">
         <ScrollViewer Padding="15,5" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Auto">
             <TextBlock MaxWidth="{Binding ViewportWidth, RelativeSource={RelativeSource AncestorType=ScrollViewer}}" Text="{Binding Messages[0].Text}" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" TextWrapping="Wrap"></TextBlock>
         </ScrollViewer>

@@ -10,6 +10,6 @@ namespace TrackMyMoney.ViewModels.Contracts
     public interface IMessagesViewModel
     {
         ObservableCollection<Message> Messages { get; }
-        void AddMessage(string message);
+        void AddMessage(string message, MessageTypes type);
     }
 }

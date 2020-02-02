@@ -124,7 +124,7 @@ namespace TrackMyMoney.ViewModels
             }
             else
             {
-                messagesViewModel.AddMessage(categoriesResult.ErrorMessage);
+                messagesViewModel.AddMessage(categoriesResult.ErrorMessage, MessageTypes.ERROR);
             }
         }
 
@@ -144,7 +144,7 @@ namespace TrackMyMoney.ViewModels
             }
             else
             {
-                messagesViewModel.AddMessage(costsResult.ErrorMessage);
+                messagesViewModel.AddMessage(costsResult.ErrorMessage, MessageTypes.ERROR);
             }
         }
 

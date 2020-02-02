@@ -16,9 +16,9 @@ namespace TrackMyMoney.ViewModels
             Messages = new ObservableCollection<Message>();
         }
 
-        public void AddMessage(string message)
+        public void AddMessage(string message, MessageTypes type)
         {
-            Messages.Add(new Message(message));
+            Messages.Add(new Message(message, type));
         }
     }
 }

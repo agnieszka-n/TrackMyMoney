@@ -182,7 +182,7 @@ namespace TrackMyMoney.Services
                     return new OperationResult();
                 }
 
-                return new OperationResult("The category has some costs.");
+                return new OperationResult("The category can't be deleted because it has some costs.");
             }
 
             return ExecuteFunction(CheckCategoryHasCosts, errorHandler);

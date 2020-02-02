@@ -26,7 +26,7 @@
     </Window.Resources>
     <DockPanel>
 
-        <StackPanel DockPanel.Dock="Top" Margin="5,15">
+        <StackPanel DockPanel.Dock="Top" Margin="5,15,5,10">
             <StackPanel Orientation="Horizontal" Visibility="{Binding MenuState, Converter={StaticResource EnumToVisibilityConverter}, ConverterParameter={x:Static contracts:CostsListMenuState.DEFAULT}}">
                 <Button Content="Add a cost" Command="{Binding ShowAddCostCommand}">
                     <Button.Style>
@@ -45,7 +45,7 @@
 
         <local:MessagesControl Height="45" DockPanel.Dock="Bottom" DataContext="{Binding MessagesViewModel}"></local:MessagesControl>
 
-        <DataGrid ItemsSource="{Binding Costs}" AutoGenerateColumns="False" RowHeaderWidth="0" Padding="5,0" BorderThickness="0,1,0,0">
+        <DataGrid ItemsSource="{Binding Costs}" AutoGenerateColumns="False" RowHeaderWidth="0" Padding="5,0" BorderThickness="0,1,0,0" Margin="5">
             <DataGrid.Resources>
                 <Style TargetType="DataGridColumnHeader">
                     <Setter Property="Padding" Value="5"/>
