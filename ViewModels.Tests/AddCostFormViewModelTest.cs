@@ -16,7 +16,7 @@ namespace TrackMyMoney.ViewModels.Tests
     public class AddCostFormViewModelTest
     {
         [Test]
-        public void Can_Cancel_Clear_New_Cost()
+        public void Can_Clear_New_Cost_When_Cancel_Clicked()
         {
             // Arrange
             AddCostFormViewModel vm = GetViewModel();
@@ -117,7 +117,7 @@ namespace TrackMyMoney.ViewModels.Tests
         }
 
         [Test]
-        public void Can_Save_Cost_Clear_Form()
+        public void Can_Clear_Form_When_Cost_Saved()
         {
             // Arrange
             var mockCostsManager = new Mock<ICostsManager>();

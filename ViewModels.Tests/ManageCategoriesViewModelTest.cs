@@ -34,7 +34,7 @@ namespace TrackMyMoney.ViewModels.Tests
         }
 
         [Test]
-        public void Can_Cancel_Renaming()
+        public void Can_Go_Back_When_Cancel_Rename_Category_Clicked()
         {
             // Arrange
             var mockCategoriesManager = new Mock<ICategoriesManager>();

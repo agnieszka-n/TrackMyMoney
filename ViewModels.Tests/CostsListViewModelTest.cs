@@ -17,7 +17,7 @@ namespace TrackMyMoney.ViewModels.Tests
     public class CostsListViewModelTest
     {
         [Test]
-        public void Can_Add_Cost_Click_Show_Panel()
+        public void Can_Show_Panel_When_Add_Cost_Clicked()
         {
             // Arrange
             CostsListViewModel vm = GetCostsListViewModelWithoutDatabaseReadings();
@@ -30,7 +30,7 @@ namespace TrackMyMoney.ViewModels.Tests
         }
 
         [Test]
-        public void Can_Cancel_Add_Cost_Hide_Panel()
+        public void Can_Hide_Panel_When_Cancel_Add_Cost_Clicked()
         {
             // Arrange
             var mockCategoriesManager = new Mock<ICategoriesManager>();
@@ -50,7 +50,7 @@ namespace TrackMyMoney.ViewModels.Tests
         }
 
         [Test]
-        public void Can_Manage_Categories_Click_Show_Panel()
+        public void Can_Show_Panel_When_Manage_Categories_Clicked()
         {
             // Arrange
             CostsListViewModel vm = GetCostsListViewModelWithoutDatabaseReadings();
@@ -63,7 +63,7 @@ namespace TrackMyMoney.ViewModels.Tests
         }
 
         [Test]
-        public void Can_Cancel_Manage_Categories_Hide_Panel()
+        public void Can_Hide_Panel_When_Cancel_Manage_Categories_Clicked()
         {
             // Arrange
             var mockManageCategoriesViewModel = new Mock<IManageCategoriesViewModel>();
@@ -79,7 +79,7 @@ namespace TrackMyMoney.ViewModels.Tests
         }
 
         [Test]
-        public void Can_Refresh_List_On_Cost_Added()
+        public void Can_Refresh_List_When_Cost_Added()
         {
             // Arrange
             var mockCategoriesManager = new Mock<ICategoriesManager>();
@@ -182,7 +182,7 @@ namespace TrackMyMoney.ViewModels.Tests
         }
 
         [Test]
-        public void Can_Refresh_Categories_On_Category_Deleted()
+        public void Can_Refresh_Categories_When_Category_Deleted()
         {
             // Arrange
             var mockCategoriesManager = new Mock<ICategoriesManager>();
@@ -217,7 +217,7 @@ namespace TrackMyMoney.ViewModels.Tests
         }
 
         [Test]
-        public void Can_Refresh_Categories_On_Category_Renamed()
+        public void Can_Refresh_Categories_When_Category_Renamed()
         {
             // Arrange
             var mockCategoriesManager = new Mock<ICategoriesManager>();
@@ -252,7 +252,7 @@ namespace TrackMyMoney.ViewModels.Tests
         }
 
         [Test]
-        public void Can_Refresh_Categories_On_Category_Added()
+        public void Can_Refresh_Categories_When_Category_Added()
         {
             // Arrange
             var mockCategoriesManager = new Mock<ICategoriesManager>();
