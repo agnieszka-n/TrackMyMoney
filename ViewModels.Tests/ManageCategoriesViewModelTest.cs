@@ -50,6 +50,23 @@ namespace TrackMyMoney.ViewModels.Tests
         }
 
         [Test]
+        public void Can_Clear_New_Category_Name_When_Renaming_Cancelled()
+        {
+            // Arrange
+            var mockCategoriesManager = new Mock<ICategoriesManager>();
+            var vm = GetViewModel(mockCategoriesManager);
+            vm.SelectedCategory = new CostCategoryViewModel();
+            vm.ShowRenameCommand.Execute(null);
+            vm.RenamedCategoryNewName = "New name";
+
+            // Act
+            vm.CancelActionCommand.Execute(null);
+
+            // Assert
+            Assert.IsNull(vm.RenamedCategoryNewName);
+        }
+
+        [Test]
         public void Can_Rename_Category()
         {
             // Arrange
@@ -158,6 +175,22 @@ namespace TrackMyMoney.ViewModels.Tests
             Assert.AreEqual(ManageCategoriesMenuState.DEFAULT, vm.MenuState);
             Assert.IsNull(vm.NewCategoryName);
             mockCategoriesManager.Verify(x => x.GetCategories(), Times.Never, "Should not reload categories after adding one.");
+        }
+
+        [Test]
+        public void Can_Clear_New_Category_Name_When_Adding_Cancelled()
+        {
+            // Arrange
+            var mockCategoriesManager = new Mock<ICategoriesManager>();
+            var vm = GetViewModel(mockCategoriesManager);
+            vm.ShowAddCommand.Execute(null);
+            vm.NewCategoryName = "New name";
+
+            // Act
+            vm.CancelActionCommand.Execute(null);
+
+            // Assert
+            Assert.IsNull(vm.NewCategoryName);
         }
 
         [Test]

@@ -92,7 +92,7 @@ namespace TrackMyMoney.ViewModels
             SaveAddCommand = new RelayCommand(SaveAdd);
             ShowDeleteCommand = new RelayCommand(ShowDelete);
             ConfirmDeleteCommand = new RelayCommand(ConfirmDelete);
-            CancelActionCommand = new RelayCommand(SetDefaultMenuState);
+            CancelActionCommand = new RelayCommand(GoBackToDefaultMenuState);
 
             MenuState = ManageCategoriesMenuState.DEFAULT;
         }
@@ -114,7 +114,7 @@ namespace TrackMyMoney.ViewModels
             if (result.IsSuccess)
             {
                 NewCategoryName = null;
-                SetDefaultMenuState();
+                GoBackToDefaultMenuState();
                 Added?.Invoke();
                 messagesViewModel.AddMessage("A category has been added.", MessageTypes.SUCCESS);
             }
@@ -124,9 +124,11 @@ namespace TrackMyMoney.ViewModels
             }
         }
 
-        private void SetDefaultMenuState()
+        private void GoBackToDefaultMenuState()
         {
             MenuState = ManageCategoriesMenuState.DEFAULT;
+            NewCategoryName = null;
+            RenamedCategoryNewName = null;
         }
 
         private void ShowRename()
@@ -146,7 +148,7 @@ namespace TrackMyMoney.ViewModels
             if (result.IsSuccess)
             {
                 RenamedCategoryNewName = null;
-                SetDefaultMenuState();
+                GoBackToDefaultMenuState();
                 Renamed?.Invoke();
                 messagesViewModel.AddMessage("A category has been renamed.", MessageTypes.SUCCESS);
             }
@@ -173,7 +175,7 @@ namespace TrackMyMoney.ViewModels
             if (result.IsSuccess)
             {
                 SelectedCategory = null;
-                SetDefaultMenuState();
+                GoBackToDefaultMenuState();
                 Deleted?.Invoke();
                 messagesViewModel.AddMessage("A category has been deleted.", MessageTypes.SUCCESS);
             }
