@@ -81,14 +81,7 @@
         </Grid>
 
         <StackPanel Grid.Column="1" Orientation="Horizontal">
-            <Button Content="Save" Command="{Binding SaveCommand}">
-                <Button.Style>
-                    <MultiBinding Converter="{StaticResource MultiStylesConverter}">
-                        <Binding Source="{StaticResource Button}"></Binding>
-                        <Binding Source="{StaticResource LastButOneInRow}"></Binding>
-                    </MultiBinding>
-                </Button.Style>
-            </Button>
+            <Button Content="Save" Command="{Binding SaveCommand}" Style="{Binding Style, Source={StaticResource ButtonOtherThanLastInRow}}"/>
             <Button Content="Cancel" Command="{Binding CancelCommand}"></Button>
         </StackPanel>
     </Grid>

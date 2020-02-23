@@ -28,7 +28,16 @@
     </Style>
     <Style TargetType="TextBlock" BasedOn="{StaticResource TextBlock}"></Style>
 
-    <Style x:Key="LastButOneInRow" TargetType="{x:Type Control}">
+    <Style x:Key="ControlOtherThanLastInRow" TargetType="{x:Type Control}">
         <Setter Property="Margin" Value="0,0,5,0"></Setter>
     </Style>
+
+    <Button x:Key="ButtonOtherThanLastInRow">
+        <Button.Style>
+            <MultiBinding Converter="{StaticResource MultiStylesConverter}">
+                <Binding Source="{StaticResource Button}"></Binding>
+                <Binding Source="{StaticResource ControlOtherThanLastInRow}"></Binding>
+            </MultiBinding>
+        </Button.Style>
+    </Button>
 </ResourceDictionary>
