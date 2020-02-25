@@ -6,16 +6,53 @@
              xmlns:local="clr-namespace:TrackMyMoney.Views"
              xmlns:conv="clr-namespace:TrackMyMoney.Views.Converters"
              xmlns:vm="clr-namespace:TrackMyMoney.Views.ViewModels"
+             Height="80"
              mc:Ignorable="d" 
-             d:DesignHeight="100" d:DesignWidth="400"
+             d:DesignHeight="80" d:DesignWidth="500"
              d:DataContext="{d:DesignInstance vm:MessagesViewModelStub, IsDesignTimeCreatable=True}">
     <UserControl.Resources>
-        <conv:HasItemsToVisibleHiddenConverter x:Key="HasItemsToVisibleHiddenConverter"></conv:HasItemsToVisibleHiddenConverter>
-        <conv:MessageTypeToBrushConverter x:Key="MessageTypeToColorConverter"></conv:MessageTypeToBrushConverter>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Styles.xaml"></ResourceDictionary>
+
+                <ResourceDictionary>
+                    <Style TargetType="TextBlock">
+                        <Setter Property="Foreground" Value="White"></Setter>
+                    </Style>
+
+                    <conv:MessageTypeToBrushConverter x:Key="MessageTypeToColorConverter"></conv:MessageTypeToBrushConverter>
+                    <conv:MessagesCountToVisibilityConverter x:Key="MessagesCountToVisibilityConverter"></conv:MessagesCountToVisibilityConverter>
+                </ResourceDictionary>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
     </UserControl.Resources>
-    <Grid Visibility="{Binding Messages.Count, Converter={StaticResource HasItemsToVisibleHiddenConverter}}" Background="{Binding Messages[0].Type, Converter={StaticResource MessageTypeToColorConverter}}">
-        <ScrollViewer Padding="15,5" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Auto">
-            <TextBlock MaxWidth="{Binding ViewportWidth, RelativeSource={RelativeSource AncestorType=ScrollViewer}}" Text="{Binding Messages[0].Text}" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" TextWrapping="Wrap"></TextBlock>
+    <Grid Background="{Binding CurrentMessage.Type, Converter={StaticResource MessageTypeToColorConverter}}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="35"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="90"></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <StackPanel Grid.Column="0" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,0,5,0">
+            <Button Style="{Binding Style, Source={StaticResource ButtonOtherThanLastInRow}}" Content="Dismiss" Command="{Binding DismissCurrentMessageCommand}"></Button>
+            <Button Content="Dismiss success messages" Command="{Binding DismissSuccessMessagesCommand}"></Button>
+        </StackPanel>
+
+        <StackPanel Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" Visibility="{Binding Messages.Count, Converter={StaticResource MessagesCountToVisibilityConverter}}" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Button Content="Previous" Command="{Binding GoToPreviousMessageCommand}"></Button>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,2">
+                <TextBlock Text="{Binding CurrentMessageNumber}" MaxWidth="30" ToolTip="{Binding CurrentMessageNumber}" TextTrimming="CharacterEllipsis"></TextBlock>
+                <TextBlock Text="/" Margin="2,0"></TextBlock>
+                <TextBlock Text="{Binding Messages.Count}" MaxWidth="30" ToolTip="{Binding Messages.Count}" TextTrimming="CharacterEllipsis"></TextBlock>
+            </StackPanel>
+            <Button Content="Next" Command="{Binding GoToNextMessageCommand}"></Button>
+        </StackPanel>
+
+        <ScrollViewer Margin="5,0,5,5" Grid.Row="1" Grid.Column="1" Padding="5" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Auto">
+            <TextBlock MaxWidth="{Binding ViewportWidth, RelativeSource={RelativeSource AncestorType=ScrollViewer}}" Text="{Binding CurrentMessage.Text}" VerticalAlignment="Center" HorizontalAlignment="Center" TextWrapping="Wrap"></TextBlock>
         </ScrollViewer>
     </Grid>
 </UserControl>

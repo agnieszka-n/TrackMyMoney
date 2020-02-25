@@ -88,8 +88,9 @@
       <DependentUpon>AddCostFormControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Converters\EnumToVisibilityConverter.cs" />
-    <Compile Include="Converters\HasItemsToVisibleHiddenConverter.cs" />
+    <Compile Include="Converters\HasItemsToVisibleCollapsedConverter.cs" />
     <Compile Include="Converters\IsNotNullConverter.cs" />
+    <Compile Include="Converters\MessagesCountToVisibilityConverter.cs" />
     <Compile Include="Converters\MessageTypeToBrushConverter.cs" />
     <Compile Include="Converters\MultiStylesConverter.cs" />
     <Compile Include="Converters\IsCategorySelectionEditableConverter.cs" />

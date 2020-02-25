@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
@@ -10,16 +9,16 @@ using System.Windows.Data;
 
 namespace TrackMyMoney.Views.Converters
 {
-    internal class HasItemsToVisibleHiddenConverter : IValueConverter
+    public class MessagesCountToVisibilityConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (!(value is int collectionCount))
+            if (!(value is int messagesCount))
             {
-                return Visibility.Hidden;
+                return Binding.DoNothing;
             }
 
-            return collectionCount > 0 ? Visibility.Visible : Visibility.Hidden;
+            return messagesCount > 1 ? Visibility.Visible : Visibility.Hidden;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

@@ -78,6 +78,7 @@
     <Compile Include="AddCostFormViewModelTest.cs" />
     <Compile Include="CostsListViewModelTest.cs" />
     <Compile Include="ManageCategoriesViewModelTest.cs" />
+    <Compile Include="MessagesViewModelTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

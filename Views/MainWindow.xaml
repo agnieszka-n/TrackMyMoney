@@ -20,6 +20,7 @@
 
                 <ResourceDictionary>
                     <conv:EnumToVisibilityConverter x:Key="EnumToVisibilityConverter"></conv:EnumToVisibilityConverter>
+                    <conv:HasItemsToVisibleCollapsedConverter x:Key="HasItemsToVisibleCollapsedConverter"></conv:HasItemsToVisibleCollapsedConverter>
                 </ResourceDictionary>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
@@ -36,7 +37,7 @@
             <local:ManageCategoriesControl DataContext="{Binding DataContext.ManageCategoriesViewModel, ElementName=Window}" Visibility="{Binding DataContext.MenuState, ElementName=Window, Converter={StaticResource EnumToVisibilityConverter}, ConverterParameter={x:Static contracts:CostsListMenuState.MANAGE_CATEGORIES}}"></local:ManageCategoriesControl>
         </StackPanel>
 
-        <local:MessagesControl Height="45" DockPanel.Dock="Bottom" DataContext="{Binding MessagesViewModel}"></local:MessagesControl>
+        <local:MessagesControl DataContext="{Binding MessagesViewModel}" DockPanel.Dock="Bottom" Visibility="{Binding Messages.Count, Converter={StaticResource HasItemsToVisibleCollapsedConverter}}"></local:MessagesControl>
 
         <DataGrid ItemsSource="{Binding Costs}" AutoGenerateColumns="False" RowHeaderWidth="0" Padding="5,0" BorderThickness="0,1,0,0" Margin="5">
             <DataGrid.Resources>
