@@ -40,6 +40,8 @@ namespace TrackMyMoney.IntegrationTests
                 var costsListCategories = mainVm.Categories;
                 Assert.AreEqual(1, costsListCategories.Count);
                 Assert.AreEqual("New category", costsListCategories.First().Name);
+
+                AssertFeedbackMessages(mainVm.MessagesViewModel, 1, MessageTypes.SUCCESS);
             }
 
             RunTest(Test);
@@ -67,6 +69,8 @@ namespace TrackMyMoney.IntegrationTests
                 var costsListCategories = mainVm.Categories;
                 Assert.AreEqual(1, costsListCategories.Count);
                 Assert.AreEqual("Renamed category", costsListCategories.First().Name);
+
+                AssertFeedbackMessages(mainVm.MessagesViewModel, 2, MessageTypes.SUCCESS);
             }
 
             RunTest(Test);
@@ -89,6 +93,8 @@ namespace TrackMyMoney.IntegrationTests
                 // Assert
                 Assert.AreEqual(0, mainVm.Categories.Count);
                 Assert.AreEqual(0, manageCategoriesVm.Categories.Count);
+
+                AssertFeedbackMessages(mainVm.MessagesViewModel, 2, MessageTypes.SUCCESS);
             }
 
             RunTest(Test);
@@ -114,6 +120,8 @@ namespace TrackMyMoney.IntegrationTests
                 var manageCategoriesCategories = manageCategoriesVm.Categories;
                 Assert.AreEqual(1, manageCategoriesCategories.Count);
                 Assert.AreEqual("New category", manageCategoriesCategories.First().Name);
+
+                AssertFeedbackMessages(mainVm.MessagesViewModel, 2, MessageTypes.ERROR);
             }
 
             RunTest(Test);
@@ -137,6 +145,8 @@ namespace TrackMyMoney.IntegrationTests
                 // Assert
                 Assert.AreEqual("Category 1", mainVm.Categories.First().Name);
                 Assert.AreEqual("Category 1", manageCategoriesVm.Categories.First().Name);
+
+                AssertFeedbackMessages(mainVm.MessagesViewModel, 3, MessageTypes.ERROR);
             }
 
             RunTest(Test);
@@ -184,6 +194,13 @@ namespace TrackMyMoney.IntegrationTests
             manageCategoriesVm.SelectedCategory = category;
             manageCategoriesVm.ShowDeleteCommand.Execute(null);
             manageCategoriesVm.ConfirmDeleteCommand.Execute(null);
+        }
+
+        private static void AssertFeedbackMessages(IMessagesViewModel messagesVm, int expectedMessagesCount, MessageTypes expectedCurrentMessageType)
+        {
+            Assert.AreEqual(expectedMessagesCount, messagesVm.Messages.Count, $"Invalid number of messages.");
+            Assert.IsNotNull(messagesVm.CurrentMessage, "Current message shouldn't be null.");
+            Assert.AreEqual(expectedCurrentMessageType, messagesVm.CurrentMessage.Type, "Invalid type of the current message.");
         }
     }
 }
