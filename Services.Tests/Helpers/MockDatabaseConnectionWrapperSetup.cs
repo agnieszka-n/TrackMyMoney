@@ -13,7 +13,7 @@ namespace TrackMyMoney.Services.Tests.Helpers
     internal static class MockDatabaseConnectionWrapperSetup
     {
         /// <typeparam name="T">Returned OperationResult's parameter type</typeparam>
-        public static void SetupConnectionWrapperToExecuteFunction<T>(Mock<IDatabaseProxy> mockDbProxy)
+        public static void SetupConnectionWrapperExecuteFunction<T>(Mock<IDatabaseProxy> mockDbProxy)
         {
             var mockConnectionWrapper = new Mock<IDatabaseConnectionWrapper>();
             mockConnectionWrapper
@@ -22,7 +22,7 @@ namespace TrackMyMoney.Services.Tests.Helpers
             mockDbProxy.Setup(x => x.CreateConnectionWrapper()).Returns(mockConnectionWrapper.Object);
         }
 
-        public static void SetupConnectionWrapperToExecuteAction(Mock<IDatabaseProxy> mockDbProxy)
+        public static void SetupConnectionWrapperExecuteFunction(Mock<IDatabaseProxy> mockDbProxy)
         {
             var mockConnectionWrapper = new Mock<IDatabaseConnectionWrapper>();
             mockConnectionWrapper

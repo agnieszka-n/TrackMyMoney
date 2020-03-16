@@ -21,10 +21,10 @@ namespace TrackMyMoney.Services.Database
             this.disposesConnection = disposesConnection;
         }
 
-        public void Execute(Action<SQLiteConnection> function)
+        public void Execute(Action<SQLiteConnection> action)
         {
             OpenConnection();
-            function(connection);
+            action(connection);
         }
 
         public T Execute<T>(Func<SQLiteConnection, T> function)

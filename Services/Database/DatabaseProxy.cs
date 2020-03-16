@@ -15,12 +15,18 @@ namespace TrackMyMoney.Services.Database
         private readonly Func<SQLiteConnection> getConnection;
         private readonly bool disposesConnection;
 
+        /// <summary>
+        /// Used in tests to inject a connection for an in-memory database.
+        /// </summary>
         public DatabaseProxy(SQLiteConnection connection)
         {
             getConnection = () => connection;
             disposesConnection = false;
         }
 
+        /// <summary>
+        /// Used in the application with a real database.
+        /// </summary>
         public DatabaseProxy(string connectionString)
         {
             getConnection = () => new SQLiteConnection(connectionString);
@@ -33,7 +39,7 @@ namespace TrackMyMoney.Services.Database
             return new DatabaseConnectionWrapper(connection, disposesConnection);
         }
 
-        public IQueryResultReader ExecuteReader(string query, DbConnection connection)
+        public IQueryResultReader ExecuteReader(DbConnection connection, string query)
         {
             DbCommand command = connection.CreateCommand();
             command.CommandText = query;

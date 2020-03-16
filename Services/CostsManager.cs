@@ -23,7 +23,7 @@ namespace TrackMyMoney.Services
                 string query = "select id, date, categoryId, subject, amount" +
                                " from costs" +
                                " order by date";
-                IQueryResultReader reader = dbProxy.ExecuteReader(query, connection);
+                IQueryResultReader reader = dbProxy.ExecuteReader(connection, query);
                 var result = new List<Cost>();
 
                 while (reader.Read())

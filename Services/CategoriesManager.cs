@@ -23,7 +23,7 @@ namespace TrackMyMoney.Services
             OperationResult<List<CostCategory>> FunctionBody(DbConnection connection)
             {
                 string query = "select id, name from categories order by name";
-                IQueryResultReader reader = dbProxy.ExecuteReader(query, connection);
+                IQueryResultReader reader = dbProxy.ExecuteReader(connection, query);
                 var result = new List<CostCategory>();
 
                 while (reader.Read())

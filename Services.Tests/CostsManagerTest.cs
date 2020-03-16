@@ -27,8 +27,8 @@ namespace TrackMyMoney.Services.Tests
                 1, "2000-01-05", 111, "Pasta", 12
             };
             var reader = new QueryResultReaderStub(5, values);
-            mockDbProxy.Setup(x => x.ExecuteReader(It.IsAny<string>(), It.IsAny<DbConnection>())).Returns(reader);
-            MockDatabaseConnectionWrapperSetup.SetupConnectionWrapperToExecuteFunction<List<Cost>>(mockDbProxy);
+            mockDbProxy.Setup(x => x.ExecuteReader(It.IsAny<DbConnection>(), It.IsAny<string>())).Returns(reader);
+            MockDatabaseConnectionWrapperSetup.SetupConnectionWrapperExecuteFunction<List<Cost>>(mockDbProxy);
 
             var manager = new CostsManager(mockDbProxy.Object);
 
@@ -54,7 +54,7 @@ namespace TrackMyMoney.Services.Tests
             // Arrange
             var mockDbProxy = new Mock<IDatabaseProxy>();
             mockDbProxy.Setup(x => x.ExecuteNonQuery(It.IsAny<DbConnection>(), It.IsAny<string>(), It.IsAny<Dictionary<string, object>>())).Returns(1);
-            MockDatabaseConnectionWrapperSetup.SetupConnectionWrapperToExecuteAction(mockDbProxy);
+            MockDatabaseConnectionWrapperSetup.SetupConnectionWrapperExecuteFunction(mockDbProxy);
 
             var manager = new CostsManager(mockDbProxy.Object);
 

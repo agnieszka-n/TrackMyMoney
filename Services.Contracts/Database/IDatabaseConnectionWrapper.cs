@@ -8,9 +8,12 @@ using System.Threading.Tasks;
 
 namespace TrackMyMoney.Services.Contracts.Database
 {
+    /// <summary>
+    /// Wraps a connection to dispose it after a real query or keep after a query in tests.
+    /// </summary>
     public interface IDatabaseConnectionWrapper : IDisposable
     {
-       void Execute(Action<SQLiteConnection> function);
+       void Execute(Action<SQLiteConnection> action);
         T Execute<T>(Func<SQLiteConnection, T> function);
     }
 }

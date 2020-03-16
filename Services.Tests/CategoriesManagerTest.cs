@@ -27,8 +27,8 @@ namespace TrackMyMoney.Services.Tests
                 2, "name 2"
             };
             var reader = new QueryResultReaderStub(2, values);
-            mockDbProxy.Setup(x => x.ExecuteReader(It.IsAny<string>(), It.IsAny<DbConnection>())).Returns(reader);
-            MockDatabaseConnectionWrapperSetup.SetupConnectionWrapperToExecuteFunction<List<CostCategory>>(mockDbProxy);
+            mockDbProxy.Setup(x => x.ExecuteReader(It.IsAny<DbConnection>(), It.IsAny<string>())).Returns(reader);
+            MockDatabaseConnectionWrapperSetup.SetupConnectionWrapperExecuteFunction<List<CostCategory>>(mockDbProxy);
 
             var manager = new CategoriesManager(mockDbProxy.Object);
 
