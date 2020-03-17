@@ -5,12 +5,13 @@ using System.Text;
 using System.Threading.Tasks;
 using Ninject;
 using NUnit.Framework;
+using TrackMyMoney.ViewModels;
 using TrackMyMoney.ViewModels.Contracts;
 
 namespace TrackMyMoney.IntegrationTests
 {
     [TestFixture]
-    public class Integration_ManageCategoriesTest: TextFixtureBase
+    public class Integration_ManageCategoriesTest : TextFixtureBase
     {
         [Test]
         public void Can_Add_Category()
@@ -82,6 +83,37 @@ namespace TrackMyMoney.IntegrationTests
                 // Assert
                 Assert.AreEqual(0, mainVm.Categories.Count);
                 Assert.AreEqual(0, manageCategoriesVm.Categories.Count);
+            }
+
+            RunTest(Test);
+        }
+
+        [Test]
+        public void Can_Prevent_Delete_Category_When_In_Use()
+        {
+            void Test(IKernel kernel)
+            {
+                // Arrange
+                var mainVm = kernel.Get<ICostsListViewModel>();
+                var manageCategoriesVm = mainVm.ManageCategoriesViewModel;
+
+                mainVm.ShowManageCategoriesCommand.Execute(null);
+                AddCategory(manageCategoriesVm, "New category");
+
+                mainVm.ShowAddCostCommand.Execute(null);
+                mainVm.AddCostFormViewModel.NewCost.Subject = "subject";
+                mainVm.AddCostFormViewModel.NewCost.Amount = 12;
+                mainVm.AddCostFormViewModel.NewCost.Category = mainVm.Categories.First();
+                mainVm.AddCostFormViewModel.NewCost.Date = new DateTime(2000, 1, 15);
+
+                mainVm.AddCostFormViewModel.SaveCommand.Execute(null);
+
+                // Act
+                DeleteCategory(manageCategoriesVm, manageCategoriesVm.Categories.First());
+
+                // Assert
+                Assert.AreEqual(1, mainVm.Categories.Count);
+                Assert.AreEqual(1, manageCategoriesVm.Categories.Count);
             }
 
             RunTest(Test);
