@@ -70,8 +70,8 @@ namespace TrackMyMoney.ViewModels
             AddCostFormViewModel.Saved += LoadCosts;
             AddCostFormViewModel.Cancelled += SetDefaultMenuState;
 
-            ShowAddCostCommand = new RelayCommand(ShowAddCost);
-            ShowManageCategoriesCommand = new RelayCommand(ShowManageCategories);
+            ShowAddCostCommand = new RelayCommand(ShowAddCost, () => MenuState == CostsListMenuState.DEFAULT);
+            ShowManageCategoriesCommand = new RelayCommand(ShowManageCategories, () => MenuState == CostsListMenuState.DEFAULT);
 
             ManageCategoriesViewModel = manageCategoriesViewModel;
             ManageCategoriesViewModel.WentBack += SetDefaultMenuState;

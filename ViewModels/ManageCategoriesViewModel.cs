@@ -83,13 +83,13 @@ namespace TrackMyMoney.ViewModels
         {
             this.categoriesManager = categoriesManager;
             GoBackCommand = new RelayCommand(GoBack);
-            ShowRenameCommand = new RelayCommand(ShowRename);
-            SaveRenameCommand = new RelayCommand(SaveRename);
-            ShowAddCommand = new RelayCommand(ShowAdd);
-            SaveAddCommand = new RelayCommand(SaveAdd);
-            ShowDeleteCommand = new RelayCommand(ShowDelete);
-            ConfirmDeleteCommand = new RelayCommand(ConfirmDelete);
-            CancelActionCommand = new RelayCommand(SetDefaultMenuState);
+            ShowRenameCommand = new RelayCommand(ShowRename, () => MenuState == ManageCategoriesMenuState.DEFAULT);
+            SaveRenameCommand = new RelayCommand(SaveRename, () => MenuState == ManageCategoriesMenuState.RENAME);
+            ShowAddCommand = new RelayCommand(ShowAdd, () => MenuState == ManageCategoriesMenuState.DEFAULT);
+            SaveAddCommand = new RelayCommand(SaveAdd, () => MenuState == ManageCategoriesMenuState.ADD);
+            ShowDeleteCommand = new RelayCommand(ShowDelete, () => MenuState == ManageCategoriesMenuState.DEFAULT);
+            ConfirmDeleteCommand = new RelayCommand(ConfirmDelete, () => MenuState == ManageCategoriesMenuState.DELETE);
+            CancelActionCommand = new RelayCommand(SetDefaultMenuState, () => MenuState != ManageCategoriesMenuState.DEFAULT);
             MenuState = ManageCategoriesMenuState.DEFAULT;
         }
 
