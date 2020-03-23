@@ -1,11 +1,8 @@
 ﻿using GalaSoft.MvvmLight;
-using GalaSoft.MvvmLight.Command;
+using GalaSoft.MvvmLight.CommandWpf;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using TrackMyMoney.Services.Contracts;
 using TrackMyMoney.ViewModels.Contracts;
 
@@ -25,7 +22,7 @@ namespace TrackMyMoney.ViewModels
         public RelayCommand ShowAddCommand { get; }
         public RelayCommand SaveAddCommand { get; }
         public RelayCommand ShowDeleteCommand { get; }
-        public RelayCommand ConfirmDeleteCommand { get; }
+        public RelayCommand SaveDeleteCommand { get; }
 
         private readonly ICategoriesManager categoriesManager;
 
@@ -88,7 +85,7 @@ namespace TrackMyMoney.ViewModels
             ShowAddCommand = new RelayCommand(ShowAdd, () => MenuState == ManageCategoriesMenuState.DEFAULT);
             SaveAddCommand = new RelayCommand(SaveAdd, () => MenuState == ManageCategoriesMenuState.ADD);
             ShowDeleteCommand = new RelayCommand(ShowDelete, () => MenuState == ManageCategoriesMenuState.DEFAULT);
-            ConfirmDeleteCommand = new RelayCommand(ConfirmDelete, () => MenuState == ManageCategoriesMenuState.DELETE);
+            SaveDeleteCommand = new RelayCommand(SaveDelete, () => MenuState == ManageCategoriesMenuState.DELETE);
             CancelActionCommand = new RelayCommand(SetDefaultMenuState, () => MenuState != ManageCategoriesMenuState.DEFAULT);
             MenuState = ManageCategoriesMenuState.DEFAULT;
         }
@@ -151,7 +148,7 @@ namespace TrackMyMoney.ViewModels
             MenuState = ManageCategoriesMenuState.DELETE;
         }
 
-        private void ConfirmDelete()
+        private void SaveDelete()
         {
             if (SelectedCategory == null)
             {

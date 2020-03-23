@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using GalaSoft.MvvmLight.Command;
+using GalaSoft.MvvmLight.CommandWpf;
 
 namespace TrackMyMoney.ViewModels.Contracts
 {
@@ -22,7 +18,7 @@ namespace TrackMyMoney.ViewModels.Contracts
         RelayCommand ShowAddCommand { get; }
         RelayCommand SaveAddCommand { get; }
         RelayCommand ShowDeleteCommand { get; }
-        RelayCommand ConfirmDeleteCommand { get; }
+        RelayCommand SaveDeleteCommand { get; }
 
         ICostCategoryViewModel SelectedCategory { get; set; }
         ObservableCollection<ICostCategoryViewModel> Categories { get; set; }

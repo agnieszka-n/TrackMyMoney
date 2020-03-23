@@ -1,5 +1,5 @@
 ﻿using System.Collections.ObjectModel;
-using GalaSoft.MvvmLight.Command;
+using GalaSoft.MvvmLight.CommandWpf;
 using TrackMyMoney.Common;
 
 namespace TrackMyMoney.ViewModels.Contracts

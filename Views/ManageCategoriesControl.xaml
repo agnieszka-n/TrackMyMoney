@@ -106,7 +106,7 @@
                 <ColumnDefinition Width="Auto"></ColumnDefinition>
             </Grid.ColumnDefinitions>
             <TextBlock HorizontalAlignment="Right" Text="Delete the selected category?"></TextBlock>
-            <Button Grid.Column="1" Content="OK" Style="{Binding Style, Source={StaticResource ButtonLastButOneInRow}}" Command="{Binding ConfirmDeleteCommand}"></Button>
+            <Button Grid.Column="1" Content="OK" Style="{Binding Style, Source={StaticResource ButtonLastButOneInRow}}" Command="{Binding SaveDeleteCommand}"></Button>
             <Button Grid.Column="2" Content="Cancel" Command="{Binding CancelActionCommand}"></Button>
         </Grid>
     </Grid>

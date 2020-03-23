@@ -1,4 +1,4 @@
-﻿using GalaSoft.MvvmLight.Command;
+﻿using GalaSoft.MvvmLight.CommandWpf;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -23,7 +23,7 @@ namespace TrackMyMoney.Views.ViewModels
         public RelayCommand ShowAddCommand => null;
         public RelayCommand SaveAddCommand => null;
         public RelayCommand ShowDeleteCommand => null;
-        public RelayCommand ConfirmDeleteCommand => null;
+        public RelayCommand SaveDeleteCommand => null;
         public RelayCommand CancelActionCommand => null;
 
         public ICostCategoryViewModel SelectedCategory { get; set; }

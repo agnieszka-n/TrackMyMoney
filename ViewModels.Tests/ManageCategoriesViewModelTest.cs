@@ -229,7 +229,7 @@ namespace TrackMyMoney.ViewModels.Tests
             vm.Deleted += () => isDeletedInvoked = true;
 
             // Act
-            vm.ConfirmDeleteCommand.Execute(null);
+            vm.SaveDeleteCommand.Execute(null);
 
             // Assert
             Assert.AreEqual(true, isDeletedInvoked);
@@ -255,7 +255,7 @@ namespace TrackMyMoney.ViewModels.Tests
             vm.Deleted += () => isDeletedInvoked = true;
 
             // Act
-            vm.ConfirmDeleteCommand.Execute(null);
+            vm.SaveDeleteCommand.Execute(null);
 
             // Assert
             Assert.AreEqual(false, isDeletedInvoked);

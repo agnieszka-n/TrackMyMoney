@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TrackMyMoney.Common;
-using GalaSoft.MvvmLight.Command;
+using GalaSoft.MvvmLight.CommandWpf;
 using TrackMyMoney.Models;
 using TrackMyMoney.Services.Contracts;
 using TrackMyMoney.ViewModels.Contracts;

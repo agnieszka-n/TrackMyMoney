@@ -183,7 +183,7 @@ namespace TrackMyMoney.IntegrationTests
         {
             manageCategoriesVm.SelectedCategory = category;
             manageCategoriesVm.ShowDeleteCommand.Execute(null);
-            manageCategoriesVm.ConfirmDeleteCommand.Execute(null);
+            manageCategoriesVm.SaveDeleteCommand.Execute(null);
         }
     }
 }
