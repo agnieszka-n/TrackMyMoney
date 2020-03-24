@@ -16,6 +16,7 @@
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Icons.xaml"></ResourceDictionary>
                 <ResourceDictionary Source="Styles.xaml"></ResourceDictionary>
 
                 <ResourceDictionary>
@@ -81,6 +82,19 @@
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate DataType="{x:Type vm:CostViewModelStub}">
                             <TextBlock Style="{StaticResource CellTextStyle}" Text="{Binding Amount}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Width="50">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate DataType="{x:Type vm:CostViewModelStub}">
+                            <Button Style="{StaticResource IconButton}" ToolTip="Delete a cost" Command="{Binding DataContext.DeleteCostCommand, ElementName=Window}" CommandParameter="{Binding}">
+z                               <Button.Template>
+                                    <ControlTemplate>
+                                        <Image Source="{StaticResource DeleteCostIcon}"/>
+                                    </ControlTemplate>
+                                </Button.Template>
+                            </Button>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>

@@ -21,6 +21,7 @@ namespace TrackMyMoney.Views.ViewModels
         public ObservableCollection<ICostCategoryViewModel> Categories { get; }
         public RelayCommand ShowAddCostCommand => null;
         public RelayCommand ShowManageCategoriesCommand => null;
+        public RelayCommand<ICostViewModel> DeleteCostCommand => null;
 
         public CostsListViewModelStub()
         {

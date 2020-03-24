@@ -84,5 +84,36 @@ namespace TrackMyMoney.Services
 
             return ExecuteFunction(FunctionBody, ErrorHandler);
         }
+
+        public OperationResult DeleteCost(int costId)
+        {
+            OperationResult FunctionBody(DbConnection connection)
+            {
+                string query = "delete from costs" +
+                               " where id = @id";
+
+                Dictionary<string, object> parameters = new Dictionary<string, object>()
+                {
+                    { "@id", costId }
+                };
+
+                int affectedRowsCount = dbProxy.ExecuteNonQuery(connection, query, parameters);
+
+                if (affectedRowsCount == 1)
+                {
+                    return new OperationResult();
+                }
+
+                throw new Exception("Deleting a cost failed.");
+            }
+
+            OperationResult ErrorHandler(Exception ex)
+            {
+                Logger.LogError(this, ex);
+                return new OperationResult("An error occurred while saving a cost.");
+            }
+
+            return ExecuteFunction(FunctionBody, ErrorHandler);
+        }
     }
 }

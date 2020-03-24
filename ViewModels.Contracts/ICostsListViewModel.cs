@@ -13,5 +13,6 @@ namespace TrackMyMoney.ViewModels.Contracts
         ObservableCollection<ICostCategoryViewModel> Categories { get;}
         RelayCommand ShowAddCostCommand { get; }
         RelayCommand ShowManageCategoriesCommand { get; }
+        RelayCommand<ICostViewModel> DeleteCostCommand { get; }
     }
 }

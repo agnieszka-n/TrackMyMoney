@@ -64,5 +64,22 @@ namespace TrackMyMoney.Services.Tests
             // Assert
             Assert.AreEqual(true, result.IsSuccess, "Should return success from a database.");
         }
+
+        [Test]
+        public void Can_Delete_Cost()
+        {
+            // Arrange
+            var mockDbProxy = new Mock<IDatabaseProxy>();
+            mockDbProxy.Setup(x => x.ExecuteNonQuery(It.IsAny<DbConnection>(), It.IsAny<string>(), It.IsAny<Dictionary<string, object>>())).Returns(1);
+            MockDatabaseConnectionWrapperSetup.SetupConnectionWrapperExecuteFunction(mockDbProxy);
+
+            var manager = new CostsManager(mockDbProxy.Object);
+
+            // Act
+            OperationResult result = manager.DeleteCost(1);
+
+            // Assert
+            Assert.AreEqual(true, result.IsSuccess, "Should return success from a database.");
+        }
     }
 }

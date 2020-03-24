@@ -76,6 +76,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Integration_ManageCategoriesTest.cs" />
+    <Compile Include="Integration_ManageCostsTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TextFixtureBase.cs" />
   </ItemGroup>

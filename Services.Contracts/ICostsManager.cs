@@ -12,5 +12,6 @@ namespace TrackMyMoney.Services.Contracts
     {
         OperationResult<List<Cost>> GetCosts();
         OperationResult AddCost(Cost cost);
+        OperationResult DeleteCost(int costId);
     }
 }

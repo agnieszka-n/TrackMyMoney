@@ -60,6 +60,7 @@ namespace TrackMyMoney.ViewModels
 
         public RelayCommand ShowAddCostCommand { get; }
         public RelayCommand ShowManageCategoriesCommand { get; }
+        public RelayCommand<ICostViewModel> DeleteCostCommand { get; }
 
         public CostsListViewModel(ICategoriesManager categoriesManager, ICostsManager costsManager, IAddCostFormViewModel addCostFormViewModel, IManageCategoriesViewModel manageCategoriesViewModel)
         {
@@ -72,6 +73,7 @@ namespace TrackMyMoney.ViewModels
 
             ShowAddCostCommand = new RelayCommand(ShowAddCost, () => MenuState == CostsListMenuState.DEFAULT);
             ShowManageCategoriesCommand = new RelayCommand(ShowManageCategories, () => MenuState == CostsListMenuState.DEFAULT);
+            DeleteCostCommand = new RelayCommand<ICostViewModel>(DeleteCost);
 
             ManageCategoriesViewModel = manageCategoriesViewModel;
             ManageCategoriesViewModel.WentBack += SetDefaultMenuState;
@@ -140,6 +142,17 @@ namespace TrackMyMoney.ViewModels
             {
                 cost.Category = Categories.Single(category => category.Id == cost.Category.Id);
             }
+        }
+
+        private void DeleteCost(ICostViewModel cost)
+        {
+            OperationResult result = costsManager.DeleteCost(cost.Id);
+
+            if (result.IsSuccess)
+            {
+                LoadCosts();
+            }
+            // TODO implement an error message 
         }
     }
 }
