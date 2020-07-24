@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Moq;
 using Ninject;
 using NUnit.Framework;
-using TrackMyMoney.ViewModels;
+using TrackMyMoney.Services.Contracts.Dialogs;
 using TrackMyMoney.ViewModels.Contracts;
 
 namespace TrackMyMoney.IntegrationTests
@@ -50,7 +51,12 @@ namespace TrackMyMoney.IntegrationTests
             void Test(IKernel kernel)
             {
                 // Arrange
+                var mockDialog = new Mock<IOkCancelDialogWindow>();
+                mockDialog.Setup(x => x.ShowDialog(It.IsAny<string>())).Returns(true);
+                kernel.Rebind<IOkCancelDialogWindow>().ToConstant(mockDialog.Object);
+
                 var mainVm = kernel.Get<ICostsListViewModel>();
+
                 mainVm.ShowManageCategoriesCommand.Execute(null);
                 AddCategory(mainVm.ManageCategoriesViewModel, "Category");
                 var category = mainVm.Categories.First();

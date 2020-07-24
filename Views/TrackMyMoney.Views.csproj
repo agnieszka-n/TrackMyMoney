@@ -91,6 +91,9 @@
     <Compile Include="Converters\IsNotNullConverter.cs" />
     <Compile Include="Converters\MultiStylesConverter.cs" />
     <Compile Include="Converters\IsCategorySelectionEditableConverter.cs" />
+    <Compile Include="OkCancelDialogWindow.xaml.cs">
+      <DependentUpon>OkCancelDialogWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ManageCategoriesControl.xaml.cs">
       <DependentUpon>ManageCategoriesControl.xaml</DependentUpon>
     </Compile>
@@ -99,6 +102,7 @@
     <Compile Include="ViewModels\CostsListViewModelStub.cs" />
     <Compile Include="ViewModels\CostViewModelStub.cs" />
     <Compile Include="ViewModels\ManageCategoriesViewModelStub.cs" />
+    <Compile Include="ViewModels\OkCancelDialogWindowViewModelStub.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MainWindow.xaml.cs">
@@ -129,6 +133,10 @@
   </ItemGroup>
   <ItemGroup>
     <Page Include="AddCostFormControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="OkCancelDialogWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

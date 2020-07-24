@@ -1,0 +1,30 @@
+﻿<Window x:Class="TrackMyMoney.Views.OkCancelDialogWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:vm="clr-namespace:TrackMyMoney.Views.ViewModels"
+        mc:Ignorable="d"
+        d:DataContext="{d:DesignInstance vm:OkCancelDialogWindowViewModelStub, IsDesignTimeCreatable=True}"
+        Title="" Height="150" Width="250"
+        WindowStartupLocation="CenterOwner"
+        ResizeMode="NoResize"
+        >
+    <Window.Resources>
+        <ResourceDictionary Source="Styles.xaml"></ResourceDictionary>
+    </Window.Resources>
+    <DockPanel>
+        <StackPanel DockPanel.Dock="Bottom" HorizontalAlignment="Center" Orientation="Horizontal" Margin="10">
+            <Button Content="OK" Command="{Binding OkClickCommand}">
+                <Button.Style>
+                    <MultiBinding Converter="{StaticResource MultiStylesConverter}">
+                        <Binding Source="{StaticResource Button}"></Binding>
+                        <Binding Source="{StaticResource LastButOneInRow}"></Binding>
+                    </MultiBinding>
+                </Button.Style>
+            </Button>
+            <Button Content="Cancel" Name="CancelButton" IsCancel="True" Command="{Binding CancelClickCommand}"></Button>
+        </StackPanel>
+        <TextBlock Text="{Binding Message, Mode=OneWay}" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
+    </DockPanel>
+</Window>

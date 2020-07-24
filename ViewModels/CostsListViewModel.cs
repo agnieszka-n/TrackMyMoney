@@ -10,6 +10,7 @@ using GalaSoft.MvvmLight.CommandWpf;
 using TrackMyMoney.Models;
 using TrackMyMoney.Services.Contracts;
 using TrackMyMoney.ViewModels.Contracts;
+using TrackMyMoney.Services.Contracts.Dialogs;
 
 namespace TrackMyMoney.ViewModels
 {
@@ -17,6 +18,7 @@ namespace TrackMyMoney.ViewModels
     {
         private readonly ICategoriesManager categoriesManager;
         private readonly ICostsManager costsManager;
+        private readonly IDialogService dialogService;
 
         private ObservableCollection<ICostCategoryViewModel> categories;
         public ObservableCollection<ICostCategoryViewModel> Categories
@@ -62,10 +64,11 @@ namespace TrackMyMoney.ViewModels
         public RelayCommand ShowManageCategoriesCommand { get; }
         public RelayCommand<ICostViewModel> DeleteCostCommand { get; }
 
-        public CostsListViewModel(ICategoriesManager categoriesManager, ICostsManager costsManager, IAddCostFormViewModel addCostFormViewModel, IManageCategoriesViewModel manageCategoriesViewModel)
+        public CostsListViewModel(ICategoriesManager categoriesManager, ICostsManager costsManager, IAddCostFormViewModel addCostFormViewModel, IManageCategoriesViewModel manageCategoriesViewModel, IDialogService dialogService)
         {
             this.categoriesManager = categoriesManager;
             this.costsManager = costsManager;
+            this.dialogService = dialogService;
 
             AddCostFormViewModel = addCostFormViewModel;
             AddCostFormViewModel.Saved += LoadCosts;
@@ -146,6 +149,11 @@ namespace TrackMyMoney.ViewModels
 
         private void DeleteCost(ICostViewModel cost)
         {
+            if (!dialogService.ShowDialog("Are you sure to delete this cost?"))
+            {
+                return;
+            }
+
             OperationResult result = costsManager.DeleteCost(cost.Id);
 
             if (result.IsSuccess)

@@ -73,6 +73,7 @@
     <Compile Include="Database\DatabaseConnectionWrapper.cs" />
     <Compile Include="Database\DatabaseProxy.cs" />
     <Compile Include="Database\QueryResultReader.cs" />
+    <Compile Include="Dialogs\DialogService.cs" />
     <Compile Include="ManagerBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

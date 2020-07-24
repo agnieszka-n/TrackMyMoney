@@ -62,6 +62,7 @@
     <Compile Include="ICostsListViewModel.cs" />
     <Compile Include="ICostViewModel.cs" />
     <Compile Include="IManageCategoriesViewModel.cs" />
+    <Compile Include="IOkCancelDialogWindowViewModel.cs" />
     <Compile Include="ManageCategoriesMenuState.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

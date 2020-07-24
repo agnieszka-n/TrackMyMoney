@@ -312,7 +312,7 @@ namespace TrackMyMoney.ViewModels.Tests
             mockAddCostFormVm = mockAddCostFormVm ?? new Mock<IAddCostFormViewModel>();
             mockManageCategoriesVm = mockManageCategoriesVm ?? new Mock<IManageCategoriesViewModel>();
 
-            return new CostsListViewModel(mockCategoriesManager.Object, mockCostsManager.Object, mockAddCostFormVm.Object, mockManageCategoriesVm.Object);
+            return new CostsListViewModel(mockCategoriesManager.Object, mockCostsManager.Object, mockAddCostFormVm.Object, mockManageCategoriesVm.Object, null);
         }
     }
 }

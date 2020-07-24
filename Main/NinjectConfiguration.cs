@@ -1,17 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.SQLite;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Windows;
 using Ninject;
-using Ninject.Parameters;
 using TrackMyMoney.Services;
 using TrackMyMoney.Services.Contracts;
 using TrackMyMoney.Services.Contracts.Database;
+using TrackMyMoney.Services.Contracts.Dialogs;
 using TrackMyMoney.Services.Database;
+using TrackMyMoney.Services.Dialogs;
 using TrackMyMoney.ViewModels;
 using TrackMyMoney.ViewModels.Contracts;
+using TrackMyMoney.Views;
+using IDialogService = TrackMyMoney.Services.Contracts.Dialogs.IDialogService;
 
 namespace TrackMyMoney.Main
 {
@@ -22,9 +20,14 @@ namespace TrackMyMoney.Main
             kernel.Bind<ICostsListViewModel>().To<CostsListViewModel>();
             kernel.Bind<IAddCostFormViewModel>().To<AddCostFormViewModel>();
             kernel.Bind<IManageCategoriesViewModel>().To<ManageCategoriesViewModel>();
+
             kernel.Bind<ICategoriesManager>().To<CategoriesManager>();
             kernel.Bind<ICostsManager>().To<CostsManager>();
+
             kernel.Bind<IDatabaseProxy>().ToMethod(context => new DatabaseProxy(connectionString));
+
+            kernel.Bind<IDialogService>().ToMethod(context => new DialogService(() => kernel.Get<IOkCancelDialogWindow>()));
+            kernel.Bind<IOkCancelDialogWindow>().ToMethod(context => new OkCancelDialogWindow(Application.Current.MainWindow));
         }
     }
 }
